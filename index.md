@@ -1,15 +1,31 @@
 ---
 layout: default
-title: Home
+title: Software Engineering Showcase
 ---
 
-## 🚀 Featured Project: VividMMO
+# Precision Logic & Robust Code
 
-A 2D/Isometric game engine built with the **Python Ursina engine**. I am currently exploring spatial partitioning and sprite rendering to create immersive, old-school inspired environments.
+I bring the discipline and structural integrity of **20 years in metal fabrication** to the world of software engineering. My focus is on building scalable systems, immersive game environments, and intelligent AI integrations.
 
 ---
 
-## 🛠 Skills & Tools
-* **Languages:** C#, Python, TypeScript
-* **Engines:** Unity, Ursina
-* **Expertise:** AI Integration, Metal Fabrication & Precision Logic
+## 🕹 Featured Project: VividMMO
+
+**VividMMO** is a 2D/Isometric game engine project built using the **Python Ursina engine**. 
+* **The Goal:** Creating a performant, old-school inspired environment.
+* **Technical Focus:** Implementing spatial partitioning and efficient sprite rendering to handle complex isometric grids.
+
+---
+
+## 🛠 Technical Stack
+
+| Category | Skills & Tools |
+| :--- | :--- |
+| **Languages** | C#, Python, TypeScript |
+| **Frameworks** | Unity, Ursina, React |
+| **Specializations** | AI Integration, System Architecture, Precision Logic |
+
+---
+
+## 📬 Connect with Me
+[View my GitHub Profile](https://github.com/Vivid86)
