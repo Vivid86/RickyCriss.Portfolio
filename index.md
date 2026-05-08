@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Software Engineering Showcase
+
 ---
 
 # Precision Logic & Robust Code
@@ -9,11 +10,12 @@ I bring the discipline and structural integrity of **20 years in metal fabricati
 
 ---
 
-## 🕹 Featured Project: VividMMO
+## // 🕹 Featured Project: Professional Portfolio & Showcase App
 
-**VividMMO** is a 2D/Isometric game engine project built using the **Python Ursina engine**. 
-* **The Goal:** Creating a performant, old-school inspired environment.
-* **Technical Focus:** Implementing spatial partitioning and efficient sprite rendering to handle complex isometric grids.
+This platform is a live demonstration of modern web deployment and CI/CD workflows. 
+* **The Goal:** Create a high-performance, responsive developer showcase that bridges a 20-year career in precision fabrication with software engineering excellence.
+* **Technical Focus:** Utilizing **Jekyll** for static site generation and **GitHub Actions** for automated build and deployment pipelines. 
+* **Architecture:** Configuration-driven design using **YAML** and **Markdown** to ensure clean, maintainable, and scalable content.
 
 ---
 
@@ -27,5 +29,6 @@ I bring the discipline and structural integrity of **20 years in metal fabricati
 
 ---
 
-## 📬 Connect with Me
-[View my GitHub Profile](https://github.com/Vivid86)
+## 🤝 Connect & Collaborate
+
+I am always looking for opportunities to apply my technical background to complex software challenges. 
