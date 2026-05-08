@@ -1,12 +1,15 @@
 ---
-layout: home
+layout: default
+title: Home
 ---
-# Welcome to my Showcase
 
-I'm Ricky, a Software Engineering student with a background in metal fabrication. 
-I'm currently working on:
-* **VividMMO** - A 2D isometric game engine.
-* **AI Tools** - Integrating Gemini into practical apps.
-* **Application Development**
-* **Web/Graphic design**
-* **Marketing tools and Ai integration**
+## 🚀 Featured Project: VividMMO
+
+A 2D/Isometric game engine built with the **Python Ursina engine**. I am currently exploring spatial partitioning and sprite rendering to create immersive, old-school inspired environments.
+
+---
+
+## 🛠 Skills & Tools
+* **Languages:** C#, Python, TypeScript
+* **Engines:** Unity, Ursina
+* **Expertise:** AI Integration, Metal Fabrication & Precision Logic
