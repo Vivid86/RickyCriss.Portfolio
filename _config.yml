@@ -1,8 +1,9 @@
 title: Ricky Criss | Software Engineer
 email: rickycriss86@gmail.com
 description: >- 
-  Professional Welder turned Software Engineer. 
-  Building AI tools and immersive game environments.
+  Professional Welder turned Software Engineer, pure Creator. 
+  Developing applications, AI tools and immersive game environments.
 baseurl: "/RickyCriss.github.io" 
 url: "https://vivid86.github.io"
-theme: minima
+remote_theme: pages-themes/hacker@v0.2.0
+github_username: Vivid86
