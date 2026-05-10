@@ -6,3 +6,6 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# Allow committing the built AI Studio app
+!projects/ai-studio-app/dist/
