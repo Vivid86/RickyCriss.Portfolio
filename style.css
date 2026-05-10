@@ -259,9 +259,10 @@ main {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-.placeholder-img {
+.placeholder-img, .project-img {
     height: 200px;
     width: 100%;
+    object-fit: cover;
 }
 
 .bg-gradient-1 { background: linear-gradient(45deg, #1e3a8a, #3b82f6); }
