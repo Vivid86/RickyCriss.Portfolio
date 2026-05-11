@@ -129,25 +129,29 @@ main {
 }
 
 .hero-brand-bg {
-    position: absolute;
-    right: 0;
+    position: fixed;
+    left: 50%;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translate(-50%, -50%);
     z-index: -1;
     opacity: 0.15;
     pointer-events: none;
     animation: pulse-glow 4s infinite ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .hero-logo-large {
-    width: 600px;
+    width: 80vw;
+    max-width: 800px;
     height: auto;
     filter: drop-shadow(0 0 50px var(--accent-glow));
 }
 
 @keyframes pulse-glow {
-    0%, 100% { opacity: 0.1; transform: translateY(-50%) scale(1); }
-    50% { opacity: 0.2; transform: translateY(-50%) scale(1.05); }
+    0%, 100% { opacity: 0.08; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.15; transform: translate(-50%, -50%) scale(1.05); }
 }
 
 .hero-content {
