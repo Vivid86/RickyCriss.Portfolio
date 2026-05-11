@@ -216,7 +216,10 @@ const MusicTimer = () => {
 
   return (
     <div id="music-timer" className="relative h-24 overflow-hidden rounded-2xl bg-gradient-to-br from-indigo-900 to-purple-900 border border-white/10 group cursor-pointer">
-      <div className="absolute inset-0 bg-[url('./assets/ai_studio.png')] bg-cover bg-center opacity-40 group-hover:scale-105 transition-transform duration-1000" />
+      <div 
+        className="absolute inset-0 bg-cover bg-center opacity-40 group-hover:scale-105 transition-transform duration-1000" 
+        style={{ backgroundImage: "url('./ai_studio.png')" }}
+      />
       <div className="absolute inset-0 backdrop-blur-[2px]" />
       
       <div className="relative h-full p-4 flex items-center justify-between">
