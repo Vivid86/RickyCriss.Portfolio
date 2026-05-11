@@ -228,7 +228,7 @@ const MusicTimer = () => {
             <Music size={24} className="text-white" />
           </div>
           <div>
-            <p className="text-[10px] uppercase tracking-wider font-bold text-indigo-200">AI Studio Interactive</p>
+            <p className="text-[10px] uppercase tracking-wider font-bold text-indigo-200">Corner14 Interactive</p>
             <h3 className="text-lg font-bold text-white">The Cascade Boys</h3>
           </div>
         </div>
@@ -414,7 +414,7 @@ export default function App() {
       <header className="px-5 mb-6">
         <div className="flex justify-between items-center mb-1 gap-4">
           <div className="shrink-0">
-            <h1 className="text-3xl font-black italic tracking-tighter text-white uppercase transform -skew-x-12">AI STUDIO</h1>
+            <h1 className="text-3xl font-black italic tracking-tighter text-white uppercase transform -skew-x-12">Corner14</h1>
             <div className="flex items-center gap-1 text-[10px] font-bold text-gray-500 uppercase tracking-widest mt-0.5">
               <MapPin size={10} className="text-orange-500" />
               Oregon City, OR
