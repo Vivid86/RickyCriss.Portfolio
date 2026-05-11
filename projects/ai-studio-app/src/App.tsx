@@ -216,7 +216,7 @@ const MusicTimer = () => {
 
   return (
     <div id="music-timer" className="relative h-24 overflow-hidden rounded-2xl bg-gradient-to-br from-indigo-900 to-purple-900 border border-white/10 group cursor-pointer">
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=800&q=80')] bg-cover bg-center opacity-30 group-hover:scale-105 transition-transform duration-700" />
+      <div className="absolute inset-0 bg-[url('./assets/ai_studio.png')] bg-cover bg-center opacity-40 group-hover:scale-105 transition-transform duration-1000" />
       <div className="absolute inset-0 backdrop-blur-[2px]" />
       
       <div className="relative h-full p-4 flex items-center justify-between">
@@ -225,7 +225,7 @@ const MusicTimer = () => {
             <Music size={24} className="text-white" />
           </div>
           <div>
-            <p className="text-[10px] uppercase tracking-wider font-bold text-indigo-200">Main Stage Live</p>
+            <p className="text-[10px] uppercase tracking-wider font-bold text-indigo-200">AI Studio Interactive</p>
             <h3 className="text-lg font-bold text-white">The Cascade Boys</h3>
           </div>
         </div>
@@ -411,7 +411,7 @@ export default function App() {
       <header className="px-5 mb-6">
         <div className="flex justify-between items-center mb-1 gap-4">
           <div className="shrink-0">
-            <h1 className="text-3xl font-black italic tracking-tighter text-white uppercase transform -skew-x-12">Corner 14</h1>
+            <h1 className="text-3xl font-black italic tracking-tighter text-white uppercase transform -skew-x-12">AI STUDIO</h1>
             <div className="flex items-center gap-1 text-[10px] font-bold text-gray-500 uppercase tracking-widest mt-0.5">
               <MapPin size={10} className="text-orange-500" />
               Oregon City, OR
