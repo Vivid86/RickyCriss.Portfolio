@@ -7,8 +7,8 @@ This document tracks all active deployments and release history for the Vivid ec
 
 | Project | Live Link | Repository | Last Commit |
 | :--- | :--- | :--- | :--- |
-| **Mortal Online 2 Assistant** | [https://vivid86.github.io/Vivid86-s-Ultimate-Mortal-Online-2-Assistant/](https://vivid86.github.io/Vivid86-s-Ultimate-Mortal-Online-2-Assistant/) | `Vivid86/Vivid86-s-Ultimate-Mortal-Online-2-Assistant` | `a60e409` |
-| **Vivid Nexus Deck** | [https://vivid86.github.io/Vivid-Nexus-Deck/](https://vivid86.github.io/Vivid-Nexus-Deck/) | `Vivid86/Vivid-Nexus-Deck` | `758ee17` |
+| **Mortal Online 2 Assistant** | [https://vivid86.github.io/Vivid86-s-Ultimate-Mortal-Online-2-Assistant/](https://vivid86.github.io/Vivid86-s-Ultimate-Mortal-Online-2-Assistant/) | `Vivid86/Vivid86-s-Ultimate-Mortal-Online-2-Assistant` | `cab827c` |
+| **Vivid Nexus Deck** | [https://vivid86.github.io/Vivid-Nexus-Deck/](https://vivid86.github.io/Vivid-Nexus-Deck/) | `Vivid86/Vivid-Nexus-Deck` | `130e41b` |
 | **Portfolio Hub** | [https://rickycriss.github.io/](https://rickycriss.github.io/) | `RickyCriss/RickyCriss.github.io` | `5b5ccb1` |
 | **Antigravity** | [https://vivid86.github.io/Antigravity/](https://vivid86.github.io/Antigravity/) | `Vivid86/Antigravity` | `4b0473e` |
 
