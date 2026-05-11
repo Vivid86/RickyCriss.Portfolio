@@ -2,8 +2,8 @@
     --bg-dark: #0a0a0f;
     --text-main: #f3f4f6;
     --text-muted: #9ca3af;
-    --accent-primary: #3b82f6;
-    --accent-glow: rgba(59, 130, 246, 0.5);
+    --accent-primary: #f59e0b;
+    --accent-glow: rgba(245, 158, 11, 0.4);
     --glass-bg: rgba(255, 255, 255, 0.03);
     --glass-border: rgba(255, 255, 255, 0.08);
 }
@@ -46,13 +46,13 @@ body {
 
 .orb-1 {
     width: 400px; height: 400px;
-    background: radial-gradient(circle, #3b82f6, transparent);
+    background: radial-gradient(circle, #ea580c, transparent);
     top: -100px; left: -100px;
 }
 
 .orb-2 {
     width: 500px; height: 500px;
-    background: radial-gradient(circle, #8b5cf6, transparent);
+    background: radial-gradient(circle, #7c2d12, transparent);
     bottom: -100px; right: -100px;
     animation-delay: -10s;
 }
@@ -82,9 +82,17 @@ body {
 }
 
 .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
     font-weight: 800;
-    font-size: 1.5rem;
-    letter-spacing: -1px;
+    font-size: 1.2rem;
+    letter-spacing: -0.5px;
+}
+.nav-logo {
+    height: 32px;
+    width: auto;
+    filter: drop-shadow(0 0 10px var(--accent-glow));
 }
 .logo .dot { color: var(--accent-primary); }
 
@@ -117,10 +125,35 @@ main {
     display: flex;
     align-items: center;
     padding-top: 80px;
+    position: relative;
+}
+
+.hero-brand-bg {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: -1;
+    opacity: 0.15;
+    pointer-events: none;
+    animation: pulse-glow 4s infinite ease-in-out;
+}
+
+.hero-logo-large {
+    width: 600px;
+    height: auto;
+    filter: drop-shadow(0 0 50px var(--accent-glow));
+}
+
+@keyframes pulse-glow {
+    0%, 100% { opacity: 0.1; transform: translateY(-50%) scale(1); }
+    50% { opacity: 0.2; transform: translateY(-50%) scale(1.05); }
 }
 
 .hero-content {
     max-width: 800px;
+    position: relative;
+    z-index: 1;
 }
 
 .badge {
@@ -144,7 +177,7 @@ main {
 }
 
 .highlight {
-    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    background: linear-gradient(135deg, #f59e0b, #ea580c);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -171,12 +204,12 @@ main {
 }
 
 .btn-primary {
-    background: var(--text-main);
-    color: var(--bg-dark);
+    background: var(--accent-primary);
+    color: #000;
 }
 
 .btn-primary:hover {
-    background: #ffffff;
+    background: #fbbf24;
     box-shadow: 0 0 20px var(--accent-glow);
     transform: translateY(-2px);
 }
