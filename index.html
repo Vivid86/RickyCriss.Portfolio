@@ -7,6 +7,15 @@
     <meta name="description" content="Portfolio of Ricky Criss - Future software engineer combining 20 years of precision fabrication with modern software development.">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    
+    <!-- Google Analytics Placeholder -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR-GA-ID"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'YOUR-GA-ID');
+    </script> -->
 </head>
 <body>
     <div class="background-grid"></div>
@@ -25,8 +34,8 @@
             </div>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#projects">Work</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
@@ -35,36 +44,38 @@
     <main>
         <section id="about" class="hero">
             <div class="hero-content fade-in">
-                <div class="badge">Precision Logic & Robust Code</div>
-                <h1 class="title">Engineering <span class="highlight">scalable systems</span> from the ground up.</h1>
-                <p class="subtitle">Combining 20 years of fabrication disciplines with modern software engineering, AI integrations, and web/application development with a twist of game engine attitude.</p>
+                <div class="badge">Custom Software & AI Solutions</div>
+                <h1 class="title">Building <span class="highlight">intelligent apps</span> tailored to your business.</h1>
+                <p class="subtitle">Combining 20 years of precision engineering with modern software development to deliver robust web applications and custom AI agent integrations.</p>
                 <div class="cta-group">
-                    <a href="#projects" class="btn btn-primary">View My Work</a>
-                    <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+                    <a href="#services" class="btn btn-primary">Explore Services</a>
+                    <a href="#contact" class="btn btn-secondary">Start a Project</a>
                 </div>
             </div>
         </section>
 
-        <section id="skills" class="skills-section">
-            <h2 class="section-title fade-in">Technical Arsenal</h2>
-            <div class="skills-grid">
-                <div class="skill-card fade-in" style="--delay: 0.1s">
-                    <div class="icon">&lt; /&gt;</div>
-                    <h3>Languages</h3>
-                    <p>C#, Python, TypeScript</p>
+        <section id="services" class="services-section">
+            <h2 class="section-title fade-in">What I Build</h2>
+            <div class="services-grid">
+                <div class="service-card glass-panel fade-in" style="--delay: 0.1s">
+                    <div class="service-icon">🤖</div>
+                    <h3>Custom AI Agents</h3>
+                    <p>Automate workflows and enhance user experiences with tailored AI agents using the latest LLM technologies like Google's Gemini.</p>
                 </div>
-                <div class="skill-card fade-in" style="--delay: 0.2s">
-                    <div class="icon">{ }</div>
-                    <h3>Frameworks</h3>
-                    <p>Unity, Ursina, React, Vite</p>
+                <div class="service-card glass-panel fade-in" style="--delay: 0.2s">
+                    <div class="service-icon">💻</div>
+                    <h3>Web Applications</h3>
+                    <p>Full-stack, responsive web applications built with modern frameworks like React and Node.js for exceptional performance.</p>
                 </div>
-                <div class="skill-card fade-in" style="--delay: 0.3s">
-                    <div class="icon">[* ]</div>
-                    <h3>Specializations</h3>
-                    <p>AI Integration, System Architecture, Precision Logic</p>
+                <div class="service-card glass-panel fade-in" style="--delay: 0.3s">
+                    <div class="service-icon">⚙️</div>
+                    <h3>System Architecture</h3>
+                    <p>Scalable, robust backend systems and database integrations designed with the precision of a master fabricator.</p>
                 </div>
             </div>
         </section>
+
+
 
         <section id="projects" class="projects-section">
             <h2 class="section-title fade-in">Featured Projects</h2>
@@ -81,7 +92,7 @@
                             <span class="tag">AI Assistant</span>
                         </div>
                         <h3>The MO:2 AI Assistant</h3>
-                        <p>A high-resolution, tiled map system for Mortal Online 2 featuring live intel, distance measurements, and real-time community reports.</p>
+                        <p>A robust interactive mapping system built with Leaflet and Firestore. Demonstrates my ability to architect real-time data pipelines, handle complex state, and build highly interactive GIS-style applications.</p>
                         <div class="project-links">
                             <a href="projects/mortal-map/index.html" class="project-link" target="_blank">Open Assistant HUD ↗</a>
                         </div>
@@ -100,7 +111,7 @@
                             <span class="tag">Vite</span>
                         </div>
                         <h3>Corner14</h3>
-                        <p>A modern React application integrating directly with Google's AI Studio. Demonstrates state management, dynamic UI, and API integration.</p>
+                        <p>A modern React web application demonstrating seamless integration with LLMs (Google AI Studio). Showcases my ability to build dynamic, state-driven interfaces for complex AI interactions.</p>
                         <div class="project-links">
                             <a href="projects/ai-studio-app/dist/index.html" class="project-link" target="_blank">Launch App ↗</a>
                         </div>
@@ -108,20 +119,20 @@
                 </div>
 
                 <!-- Custom Tool-Calling Agent -->
-                <div class="project-card glass-panel fade-in">
+                <div class="project-card glass-panel fade-in highlight-card">
                     <div class="project-image">
                         <img src="projects/react-agent/assets/preview.png" alt="Custom ReAct Agent" class="project-img">
                     </div>
                     <div class="project-info">
                         <div class="project-tags">
-                            <span class="tag">Python</span>
-                            <span class="tag">Gemini API</span>
-                            <span class="tag">Agents</span>
+                            <span class="tag" style="background: rgba(139, 92, 246, 0.2); color: #c4b5fd;">Service Example</span>
+                            <span class="tag">AI Implementation</span>
                         </div>
-                        <h3>Custom ReAct Agent</h3>
-                        <p>A custom-built Python AI agent capable of dynamic tool calling, reasoning, and automated workflow execution using the Gemini SDK.</p>
+                        <h3>Custom Business AI Agents</h3>
+                        <p>Need a custom AI agent for your business? I build and integrate automated workflows using frameworks like this custom Python ReAct agent powered by the Gemini SDK. Stop doing manual tasks and let AI handle them.</p>
                         <div class="project-links">
-                            <a href="https://github.com/Vivid86/Antigravity" class="project-link" target="_blank">View Repository ↗</a>
+                            <a href="#contact" class="project-link">Inquire About This Service ↗</a>
+                            <a href="https://github.com/Vivid86/Antigravity" class="project-link" target="_blank">View Core Repo ↗</a>
                         </div>
                     </div>
                 </div>
@@ -149,9 +160,12 @@
 
         <section id="contact" class="contact-section fade-in">
             <div class="glass-panel contact-panel">
-                <h2>Ready to build something robust?</h2>
-                <p>I am always looking for opportunities to apply my technical background to complex software challenges.</p>
-                <a href="mailto:contact@example.com" class="btn btn-primary">Connect With Me</a>
+                <h2>Let's build your next solution.</h2>
+                <p>Whether you need a custom web application, an AI agent, or a complete system overhaul, I have the precision and expertise to deliver.</p>
+                <div class="contact-methods" style="margin-top: 2rem;">
+                    <a href="mailto:contact@example.com" class="btn btn-primary">Email Me Directly</a>
+                    <p class="contact-subtext" style="margin-top: 1rem; color: #a1a1aa; font-size: 0.9rem;">Currently accepting new freelance projects and consultations.</p>
+                </div>
             </div>
         </section>
     </main>

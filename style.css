@@ -237,40 +237,49 @@ main {
     letter-spacing: -1px;
 }
 
-/* Skills */
-.skills-section {
+/* Services */
+.services-section {
     padding: 100px 0;
 }
 
-.skills-grid {
+.services-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
+    gap: 2rem;
 }
 
-.skill-card {
+.service-card {
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
-    padding: 2rem;
+    padding: 2.5rem 2rem;
     border-radius: 16px;
     backdrop-filter: blur(10px);
-    transition: transform 0.3s, border-color 0.3s;
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
 }
 
-.skill-card:hover {
+.service-card:hover {
     transform: translateY(-5px);
     border-color: var(--accent-primary);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-.skill-card .icon {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 1.5rem;
-    color: var(--accent-primary);
-    margin-bottom: 1rem;
+.service-card .service-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
 }
 
-.skill-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
-.skill-card p { color: var(--text-muted); font-size: 0.95rem; }
+.service-card h3 { font-size: 1.4rem; margin-bottom: 0.8rem; }
+.service-card p { color: var(--text-muted); font-size: 1rem; line-height: 1.6; }
+
+/* Highlight Card */
+.highlight-card {
+    border-color: rgba(139, 92, 246, 0.5);
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.1);
+}
+.highlight-card:hover {
+    border-color: rgba(139, 92, 246, 0.8) !important;
+    box-shadow: 0 10px 40px rgba(139, 92, 246, 0.2) !important;
+}
 
 /* Projects */
 .projects-section {
