@@ -3,21 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ricky Criss | Software Engineer</title>
-    <meta name="description" content="Portfolio of Ricky Criss - Future software engineer combining 20 years of precision fabrication with modern software development.">
+    <title>Ricky Criss | Web, AI & Integration Services</title>
+    <meta name="description" content="Ricky Criss — developer and AI software engineering student. Practical web applications, workflow integrations, and AI prototypes, informed by 20 years in the metal industry. Available for remote work.">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     
-    <!-- Google Analytics Placeholder -->
-    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR-GA-ID"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'YOUR-GA-ID');
-    </script> -->
 </head>
 <body>
+    <a class="skip-link" href="#main">Skip to content</a>
     <div class="background-grid"></div>
     <div class="glow-orb orb-1"></div>
     <div class="glow-orb orb-2"></div>
@@ -26,10 +19,10 @@
         <img src="assets/brand-logo.png" alt="" class="hero-logo-large">
     </div>
 
-    <nav class="glass-nav">
+    <nav class="glass-nav" aria-label="Main navigation">
         <div class="nav-content">
             <div class="logo">
-                <img src="assets/brand-logo.png" alt="R-AI Logo" class="nav-logo">
+                <img src="assets/brand-logo.png" alt="Ricky Criss logo" class="nav-logo">
                 RICKY CRISS<span class="dot">.</span>
             </div>
             <ul class="nav-links">
@@ -41,49 +34,55 @@
         </div>
     </nav>
 
-    <main>
-        <section id="about" class="hero">
+    <main id="main">
+        <section id="home" class="hero" aria-labelledby="hero-title">
             <div class="hero-content fade-in">
-                <div class="badge">Custom Software & AI Solutions</div>
-                <h1 class="title">Building <span class="highlight">intelligent apps</span> tailored to your business.</h1>
-                <p class="subtitle">Combining 20 years of precision engineering with modern software development to deliver robust web applications and custom AI agent integrations.</p>
+                <div class="badge">WEB · AI · INTEGRATIONS</div>
+                <h1 id="hero-title" class="title">Practical problems.<br><span class="highlight">Purpose-built software.</span></h1>
+                <p class="subtitle">I’m Ricky Criss, a developer studying AI software engineering. I bring 20 years of hands-on experience in the metal industry to building websites, workflow integrations, and custom applications.</p>
                 <div class="cta-group">
-                    <a href="#services" class="btn btn-primary">Explore Services</a>
-                    <a href="#contact" class="btn btn-secondary">Start a Project</a>
+                    <a href="#projects" class="btn btn-primary">View My Work</a>
+                    <a href="#contact" class="btn btn-secondary">Discuss a Project</a>
                 </div>
+                <p class="availability"><span aria-hidden="true"></span> Open to remote developer opportunities &amp; scoped freelance projects</p>
             </div>
         </section>
 
-        <section id="services" class="services-section">
-            <h2 class="section-title fade-in">What I Build</h2>
+        <section id="services" class="services-section" aria-labelledby="services-title">
+            <div class="section-heading fade-in"><p class="eyebrow">WORK WITH ME</p><h2 id="services-title" class="section-title">A clear problem. A useful solution.</h2><p class="section-intro">Start with a focused scope and an outcome we can test together. These are proposed service packages; scope, timing, and price are agreed after discovery.</p></div>
             <div class="services-grid">
-                <div class="service-card glass-panel fade-in" style="--delay: 0.1s">
-                    <div class="service-icon">🤖</div>
-                    <h3>Custom AI Agents</h3>
-                    <p>Automate workflows and enhance user experiences with tailored AI agents using the latest LLM technologies like Google's Gemini.</p>
-                </div>
-                <div class="service-card glass-panel fade-in" style="--delay: 0.2s">
-                    <div class="service-icon">💻</div>
-                    <h3>Web Applications</h3>
-                    <p>Full-stack, responsive web applications built with modern frameworks like React and Node.js for exceptional performance.</p>
-                </div>
-                <div class="service-card glass-panel fade-in" style="--delay: 0.3s">
-                    <div class="service-icon">⚙️</div>
-                    <h3>System Architecture</h3>
-                    <p>Scalable, robust backend systems and database integrations designed with the precision of a master fabricator.</p>
-                </div>
+                <article class="service-card glass-panel fade-in">
+                    <div class="service-icon" aria-hidden="true">01 / WEB</div>
+                    <h3>Website launch &amp; care</h3>
+                    <p>For a small business that needs a clear, professional place to explain its work and help customers take the next step.</p>
+                    <ul class="offer-details"><li>Responsive service pages and clear calls to action</li><li>Contact flow, accessibility basics, and launch checks</li><li>Source handoff and a simple update guide</li></ul>
+                    <p class="offer-scope"><strong>Package:</strong> A scoped launch, with optional ongoing updates and care.</p>
+                    <a href="#contact" class="project-link">Discuss a website <span aria-hidden="true">↗</span></a>
+                </article>
+                <article class="service-card glass-panel fade-in">
+                    <div class="service-icon" aria-hidden="true">02 / WORKFLOWS</div>
+                    <h3>Connect tools. Reduce busywork.</h3>
+                    <p>For a team copying the same information between forms, spreadsheets, or business tools.</p>
+                    <ul class="offer-details"><li>Map one workflow and its source of truth</li><li>Connect agreed systems through supported APIs</li><li>Test duplicate records, failures, and recovery</li></ul>
+                    <p class="offer-scope"><strong>Package:</strong> Discovery followed by a bounded implementation; optional maintenance.</p>
+                    <a href="#contact" class="project-link">Discuss a workflow <span aria-hidden="true">↗</span></a>
+                </article>
             </div>
+            <div class="capability-note fade-in"><h3>Have a different technical challenge?</h3><p>I also explore AI assistants, custom applications, backend systems, and remote hardware support. We’ll establish feasibility and a realistic scope before making commitments.</p></div>
         </section>
 
-
+        <section id="about" class="about-section" aria-labelledby="about-title">
+            <div class="about-heading fade-in"><p class="eyebrow">THE PERSON BEHIND THE BUILD</p><h2 id="about-title" class="section-title">A practical builder,<br>always learning.</h2><span class="about-signature">Ricky Criss / Criss Tech Solutions</span></div>
+            <div class="about-copy fade-in"><p>My background is in the metal industry, where I spent 20 years working with real materials, constraints, and problems. That experience shapes how I approach software: understand the job, break it into manageable parts, and build something useful.</p><p>I’m currently studying AI software engineering and developing projects across web applications, AI integrations, and backend systems. I also build and configure computers, from workstations to gaming systems.</p><p>I’m looking for remote opportunities where I can contribute, learn from others, and take responsibility for a defined piece of work.</p><a href="https://github.com/Vivid86" class="project-link" target="_blank" rel="noopener noreferrer">Explore my GitHub <span aria-hidden="true">↗</span></a></div>
+        </section>
 
         <section id="projects" class="projects-section">
-            <h2 class="section-title fade-in">Featured Projects</h2>
+            <p class="eyebrow fade-in">SELECTED WORK</p><h2 class="section-title fade-in">Built to learn. Shared to demonstrate.</h2><p class="section-intro fade-in">Personal projects and implementation examples. These demonstrate areas I’m developing; they are not presented as paid client engagements or measured business results.</p>
             <div class="projects-grid">
                 <!-- Mortal Tactical Map -->
                 <div class="project-card glass-panel fade-in">
                     <div class="project-image">
-                        <img src="projects/mortal-map/assets/mountain.jpg" alt="Mortal Online 2 Vista" class="project-img">
+                        <img loading="lazy" src="projects/mortal-map/assets/mountain.jpg" alt="Mortal Online 2 Vista" class="project-img">
                     </div>
                     <div class="project-info">
                         <div class="project-tags">
@@ -92,9 +91,10 @@
                             <span class="tag">AI Assistant</span>
                         </div>
                         <h3>The MO:2 AI Assistant</h3>
-                        <p>A robust interactive mapping system built with Leaflet and Firestore. Demonstrates my ability to architect real-time data pipelines, handle complex state, and build highly interactive GIS-style applications.</p>
+                        <p>An interactive mapping project for Mortal Online 2, bringing location information into a navigable map interface. Built around Leaflet and Firestore to explore interactive interfaces and shared data.</p>
+                        <p class="project-proof"><strong>Skills explored:</strong> Mapping UI, application state, and data integration.</p>
                         <div class="project-links">
-                            <a href="projects/mortal-map/index.html" class="project-link" target="_blank">Open Assistant HUD ↗</a>
+                            <a href="projects/mortal-map/index.html" class="project-link" target="_blank" rel="noopener noreferrer">Explore mapping demo ↗</a>
                         </div>
                     </div>
                 </div>
@@ -102,7 +102,7 @@
                 <!-- AI Studio App -->
                 <div class="project-card glass-panel fade-in">
                     <div class="project-image">
-                        <img src="projects/ai-studio-app/assets/preview.png" alt="Corner14" class="project-img">
+                        <img loading="lazy" src="projects/ai-studio-app/assets/preview.png" alt="Corner14" class="project-img">
                     </div>
                     <div class="project-info">
                         <div class="project-tags">
@@ -111,9 +111,10 @@
                             <span class="tag">Vite</span>
                         </div>
                         <h3>Corner14</h3>
-                        <p>A modern React web application demonstrating seamless integration with LLMs (Google AI Studio). Showcases my ability to build dynamic, state-driven interfaces for complex AI interactions.</p>
+                        <p>A React and Vite application developed with Google AI Studio. A learning project exploring how to structure an AI-facing application and manage interactive interface state.</p>
+                        <p class="project-proof"><strong>Skills explored:</strong> React components, state management, and AI application interfaces.</p>
                         <div class="project-links">
-                            <a href="projects/ai-studio-app/dist/index.html" class="project-link" target="_blank">Launch App ↗</a>
+                            <a href="projects/ai-studio-app/dist/index.html" class="project-link" target="_blank" rel="noopener noreferrer">Open learning project ↗</a>
                         </div>
                     </div>
                 </div>
@@ -121,57 +122,41 @@
                 <!-- Custom Tool-Calling Agent -->
                 <div class="project-card glass-panel fade-in highlight-card">
                     <div class="project-image">
-                        <img src="projects/react-agent/assets/preview.png" alt="Custom ReAct Agent" class="project-img">
+                        <img loading="lazy" src="projects/react-agent/assets/preview.png" alt="Custom ReAct Agent" class="project-img">
                     </div>
                     <div class="project-info">
                         <div class="project-tags">
-                            <span class="tag" style="background: rgba(139, 92, 246, 0.2); color: #c4b5fd;">Service Example</span>
+                            <span class="tag" style="background: rgba(139, 92, 246, 0.2); color: #c4b5fd;">Personal project</span>
                             <span class="tag">AI Implementation</span>
                         </div>
-                        <h3>Custom Business AI Agents</h3>
-                        <p>Need a custom AI agent for your business? I build and integrate automated workflows using frameworks like this custom Python ReAct agent powered by the Gemini SDK. Stop doing manual tasks and let AI handle them.</p>
+                        <h3>Tool-calling AI agent</h3>
+                        <p>A Python ReAct agent example using the Gemini SDK to explore tool calling and multi-step tasks. A starting point for understanding how an assistant can choose tools, act, and respond.</p>
+                        <p class="project-proof"><strong>Skills explored:</strong> Python, Gemini SDK, tool calling, and agent control flow.</p>
                         <div class="project-links">
-                            <a href="#contact" class="project-link">Inquire About This Service ↗</a>
-                            <a href="https://github.com/Vivid86/Antigravity" class="project-link" target="_blank">View Core Repo ↗</a>
-                        </div>
-                    </div>
-                </div>
-
-                 <!-- 3DRPG / Games Placeholder -->
-                 <div class="project-card glass-panel fade-in">
-                    <div class="project-image">
-                        <img src="projects/interactive-env/assets/preview.png" alt="Interactive Environments" class="project-img">
-                    </div>
-                    <div class="project-info">
-                        <div class="project-tags">
-                            <span class="tag">C#</span>
-                            <span class="tag">Unity</span>
-                            <span class="tag">Game Dev</span>
-                        </div>
-                        <h3>Interactive Environments</h3>
-                        <p>Robust game environments built with structural integrity, focusing on scalable systems and smooth player experiences.</p>
-                        <div class="project-links">
-                            <a href="https://github.com/Vivid86" class="project-link" target="_blank">View Projects ↗</a>
+                            <a href="#contact" class="project-link">Discuss an AI prototype ↗</a>
+                            <a href="https://github.com/Vivid86/Antigravity" class="project-link" target="_blank" rel="noopener noreferrer">View Core Repo ↗</a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
+        <section class="process-section" aria-labelledby="process-title"><p class="eyebrow fade-in">HOW WE’D WORK TOGETHER</p><h2 id="process-title" class="section-title fade-in">Know what happens next.</h2><ol class="process-grid"><li class="fade-in"><span>01</span><h3>Understand</h3><p>Define the problem, users, tools, and what a useful result looks like.</p></li><li class="fade-in"><span>02</span><h3>Agree</h3><p>Set deliverables, exclusions, milestones, access, and price before implementation.</p></li><li class="fade-in"><span>03</span><h3>Build &amp; test</h3><p>Work in small steps, share progress, and check the agreed workflow.</p></li><li class="fade-in"><span>04</span><h3>Hand over</h3><p>Document the result and discuss any support or improvements you need.</p></li></ol></section>
+
         <section id="contact" class="contact-section fade-in">
             <div class="glass-panel contact-panel">
-                <h2>Let's build your next solution.</h2>
-                <p>Whether you need a custom web application, an AI agent, or a complete system overhaul, I have the precision and expertise to deliver.</p>
+                <h2>Have a project—or a place on your team?</h2>
+                <p>I’m open to remote developer opportunities and focused freelance projects. Share the problem you’re solving, the tools involved, and what you need next.</p>
                 <div class="contact-methods" style="margin-top: 2rem;">
-                    <a href="mailto:contact@example.com" class="btn btn-primary">Email Me Directly</a>
-                    <p class="contact-subtext" style="margin-top: 1rem; color: #a1a1aa; font-size: 0.9rem;">Currently accepting new freelance projects and consultations.</p>
+                    <a href="https://github.com/Vivid86" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Connect on GitHub</a>
+                    <p class="contact-subtext" style="margin-top: 1rem; color: #a1a1aa; font-size: 0.9rem;">GitHub is my public contact route for now. If we’re already connected on another platform, send the project link there. Please keep credentials and confidential material out of public issues.</p>
                 </div>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2026 Ricky Criss. Engineered with precision.</p>
+        <p>&copy; 2026 Ricky Criss. Practical experience. Purposeful software.</p>
     </footer>
 
     <script src="script.js"></script>
