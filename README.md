@@ -1,20 +1,25 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Ricky Criss — portfolio
 
-# Run and deploy your AI Studio app
+Static portfolio published by the GitHub Pages workflow on pushes to main.
 
-This contains everything you need to run your app locally.
+## Preview the portfolio
 
-View your app in AI Studio: https://ai.studio/apps/f014438f-728a-49e5-8c30-f0919ab73cf3
+From the repository root, run `python -m http.server 5174` and open http://localhost:5174/.
 
-## Run Locally
+## Corner14 learning project
 
-**Prerequisites:**  Node.js
+The React/Vite demo is in `projects/ai-studio-app`. It uses sample data and does not require an AI API key or an Express backend.
 
+From that directory:
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+```powershell
+npm install
+npm run lint
+npm run build
+```
+
+The portfolio links to the committed `projects/ai-studio-app/dist/index.html`. Rebuild and commit that output with source and lockfile changes before publishing. Never place service credentials in client code or Vite replacement values.
+
+## Dependency maintenance
+
+Run `npm audit` in the demo directory. Prefer compatible updates and confirm the typecheck, production build, and demo behavior after changes. The local audit report is diagnostic output; do not publish it with the site.

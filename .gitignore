@@ -9,3 +9,6 @@ coverage/
 
 # Allow committing the built AI Studio app
 !projects/ai-studio-app/dist/
+
+# Local dependency audit reports
+**/audit-report*.json
