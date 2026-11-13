@@ -396,16 +396,17 @@ a:focus-visible { outline: 3px solid var(--accent-primary); outline-offset: 6px;
 .skip-link { position: fixed; top: -100px; left: 1rem; z-index: 200; padding: .8rem 1rem; background: var(--accent-primary); color: #111; }
 .skip-link:focus { top: 1rem; }
 .hero {
-    min-height: 86vh;
-    padding-top: 110px;
-    padding-bottom: 4rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    min-height: 88vh;
+    padding-top: 135px;
+    padding-bottom: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     gap: 3.5rem;
-    align-items: center;
 }
 .hero-content {
-    max-width: 100%;
+    max-width: 950px;
+    width: 100%;
 }
 
 /* Hero Agent Card & Telemetry */
@@ -413,13 +414,35 @@ a:focus-visible { outline: 3px solid var(--accent-primary); outline-offset: 6px;
     background: rgba(12, 16, 26, 0.82);
     border: 1px solid rgba(16, 185, 129, 0.28);
     border-radius: 20px;
-    padding: 1.6rem 1.75rem;
+    padding: 1.8rem 2.2rem;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(16, 185, 129, 0.08);
     transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     position: relative;
     overflow: hidden;
+}
+
+.hero-agent-card-wide {
+    width: 100%;
+    max-width: 1000px;
+}
+
+.hero-agent-wide-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.hero-agent-col-action {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.hero-agent-col-action .hero-agent-terminal {
+    margin-bottom: 0;
 }
 
 .hero-agent-card:hover {
@@ -641,17 +664,25 @@ a:focus-visible { outline: 3px solid var(--accent-primary); outline-offset: 6px;
     gap: 0.35rem;
 }
 .title {
-    font-size: clamp(2.1rem, 3.2vw, 3.35rem);
-    line-height: 1.12;
-    letter-spacing: -1.5px;
-    margin-bottom: 1.25rem;
+    font-size: clamp(2.6rem, 5.2vw, 4.4rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -2px;
+    margin-bottom: 1.5rem;
+}
+.title-line-1 {
+    display: block;
+}
+.title-offset {
+    display: block;
+    padding-left: clamp(1.8rem, 5.5vw, 4.5rem);
 }
 .subtitle {
-    font-size: 1.1rem;
-    line-height: 1.6;
+    font-size: 1.2rem;
+    line-height: 1.65;
     color: var(--text-muted);
-    margin-bottom: 2rem;
-    max-width: 500px;
+    margin-bottom: 2.2rem;
+    max-width: 650px;
 }
 .availability { display: flex; align-items: center; gap: .65rem; margin-top: 1.8rem; color: #b7b8c2; font-size: .85rem; }
 .availability span { width: 7px; height: 7px; flex-shrink: 0; border-radius: 50%; background: var(--accent-primary); }
@@ -689,13 +720,16 @@ a:focus-visible { outline: 3px solid var(--accent-primary); outline-offset: 6px;
 .js-motion .fade-in.visible { opacity: 1; transform: none; }
 @media (max-width: 1000px) {
     .hero {
-        grid-template-columns: 1fr;
-        gap: 2.75rem;
-        padding-top: 130px;
+        padding-top: 120px;
+        gap: 2.5rem;
     }
-    .hero-content { max-width: 650px; }
-    .title { font-size: clamp(2.3rem, 5.5vw, 3.6rem); }
-    .hero-agent-card { max-width: 580px; }
+    .hero-agent-wide-grid {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+    }
+    .title-offset {
+        padding-left: 1.25rem;
+    }
     .projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .about-section { gap: 2.5rem; }
     .process-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }

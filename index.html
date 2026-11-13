@@ -38,7 +38,10 @@
         <section id="home" class="hero" aria-labelledby="hero-title">
             <div class="hero-content fade-in">
                 <div class="badge">WEB · AI · INTEGRATIONS</div>
-                <h1 id="hero-title" class="title">Practical problems.<br><span class="highlight">Purpose-built software.</span></h1>
+                <h1 id="hero-title" class="title">
+                    <span class="title-line-1">Practical problems.</span>
+                    <span class="highlight title-offset">Purpose-built software.</span>
+                </h1>
                 <p class="subtitle">I’m Ricky Criss, a developer studying AI software engineering. I bring 20 years of hands-on experience in the metal industry to building websites, workflow integrations, and custom applications.</p>
                 <div class="cta-group">
                     <a href="#projects" class="btn btn-primary">View My Work</a>
@@ -47,70 +50,74 @@
                 <p class="availability"><span aria-hidden="true"></span> Open to remote developer opportunities &amp; scoped freelance projects</p>
             </div>
 
-            <!-- Hero Live Poe Agent Card -->
-            <aside class="hero-agent-card glass-panel fade-in" aria-label="Featured Live Poe AI Agent">
-                <div class="hero-agent-header">
-                    <div class="hero-agent-type">
-                        <span class="agent-chip-icon" aria-hidden="true">🎮</span>
-                        <span>FEATURED POE AGENT</span>
-                    </div>
-                    <div class="agent-status-pill" id="hero-agent-status-pill" title="Poe Bot @Vivid86-DevAgent is hosted &amp; ready">
-                        <span class="status-dot-wrapper">
-                            <span class="status-ping"></span>
-                            <span class="status-dot"></span>
-                        </span>
-                        <span class="status-text" id="hero-agent-status-text">Active on Poe</span>
-                    </div>
-                </div>
+            <!-- Featured Live Poe Agent Showcase (Stacked Wide Console) -->
+            <aside class="hero-agent-card hero-agent-card-wide glass-panel fade-in" aria-label="Featured Live Poe AI Agent">
+                <div class="hero-agent-wide-grid">
+                    <div class="hero-agent-col-info">
+                        <div class="hero-agent-header">
+                            <div class="hero-agent-type">
+                                <span class="agent-chip-icon" aria-hidden="true">🎮</span>
+                                <span>FEATURED POE AGENT</span>
+                            </div>
+                            <div class="agent-status-pill" id="hero-agent-status-pill" title="Poe Bot @Vivid86-DevAgent is hosted &amp; ready">
+                                <span class="status-dot-wrapper">
+                                    <span class="status-ping"></span>
+                                    <span class="status-dot"></span>
+                                </span>
+                                <span class="status-text" id="hero-agent-status-text">Active on Poe</span>
+                            </div>
+                        </div>
 
-                <div class="hero-agent-body">
-                    <div class="hero-agent-title-row">
-                        <h3>Vivid-Architect</h3>
-                        <span class="hero-agent-version">vivid_ue5</span>
-                    </div>
-                    <p class="hero-agent-desc">Autonomous Unreal Engine 5 C++ agent. Trained to scaffold paired actors, validate Hungarian naming, and manage .Build.cs modules.</p>
-                    
-                    <div class="hero-agent-telemetry">
-                        <div class="telemetry-item">
-                            <span class="telem-label">MODEL</span>
-                            <span class="telem-val">Qwen2.5-1.5B (LoRA)</span>
+                        <div class="hero-agent-title-row">
+                            <h3>Vivid-Architect</h3>
+                            <span class="hero-agent-version">vivid_ue5</span>
                         </div>
-                        <div class="telemetry-item">
-                            <span class="telem-label">CORPUS</span>
-                            <span class="telem-val">57MB Engine RAG</span>
-                        </div>
-                        <div class="telemetry-item">
-                            <span class="telem-label">COMPUTE</span>
-                            <span class="telem-val">RTX 3070 Ti (8GB)</span>
-                        </div>
-                        <div class="telemetry-item">
-                            <span class="telem-label">PROTOCOL</span>
-                            <span class="telem-val">FastAPI Poe Bridge</span>
+                        <p class="hero-agent-desc">Autonomous Unreal Engine 5 C++ agent. Trained to scaffold paired actors, validate Hungarian naming, and manage .Build.cs modules.</p>
+                        
+                        <div class="hero-agent-telemetry">
+                            <div class="telemetry-item">
+                                <span class="telem-label">MODEL</span>
+                                <span class="telem-val">Qwen2.5-1.5B (LoRA)</span>
+                            </div>
+                            <div class="telemetry-item">
+                                <span class="telem-label">CORPUS</span>
+                                <span class="telem-val">57MB Engine RAG</span>
+                            </div>
+                            <div class="telemetry-item">
+                                <span class="telem-label">COMPUTE</span>
+                                <span class="telem-val">RTX 3070 Ti (8GB)</span>
+                            </div>
+                            <div class="telemetry-item">
+                                <span class="telem-label">PROTOCOL</span>
+                                <span class="telem-val">FastAPI Poe Bridge</span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="hero-agent-terminal">
-                        <div class="terminal-bar">
-                            <span class="term-circle red"></span>
-                            <span class="term-circle yellow"></span>
-                            <span class="term-circle green"></span>
-                            <span class="terminal-title">vivid_ue5_agent.py — REPL</span>
-                        </div>
-                        <pre class="terminal-code"><code><span class="term-p">&gt;</span> <span class="term-cmd">/scaffold AProceduralDungeon AActor</span>
+                    <div class="hero-agent-col-action">
+                        <div class="hero-agent-terminal">
+                            <div class="terminal-bar">
+                                <span class="term-circle red"></span>
+                                <span class="term-circle yellow"></span>
+                                <span class="term-circle green"></span>
+                                <span class="terminal-title">vivid_ue5_agent.py — REPL</span>
+                            </div>
+                            <pre class="terminal-code"><code><span class="term-p">&gt;</span> <span class="term-cmd">/scaffold AProceduralDungeon AActor</span>
 <span class="term-ok">✓</span> CoreMinimal.h &amp; Hungarian prefix 'A' verified
 <span class="term-info">ℹ</span> Injected ProceduralMeshComponent in .Build.cs
 <span class="term-active">● Active Poe Bridge: @Vivid86-DevAgent</span></code></pre>
-                    </div>
+                        </div>
 
-                    <div class="hero-agent-actions">
-                        <a href="https://poe.com/Vivid86-DevAgent" target="_blank" rel="noopener noreferrer" class="btn btn-emerald btn-sm">
-                            <span>Chat on Poe</span>
-                            <span aria-hidden="true">↗</span>
-                        </a>
-                        <a href="projects/vivid-ue5/index.html" class="btn btn-secondary btn-sm">
-                            <span>Architecture</span>
-                            <span aria-hidden="true">→</span>
-                        </a>
+                        <div class="hero-agent-actions">
+                            <a href="https://poe.com/Vivid86-DevAgent" target="_blank" rel="noopener noreferrer" class="btn btn-emerald btn-sm">
+                                <span>Chat on Poe</span>
+                                <span aria-hidden="true">↗</span>
+                            </a>
+                            <a href="projects/vivid-ue5/index.html" class="btn btn-secondary btn-sm">
+                                <span>Architecture</span>
+                                <span aria-hidden="true">→</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </aside>
