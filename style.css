@@ -395,8 +395,234 @@ section[id] { scroll-margin-top: 110px; }
 a:focus-visible { outline: 3px solid var(--accent-primary); outline-offset: 6px; border-radius: 3px; }
 .skip-link { position: fixed; top: -100px; left: 1rem; z-index: 200; padding: .8rem 1rem; background: var(--accent-primary); color: #111; }
 .skip-link:focus { top: 1rem; }
-.hero { min-height: 86vh; padding-bottom: 4rem; }
-.hero-content { max-width: 950px; }
+.hero {
+    min-height: 86vh;
+    padding-bottom: 4rem;
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 3rem;
+    align-items: center;
+}
+.hero-content { max-width: 100%; }
+
+/* Hero Agent Card & Telemetry */
+.hero-agent-card {
+    background: rgba(13, 17, 28, 0.75);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 20px;
+    padding: 1.75rem;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(16, 185, 129, 0.08);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-agent-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(16, 185, 129, 0.6);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 40px rgba(16, 185, 129, 0.15);
+}
+
+.hero-agent-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, #10b981, #06b6d4, transparent);
+}
+
+.hero-agent-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+    gap: 0.75rem;
+}
+
+.hero-agent-type {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #a7f3d0;
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    padding: 0.3rem 0.65rem;
+    border-radius: 6px;
+}
+
+/* Active Status Pill */
+.agent-status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.3rem 0.75rem;
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    border-radius: 999px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #34d399;
+}
+
+.status-dot-wrapper {
+    position: relative;
+    width: 8px;
+    height: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #10b981;
+    display: block;
+}
+
+.status-ping {
+    position: absolute;
+    top: 0; left: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #10b981;
+    animation: status-ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes status-ping {
+    0% { transform: scale(1); opacity: 0.9; }
+    75%, 100% { transform: scale(2.8); opacity: 0; }
+}
+
+.hero-agent-title-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin-bottom: 0.35rem;
+}
+
+.hero-agent-title-row h3 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+}
+
+.hero-agent-version {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: #94a3b8;
+    background: rgba(255, 255, 255, 0.06);
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+}
+
+.hero-agent-desc {
+    color: #94a3b8;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    margin-bottom: 1.25rem;
+}
+
+.hero-agent-telemetry {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+    margin-bottom: 1.25rem;
+}
+
+.telemetry-item {
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: 0.6rem 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.telem-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: #64748b;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+}
+
+.telem-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: #f1f5f9;
+    font-weight: 700;
+}
+
+.hero-agent-terminal {
+    background: #080a10;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 1.25rem;
+}
+
+.terminal-bar {
+    background: rgba(255, 255, 255, 0.04);
+    padding: 0.4rem 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.term-circle {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+.term-circle.red { background: #ef4444; }
+.term-circle.yellow { background: #f59e0b; }
+.term-circle.green { background: #10b981; }
+
+.terminal-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: #64748b;
+    margin-left: 0.4rem;
+}
+
+.terminal-code {
+    padding: 0.75rem 0.9rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.76rem;
+    line-height: 1.55;
+    margin: 0;
+    overflow-x: auto;
+}
+
+.term-p { color: #10b981; font-weight: 700; }
+.term-cmd { color: #f8fafc; font-weight: 600; }
+.term-ok { color: #34d399; }
+.term-info { color: #38bdf8; }
+.term-active { color: #a78bfa; font-weight: 700; }
+
+.hero-agent-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.btn-sm {
+    padding: 0.55rem 1.1rem;
+    font-size: 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
 .title { font-size: clamp(2.7rem, 6.3vw, 4.9rem); }
 .availability { display: flex; align-items: center; gap: .65rem; margin-top: 1.8rem; color: #b7b8c2; font-size: .85rem; }
 .availability span { width: 7px; height: 7px; flex-shrink: 0; border-radius: 50%; background: var(--accent-primary); }
@@ -433,6 +659,7 @@ a:focus-visible { outline: 3px solid var(--accent-primary); outline-offset: 6px;
 .js-motion .fade-in { opacity: 0; transform: translateY(20px); }
 .js-motion .fade-in.visible { opacity: 1; transform: none; }
 @media (max-width: 1000px) {
+    .hero { grid-template-columns: 1fr; gap: 2.5rem; }
     .projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .about-section { gap: 2.5rem; }
     .process-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }

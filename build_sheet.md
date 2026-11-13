@@ -7,6 +7,7 @@ This document tracks all active deployments and release history for the Vivid ec
 
 | Project | Live Link | Repository | Last Commit |
 | :--- | :--- | :--- | :--- |
+| **Vivid-Architect (vivid_ue5)** | [Poe Bot](https://poe.com/Vivid86-DevAgent) · [Case Study](projects/vivid-ue5/index.html) | `RickyCriss/vivid_ue5` | `Active` |
 | **ProEval Studio** | [Case Study](projects/proeval-studio/index.html) | `RickyCriss/proeval-studio` | `Published` |
 | **Mortal Online 2 Assistant** | [https://vivid86.github.io/Vivid86-s-Ultimate-Mortal-Online-2-Assistant/](https://vivid86.github.io/Vivid86-s-Ultimate-Mortal-Online-2-Assistant/) | `Vivid86/Vivid86-s-Ultimate-Mortal-Online-2-Assistant` | `f06c60b` |
 | **Vivid Nexus Deck** | [https://vivid86.github.io/Vivid-Nexus-Deck/](https://vivid86.github.io/Vivid-Nexus-Deck/) | `Vivid86/Vivid-Nexus-Deck` | `36c4693` |
