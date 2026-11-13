@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a12"/>
+      <stop offset="50%" stop-color="#121124"/>
+      <stop offset="100%" stop-color="#1a1533"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="rgba(255, 255, 255, 0.08)"/>
+      <stop offset="100%" stop-color="rgba(255, 255, 255, 0.02)"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="30" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+  
+  <!-- Subtle Grid -->
+  <g stroke="rgba(255,255,255,0.04)" stroke-width="1">
+    <line x1="0" y1="100" x2="1200" y2="100"/>
+    <line x1="0" y1="200" x2="1200" y2="200"/>
+    <line x1="0" y1="300" x2="1200" y2="300"/>
+    <line x1="0" y1="400" x2="1200" y2="400"/>
+    <line x1="0" y1="500" x2="1200" y2="500"/>
+    <line x1="150" y1="0" x2="150" y2="630"/>
+    <line x1="300" y1="0" x2="300" y2="630"/>
+    <line x1="450" y1="0" x2="450" y2="630"/>
+    <line x1="600" y1="0" x2="600" y2="630"/>
+    <line x1="750" y1="0" x2="750" y2="630"/>
+    <line x1="900" y1="0" x2="900" y2="630"/>
+    <line x1="1050" y1="0" x2="1050" y2="630"/>
+  </g>
+
+  <!-- Background Glow Orbs -->
+  <circle cx="200" cy="150" r="180" fill="#f59e0b" opacity="0.12" filter="url(#glow)"/>
+  <circle cx="1000" cy="450" r="220" fill="#8b5cf6" opacity="0.15" filter="url(#glow)"/>
+
+  <!-- Left Side: Brand and Title -->
+  <g transform="translate(80, 110)">
+    <!-- Brand Tag -->
+    <rect x="0" y="0" width="220" height="34" rx="17" fill="rgba(245, 158, 11, 0.15)" stroke="rgba(245, 158, 11, 0.4)"/>
+    <text x="110" y="22" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="700" fill="#f59e0b" text-anchor="middle" letter-spacing="1.5">CRISSCRAFTED LABS</text>
+
+    <!-- Main Title -->
+    <text x="0" y="85" font-family="'Outfit', sans-serif" font-size="52" font-weight="800" fill="#ffffff" letter-spacing="-1">ProEval Studio</text>
+    <text x="0" y="125" font-family="'Outfit', sans-serif" font-size="22" font-weight="400" fill="#a1a1aa">Multi-Language AI Code &amp; RLHF Evaluation Simulator</text>
+
+    <!-- Feature Pills -->
+    <g transform="translate(0, 160)">
+      <rect x="0" y="0" width="170" height="32" rx="16" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)"/>
+      <text x="85" y="20" font-family="'JetBrains Mono', monospace" font-size="12" fill="#e4e4e7" text-anchor="middle">⚡ 8m Bug-Hunt</text>
+
+      <rect x="180" y="0" width="160" height="32" rx="16" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)"/>
+      <text x="260" y="20" font-family="'JetBrains Mono', monospace" font-size="12" fill="#e4e4e7" text-anchor="middle">⚖️ Model A/B</text>
+
+      <rect x="350" y="0" width="180" height="32" rx="16" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)"/>
+      <text x="440" y="20" font-family="'JetBrains Mono', monospace" font-size="12" fill="#e4e4e7" text-anchor="middle">🤖 QA Adversary</text>
+    </g>
+
+    <!-- Tech Stack Row -->
+    <g transform="translate(0, 215)">
+      <text x="0" y="20" font-family="'JetBrains Mono', monospace" font-size="13" fill="#71717a">STACK:</text>
+      <text x="60" y="20" font-family="'JetBrains Mono', monospace" font-size="13" fill="#c4b5fd">React 19 · Gemini responseSchema · Pyodide WASM · Firebase 13 · PWA</text>
+    </g>
+  </g>
+
+  <!-- Right Side Mockup Frame -->
+  <g transform="translate(680, 90)">
+    <!-- Terminal Window Card -->
+    <rect width="450" height="450" rx="16" fill="#0f0f18" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+    
+    <!-- Window Bar -->
+    <rect width="450" height="40" rx="16" fill="#181824"/>
+    <circle cx="25" cy="20" r="5" fill="#ef4444"/>
+    <circle cx="42" cy="20" r="5" fill="#eab308"/>
+    <circle cx="59" cy="20" r="5" fill="#22c55e"/>
+    <text x="225" y="24" font-family="'JetBrains Mono', monospace" font-size="12" fill="#a1a1aa" text-anchor="middle">drill_sprint_python.py — Pyodide WASM</text>
+
+    <!-- Code Snippet -->
+    <g transform="translate(25, 65)" font-family="'JetBrains Mono', monospace" font-size="12">
+      <text x="0" y="20" fill="#818cf8"><tspan fill="#f43f5e">def</tspan> reconcile_ledger(entries: <tspan fill="#38bdf8">list[dict]</tspan>):</text>
+      <text x="20" y="44" fill="#64748b"># Line 2: Missing null safety guard</text>
+      <text x="20" y="68" fill="#e2e8f0"><tspan fill="#f43f5e">if not</tspan> entries: <tspan fill="#f43f5e">return</tspan> Decimal(<tspan fill="#a7f3d0">'0.0'</tspan>)</text>
+      <text x="20" y="92" fill="#e2e8f0">total = Decimal(<tspan fill="#a7f3d0">'0.0'</tspan>)</text>
+      <text x="20" y="116" fill="#f43f5e">for</text><text x="50" y="116" fill="#e2e8f0">e </text><text x="65" y="116" fill="#f43f5e">in</text><text x="85" y="116" fill="#e2e8f0">entries:</text>
+      <text x="40" y="140" fill="#fbbf24">total += Decimal(str(e.get(<tspan fill="#a7f3d0">'val'</tspan>, <tspan fill="#f43f5e">0</tspan>)))</text>
+      <text x="20" y="164" fill="#f43f5e">return</text><text x="70" y="164" fill="#e2e8f0">total</text>
+    </g>
+
+    <!-- Adversarial Evaluation Panel -->
+    <g transform="translate(25, 255)">
+      <rect width="400" height="165" rx="10" fill="rgba(245, 158, 11, 0.08)" stroke="rgba(245, 158, 11, 0.3)"/>
+      <text x="18" y="28" font-family="'Outfit', sans-serif" font-size="14" font-weight="700" fill="#f59e0b">ADVERSARIAL QA AUDIT (Gemini Structured)</text>
+      
+      <!-- Rubric pills -->
+      <g transform="translate(18, 42)">
+        <rect width="90" height="22" rx="4" fill="rgba(34, 197, 94, 0.2)"/>
+        <text x="45" y="15" font-family="'JetBrains Mono', monospace" font-size="10" fill="#86efac" text-anchor="middle">Adherence: 3/3</text>
+        
+        <rect x="98" y="0" width="90" height="22" rx="4" fill="rgba(239, 68, 68, 0.2)"/>
+        <text x="143" y="15" font-family="'JetBrains Mono', monospace" font-size="10" fill="#fca5a5" text-anchor="middle">EdgeCase: 1/3</text>
+
+        <rect x="196" y="0" width="85" height="22" rx="4" fill="rgba(59, 130, 246, 0.2)"/>
+        <text x="238" y="15" font-family="'JetBrains Mono', monospace" font-size="10" fill="#93c5fd" text-anchor="middle">Idiomatic: 3/3</text>
+
+        <rect x="289" y="0" width="95" height="22" rx="4" fill="rgba(168, 85, 247, 0.2)"/>
+        <text x="336" y="15" font-family="'JetBrains Mono', monospace" font-size="10" fill="#d8b4fe" text-anchor="middle">Accuracy: 2/3</text>
+      </g>
+
+      <text x="18" y="92" font-family="'JetBrains Mono', monospace" font-size="11" fill="#cbd5e1">⚠️ Defect Caught: Float precision drift on NaN key</text>
+      <text x="18" y="112" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8">Contract → Defect → Fix → Verification</text>
+      <text x="18" y="136" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#4ade80">✓ Readiness Score: 87.5% · Verified</text>
+    </g>
+  </g>
+</svg>

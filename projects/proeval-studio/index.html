@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProEval Studio — Case Study | Ricky Criss</title>
+    <meta name="description" content="Case study of ProEval Studio: An interactive AI code evaluation and RLHF sparring simulator built with React 19, Gemini structured outputs, Pyodide WASM, and Firebase.">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../style.css">
+    <style>
+        .case-study {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 120px 2rem 80px;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            margin-bottom: 2rem;
+            transition: color 0.2s;
+        }
+        .back-link:hover {
+            color: var(--accent-primary);
+        }
+        .case-header {
+            margin-bottom: 3rem;
+        }
+        .case-title {
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.15;
+            margin: 1rem 0;
+            letter-spacing: -1px;
+        }
+        .case-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+        .case-meta strong {
+            color: var(--text-main);
+        }
+        .case-banner {
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            margin-bottom: 3.5rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        }
+        .case-banner img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .case-section {
+            margin-bottom: 3.5rem;
+        }
+        .case-section h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 1.25rem;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .case-section h2::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 1.4rem;
+            background: var(--accent-primary);
+            border-radius: 2px;
+        }
+        .case-section p {
+            color: #d1d5db;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 1.25rem;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .feature-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 14px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+        .feature-card h3 {
+            font-size: 1.15rem;
+            color: var(--accent-primary);
+            margin-bottom: 0.5rem;
+        }
+        .feature-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+        .code-callout {
+            background: rgba(15, 15, 24, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: #c4b5fd;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+        .architecture-list {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+        .architecture-list li {
+            padding: 1rem 1.25rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            margin-bottom: 0.75rem;
+            color: #d1d5db;
+            line-height: 1.6;
+        }
+        .architecture-list li strong {
+            color: #f3f4f6;
+            display: block;
+            margin-bottom: 0.25rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+        }
+        .action-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--glass-border);
+        }
+    </style>
+</head>
+<body>
+    <div class="background-grid"></div>
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+
+    <nav class="glass-nav" aria-label="Main navigation">
+        <div class="nav-content">
+            <a href="../../index.html" class="logo" style="text-decoration: none; color: inherit;">
+                <img src="../../assets/brand-logo.png" alt="Ricky Criss logo" class="nav-logo">
+                RICKY CRISS<span class="dot">.</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="../../index.html#projects">Work</a></li>
+                <li><a href="../../index.html#about">About</a></li>
+                <li><a href="../../index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="case-study">
+        <a href="../../index.html#projects" class="back-link">← Back to Selected Work</a>
+
+        <header class="case-header">
+            <div class="badge" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3);">CASE STUDY · FLAGSHIP PROJECT</div>
+            <h1 class="case-title">ProEval Studio</h1>
+            <p class="subtitle" style="font-size: 1.25rem; color: #a1a1aa; margin-bottom: 1.5rem;">
+                Multi-Language AI Code &amp; RLHF Evaluation Simulator for Outlier AI, Code4Ai, and High-Stakes Technical Assessments
+            </p>
+            <div class="case-meta">
+                <span><strong>Role:</strong> Creator &amp; Full-Stack Engineer</span>
+                <span><strong>Brand:</strong> CrissCrafted Labs</span>
+                <span><strong>Timeline:</strong> Production Release</span>
+                <span><strong>Target:</strong> AI Data Annotators &amp; Senior SWE</span>
+            </div>
+            <div class="project-tags">
+                <span class="tag">React 19</span>
+                <span class="tag">TypeScript</span>
+                <span class="tag">Gemini responseSchema</span>
+                <span class="tag">Pyodide (WASM)</span>
+                <span class="tag">Firebase 13</span>
+                <span class="tag">Tailwind CSS v4</span>
+                <span class="tag">PWA</span>
+            </div>
+        </header>
+
+        <div class="case-banner">
+            <img src="assets/preview.svg" alt="ProEval Studio Architecture and UI Preview">
+        </div>
+
+        <section class="case-section">
+            <h2>The Problem</h2>
+            <p>
+                Leading AI data evaluation and RLHF platforms (such as Outlier AI, Code4Ai, and Alignerr) require engineers to audit, debug, and rate LLM-generated code under strict time gates (typically 8–15 minutes). 
+            </p>
+            <p>
+                Candidates with strong algorithmic backgrounds routinely fail these screenings—not because they can't code, but because:
+            </p>
+            <ul style="color: #d1d5db; margin-left: 1.5rem; line-height: 1.8; margin-bottom: 1.5rem;">
+                <li>They overlook subtle negative prompt constraints (e.g., forbidden packages, specific time complexities, strict schema invariants).</li>
+                <li>They miss silent runtime edge cases (such as <code>None</code> inputs, empty collections, float precision drift, or mutation of input arguments).</li>
+                <li>They write generic or hand-wavy rationales instead of structured, reviewer-grade justifications citing exact contracts, defects, and surgical fixes.</li>
+            </ul>
+        </section>
+
+        <section class="case-section">
+            <h2>The Solution</h2>
+            <p>
+                I engineered <strong>ProEval Studio</strong>: a high-fidelity sparring simulator and training workbench that transforms theoretical evaluation rubrics into an active, timed practice arena.
+            </p>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>⚡ 8-Min Bug-Hunt Sprints</h3>
+                    <p>Generates realistic problem briefs with subtly flawed AI code. Includes an in-browser editor, live Pyodide Python WASM execution, and a mandatory 4-point Pre-Submit Verification Gate.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>⚖️ Model A vs. B Arena</h3>
+                    <p>Pairwise evaluation with interactive 0–3 rubric scoring pills across Instruction Adherence, Edge-Case Safety, Idiomatic Quality, and Justification Precision.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🤖 Adversarial AI Reviewer</h3>
+                    <p>Acts as an unforgiving Senior QA Reviewer powered by Gemini structured JSON schemas, catching missed boundary inputs and diffing rationales against an exemplary benchmark.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🎓 Socratic Mode &amp; Mock Exam</h3>
+                    <p>Features 4-step progressive line-traced hints for practice, and a locked-down 25-minute 3-task gauntlet that issues shareable Readiness Scorecards.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="case-section">
+            <h2>Key Engineering &amp; Architectural Highlights</h2>
+            <ul class="architecture-list">
+                <li>
+                    <strong>Deterministic QA via Gemini Structured Outputs (responseSchema)</strong>
+                    Leveraged the Google Gemini API with strict JSON schema definitions to ensure deterministic drill generation, automated rubric category grading (0–3 scale), and machine-parseable diff rationales without hallucinations.
+                </li>
+                <li>
+                    <strong>Zero-Install In-Browser Execution Sandbox (Pyodide WASM)</strong>
+                    Integrated Pyodide 0.27.2 to execute and test Python 3.11+ code locally in the browser memory space with sub-second execution times and zero server infrastructure cost. Paired with a local WebSocket bridge daemon for multi-language execution (JS/TS, SQL, C++, Go, Rust).
+                </li>
+                <li>
+                    <strong>Tamper-Proof Firebase Architecture &amp; Quota Guardrails</strong>
+                    Designed Firestore security rules enforcing verified email authentication, immutable graded drill records (anti-tamper scoring), and strict 24-hour rate-limiting (15 drills/day), supplemented with a client-side BYOK (Bring Your Own Key) toggle for unlimited practice.
+                </li>
+                <li>
+                    <strong>Offline-First Progressive Web App (PWA)</strong>
+                    Configured Workbox caching strategies for instant asset delivery, offline indicator states, and seamless client-side storage persistence across browser reloads.
+                </li>
+            </ul>
+        </section>
+
+        <section class="case-section">
+            <h2>Results &amp; Competencies Demonstrated</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>Full-Stack Product Engineering</h3>
+                    <p>From product discovery to end-to-end implementation across React 19, TypeScript, Express backend, and Cloud infrastructure.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Advanced AI &amp; LLM Engineering</h3>
+                    <p>Mastery of structured output constraints, prompt engineering for evaluation benchmarks, and Socratic tutoring control flows.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Cloud Security &amp; Data Integrity</h3>
+                    <p>Production-grade Firestore security rules, rate-limiting, and defense-in-depth data validation.</p>
+                </div>
+            </div>
+
+            <div class="action-bar">
+                <a href="https://github.com/RickyCriss/proeval-studio" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                    View GitHub Repository ↗
+                </a>
+                <a href="../../index.html#contact" class="btn btn-secondary">
+                    Discuss This Project
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Ricky Criss · CrissCrafted Labs. Practical experience. Purposeful software.</p>
+    </footer>
+</body>
+</html>
