@@ -7,9 +7,35 @@
     <meta name="description" content="Ricky Criss — developer and AI software engineering student. Practical web applications, workflow integrations, and AI prototypes, informed by 20 years in the metal industry. Available for remote work.">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    
+    <link rel="stylesheet" href="jarvis.css">
+    <!-- Plausible Analytics - privacy-friendly, no cookies -->
+    <script defer data-domain="vivid86.github.io" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
+    <!-- ░░ JARVIS SPLASH SCREEN ░░ -->
+    <div id="jarvis-splash" role="dialog" aria-modal="true" aria-label="Jarvis AI initialising" tabindex="-1">
+        <div class="jarvis-grid-overlay"></div>
+        <div class="jarvis-scan-line"></div>
+        <div class="jarvis-core">
+            <div class="jarvis-ring jarvis-ring-outer"></div>
+            <div class="jarvis-ring jarvis-ring-mid"></div>
+            <div class="jarvis-ring jarvis-ring-inner"></div>
+            <div class="jarvis-hex">
+                <svg viewBox="0 0 100 100" aria-hidden="true">
+                    <polygon points="50,2 93,26 93,74 50,98 7,74 7,26" fill="none" stroke="rgba(245,158,11,0.6)" stroke-width="1.5"/>
+                    <polygon points="50,12 83,30 83,70 50,88 17,70 17,30" fill="none" stroke="rgba(245,158,11,0.3)" stroke-width="1"/>
+                    <text x="50" y="58" text-anchor="middle" fill="#f59e0b" font-size="22" font-family="JetBrains Mono" font-weight="700">J</text>
+                </svg>
+            </div>
+        </div>
+        <div class="jarvis-text-block">
+            <p class="jarvis-init-label">JARVIS OS v2.6 — INITIALISING</p>
+            <div class="jarvis-progress-bar"><div class="jarvis-progress-fill"></div></div>
+            <p id="jarvis-splash-msg" class="jarvis-splash-msg" aria-live="polite"></p>
+        </div>
+        <button class="jarvis-skip-btn" id="jarvis-skip" aria-label="Skip intro">ESC to skip</button>
+    </div>
+
     <a class="skip-link" href="#main">Skip to content</a>
     <div class="background-grid"></div>
     <div class="glow-orb orb-1"></div>
@@ -283,5 +309,32 @@
     </footer>
 
     <script src="script.js"></script>
+
+    <!-- ░░ JARVIS CHAT WIDGET ░░ -->
+    <div id="jarvis-fab" aria-label="Open Jarvis AI assistant" role="button" tabindex="0" title="Ask Jarvis">
+        <div class="jarvis-fab-ring"></div>
+        <span class="jarvis-fab-label">J</span>
+        <span class="jarvis-fab-status-dot"></span>
+    </div>
+
+    <div id="jarvis-chat" role="dialog" aria-modal="true" aria-label="Jarvis AI Assistant" hidden>
+        <div class="jarvis-chat-header">
+            <div class="jarvis-chat-title">
+                <span class="jarvis-chat-hex">⬡</span>
+                <span>JARVIS</span>
+                <span class="jarvis-chat-version">v2.6</span>
+            </div>
+            <div class="jarvis-chat-controls">
+                <button id="jarvis-tour-btn" class="jarvis-ctrl-btn" title="Start site tour">⬡ Tour</button>
+                <button id="jarvis-close" class="jarvis-ctrl-btn" aria-label="Close Jarvis">✕</button>
+            </div>
+        </div>
+        <div id="jarvis-messages" class="jarvis-messages" aria-live="polite" aria-atomic="false"></div>
+        <div class="jarvis-input-row">
+            <input id="jarvis-input" type="text" placeholder="Ask me anything…" autocomplete="off" aria-label="Message Jarvis">
+            <button id="jarvis-send" aria-label="Send message">↑</button>
+        </div>
+    </div>
+
 </body>
 </html>

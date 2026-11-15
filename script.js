@@ -1,4 +1,19 @@
+/* ============================================================
+   Ricky Criss Portfolio — script.js
+   Features: Fade-in observer · Poe status · Jarvis splash
+             Jarvis chat widget · Guided tour · Analytics events
+   ============================================================ */
+
 document.addEventListener('DOMContentLoaded', () => {
+    initMotion();
+    initPoeAgentStatus();
+    initJarvisSplash();
+    initJarvisChat();
+    initAnalyticsEvents();
+});
+
+/* ── Fade-in intersection observer ──────────────────────────── */
+function initMotion() {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (!reduceMotion && 'IntersectionObserver' in window) {
         const observer = new IntersectionObserver((entries) => {
@@ -12,34 +27,350 @@ document.addEventListener('DOMContentLoaded', () => {
         document.documentElement.classList.add('js-motion');
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
     }
+}
 
-    // Active status telemetry check for Vivid-Architect Poe Agent
-    initPoeAgentStatus();
-});
-
+/* ── Poe agent status probe ─────────────────────────────────── */
 async function initPoeAgentStatus() {
     const statusPill = document.getElementById('hero-agent-status-pill');
     const statusText = document.getElementById('hero-agent-status-text');
     if (!statusPill || !statusText) return;
 
-    // Fast non-blocking probe to detect if the local GPU server (port 8088) is running
     try {
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 1200);
-
         await fetch('http://127.0.0.1:8088/v1/models', {
             method: 'GET',
             mode: 'no-cors',
             signal: controller.signal
         });
         clearTimeout(timeoutId);
-
-        // Local RTX GPU server is running
         statusText.textContent = 'Active (RTX 3070 Ti Online)';
         statusPill.setAttribute('title', 'Local GPU model server (port 8088) is running and ready to serve');
     } catch {
-        // External visitor or local server idle: Hosted bot is active on Poe.com
         statusText.textContent = 'Active on Poe';
         statusPill.setAttribute('title', 'Vivid86-DevAgent is deployed and active on Poe.com');
     }
+}
+
+/* ── Jarvis splash screen ───────────────────────────────────── */
+function initJarvisSplash() {
+    const splash  = document.getElementById('jarvis-splash');
+    const msgEl   = document.getElementById('jarvis-splash-msg');
+    const skipBtn = document.getElementById('jarvis-skip');
+    if (!splash) return;
+
+    // Only show once per session
+    if (sessionStorage.getItem('jarvis-seen')) {
+        splash.remove();
+        return;
+    }
+
+    splash.focus();
+    document.body.style.overflow = 'hidden';
+
+    const quips = [
+        "All systems nominal. Detecting… impressive taste in developers.",
+        "I've scanned your intentions. Mostly harmless. Proceeding.",
+        "Loading portfolio… and yes, I read the whole thing. We'll talk.",
+        "Booting Ricky Criss OS. Warning: opinions about metal industry software may vary.",
+        "I'd say 'nice to meet you', but I already know everything. Carry on."
+    ];
+    const quip = quips[Math.floor(Math.random() * quips.length)];
+
+    // Show quip after 2.4s (progress bar is ~88% by then — nice timing)
+    setTimeout(() => {
+        msgEl.textContent = `"${quip}"`;
+        msgEl.classList.add('visible');
+    }, 2400);
+
+    // Auto-dismiss after 5.5s
+    const autoDismiss = setTimeout(() => dismissSplash(), 5500);
+
+    function dismissSplash() {
+        clearTimeout(autoDismiss);
+        splash.classList.add('jarvis-hidden');
+        document.body.style.overflow = '';
+        sessionStorage.setItem('jarvis-seen', '1');
+        setTimeout(() => splash.remove(), 900);
+        // Track splash view
+        plausibleTrack('Jarvis Splash Seen');
+    }
+
+    skipBtn.addEventListener('click', dismissSplash);
+    document.addEventListener('keydown', function onEsc(e) {
+        if (e.key === 'Escape') {
+            dismissSplash();
+            document.removeEventListener('keydown', onEsc);
+        }
+    });
+}
+
+/* ── Jarvis FAQ responses ───────────────────────────────────── */
+const JARVIS_KB = [
+    {
+        keys: ['who', 'ricky', 'about', 'you', 'person'],
+        response: "Ricky Criss — developer, AI engineering student, and recovering metalworker. Twenty years turning raw material into finished product. Now he does the same thing, just with code and considerably less ear protection required."
+    },
+    {
+        keys: ['hire', 'available', 'work', 'job', 'freelance', 'remote', 'opportunity'],
+        response: "He's open to remote developer roles and scoped freelance projects. Best approach: GitHub is the public contact route. Slide into the issues tab with a coherent brief and he'll respond. No recruiters pitching blockchain opportunities, please."
+    },
+    {
+        keys: ['jarvis', 'ai', 'you are', 'are you'],
+        response: "I'm Jarvis — the on-site AI for this portfolio. I answer questions, run tours, and occasionally make deadpan remarks at no extra charge. I'm not sentient. Probably."
+    },
+    {
+        keys: ['poe', 'agent', 'vivid', 'architect', 'ue5', 'unreal'],
+        response: "Vivid-Architect (vivid_ue5) is a live Poe agent fine-tuned on Unreal Engine 5. It scaffolds C++ actors, validates Hungarian naming, and manages Build.cs — running on a local RTX 3070 Ti. Chat with it on Poe: poe.com/Vivid86-DevAgent"
+    },
+    {
+        keys: ['proeval', 'rlhf', 'evaluation', 'studio'],
+        response: "ProEval Studio is an interactive RLHF sparring workbench. Timed bug-hunt sprints, in-browser Python WASM execution, A/B model audits, and Gemini-powered adversarial QA. It's what you'd build if you studied AI evaluation seriously."
+    },
+    {
+        keys: ['stack', 'tech', 'tools', 'language', 'framework'],
+        response: "On the web side: HTML, CSS, JS, React. AI: Python, Gemini SDK, LoRA fine-tuning, FastAPI, RAG pipelines. Infrastructure: local GPU compute (RTX 3070 Ti), GitHub Pages, Firebase. He builds things, then builds the things that build things."
+    },
+    {
+        keys: ['contact', 'email', 'reach', 'connect', 'message'],
+        response: "GitHub is the main contact route right now — github.com/Vivid86. Drop into the issues or discussions tab with your project brief. No CVs by DM. No equity-only offers. Yes, he's heard your brilliant idea."
+    },
+    {
+        keys: ['tour', 'show', 'walk', 'around', 'guide'],
+        response: "Great idea — click the '⬡ Tour' button up top and I'll walk you through the highlights. It's efficient, opinionated, and I promise not to ramble. Much."
+    },
+    {
+        keys: ['metal', 'industry', 'background', 'experience', 'history'],
+        response: "Twenty years in the metal industry — real materials, real constraints, real deadlines. It turns out that engineering principles transfer surprisingly well to software. The main difference is that software rarely falls on your foot."
+    },
+    {
+        keys: ['corner14', 'react', 'vite', 'ai studio'],
+        response: "Corner14 is a React + Vite learning project built with Google AI Studio. It explores structured AI application interfaces and state management. Early work — honest, documented, and functional."
+    }
+];
+
+function jarvisRespond(input) {
+    const lower = input.toLowerCase();
+    const match = JARVIS_KB.find(item => item.keys.some(k => lower.includes(k)));
+    if (match) return match.response;
+    return "I didn't quite catch that. Try asking about Ricky's work, background, the Vivid-Architect agent, or type 'tour' and I'll walk you around.";
+}
+
+/* ── Jarvis chat widget ─────────────────────────────────────── */
+function initJarvisChat() {
+    const fab      = document.getElementById('jarvis-fab');
+    const chat     = document.getElementById('jarvis-chat');
+    const closeBtn = document.getElementById('jarvis-close');
+    const input    = document.getElementById('jarvis-input');
+    const sendBtn  = document.getElementById('jarvis-send');
+    const tourBtn  = document.getElementById('jarvis-tour-btn');
+    const msgArea  = document.getElementById('jarvis-messages');
+    if (!fab || !chat) return;
+
+    let isOpen = false;
+
+    function openChat() {
+        isOpen = true;
+        chat.hidden = false;
+        input.focus();
+        if (!msgArea.children.length) {
+            addMessage('jarvis', "Hello. I'm Jarvis — your guide to this portfolio. Ask me anything about Ricky's work, or type 'tour' and I'll walk you around. Fair warning: I have opinions.");
+        }
+        plausibleTrack('Jarvis Chat Opened');
+    }
+
+    function closeChat() {
+        isOpen = false;
+        chat.hidden = true;
+        fab.focus();
+    }
+
+    fab.addEventListener('click', () => isOpen ? closeChat() : openChat());
+    fab.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); isOpen ? closeChat() : openChat(); } });
+    closeBtn.addEventListener('click', closeChat);
+
+    function sendMessage() {
+        const text = input.value.trim();
+        if (!text) return;
+        addMessage('user', text);
+        input.value = '';
+        plausibleTrack('Jarvis Message Sent');
+
+        // Check for tour trigger
+        if (/\btour\b/i.test(text)) {
+            addMessage('jarvis', "Excellent choice. Starting the grand tour — it covers the hero, services, work, and contact sections. You can bail out at any time.");
+            setTimeout(() => startTour(), 600);
+            return;
+        }
+
+        // Show typing indicator then respond
+        const typing = addTyping();
+        setTimeout(() => {
+            typing.remove();
+            addMessage('jarvis', jarvisRespond(text));
+        }, 700 + Math.random() * 400);
+    }
+
+    sendBtn.addEventListener('click', sendMessage);
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') sendMessage(); });
+    tourBtn.addEventListener('click', () => {
+        openChat();
+        setTimeout(() => {
+            addMessage('jarvis', "Right. Tour mode engaged. Follow the highlights.");
+            setTimeout(() => startTour(), 500);
+        }, 100);
+    });
+
+    // Keyboard close
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && isOpen) closeChat();
+    });
+}
+
+function addMessage(from, text) {
+    const msgArea = document.getElementById('jarvis-messages');
+    const wrapper = document.createElement('div');
+    wrapper.className = `jarvis-msg jarvis-msg-${from}`;
+
+    if (from === 'jarvis') {
+        const label = document.createElement('div');
+        label.className = 'jarvis-msg-label';
+        label.textContent = 'JARVIS';
+        wrapper.appendChild(label);
+    }
+
+    const body = document.createElement('div');
+    body.textContent = text;
+    wrapper.appendChild(body);
+    msgArea.appendChild(wrapper);
+    msgArea.scrollTop = msgArea.scrollHeight;
+    return wrapper;
+}
+
+function addTyping() {
+    const msgArea = document.getElementById('jarvis-messages');
+    const el = document.createElement('div');
+    el.className = 'jarvis-typing';
+    el.innerHTML = '<span></span><span></span><span></span>';
+    msgArea.appendChild(el);
+    msgArea.scrollTop = msgArea.scrollHeight;
+    return el;
+}
+
+/* ── Guided tour ─────────────────────────────────────────────── */
+const TOUR_STEPS = [
+    {
+        selector: '#home .hero-content',
+        title: 'Start here',
+        text: "This is the hero — Ricky's elevator pitch, minus the elevator. Practical problems, purpose-built software."
+    },
+    {
+        selector: '.hero-agent-card-wide',
+        title: 'Live Poe Agent',
+        text: "Vivid-Architect — a real, running AI agent for Unreal Engine 5 C++ work. Active on Poe. You can chat with it right now."
+    },
+    {
+        selector: '#services',
+        title: 'Services',
+        text: "Two focused offerings: website launches and workflow integrations. Scoped, agreed upfront, no scope creep surprises."
+    },
+    {
+        selector: '#projects',
+        title: 'Selected Work',
+        text: "Real projects with documented architecture — not lorem ipsum placeholders. ProEval Studio, Vivid-Architect, and more."
+    },
+    {
+        selector: '#about',
+        title: 'About',
+        text: "Twenty years of metal industry experience, now applied to software. Practical builder. Always learning. No buzzwords were harmed."
+    },
+    {
+        selector: '#contact',
+        title: 'Contact',
+        text: "GitHub is the front door. If you've got a real project brief, that's where to start. And that's the tour — efficient, as promised."
+    }
+];
+
+function startTour() {
+    let step = 0;
+    let currentHighlight = null;
+    let tooltip = null;
+
+    function showStep(i) {
+        cleanup();
+        if (i >= TOUR_STEPS.length) {
+            addMessage('jarvis', "And that's the tour. Efficient, wasn't it. If you have questions, I'm right here.");
+            plausibleTrack('Jarvis Tour Completed');
+            return;
+        }
+
+        const { selector, title, text } = TOUR_STEPS[i];
+        const target = document.querySelector(selector);
+        if (!target) { showStep(i + 1); return; }
+
+        // Scroll into view
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        // Highlight
+        setTimeout(() => {
+            target.classList.add('jarvis-tour-highlight');
+            currentHighlight = target;
+
+            // Tooltip
+            const rect = target.getBoundingClientRect();
+            tooltip = document.createElement('div');
+            tooltip.id = 'jarvis-tour-tooltip';
+            tooltip.innerHTML = `
+                <div class="tour-step-label">Step ${i + 1} of ${TOUR_STEPS.length} — ${title}</div>
+                <div>${text}</div>
+                <div class="tour-controls">
+                    <button class="tour-btn tour-btn-next">${i < TOUR_STEPS.length - 1 ? 'Next →' : 'Finish ✓'}</button>
+                    <button class="tour-btn tour-btn-skip">Skip tour</button>
+                </div>`;
+
+            // Position tooltip: prefer below, fall back to above
+            const top = rect.bottom + 16 < window.innerHeight - 100
+                ? rect.bottom + 16
+                : rect.top - 180;
+            const left = Math.min(Math.max(rect.left, 16), window.innerWidth - 300);
+            tooltip.style.cssText = `top:${top + window.scrollY}px; left:${left}px;`;
+            document.body.appendChild(tooltip);
+
+            tooltip.querySelector('.tour-btn-next').addEventListener('click', () => { step++; showStep(step); });
+            tooltip.querySelector('.tour-btn-skip').addEventListener('click', () => { cleanup(); addMessage('jarvis', "Tour cancelled. Sensible. I'll be here if you need anything."); plausibleTrack('Jarvis Tour Skipped'); });
+        }, 400);
+    }
+
+    function cleanup() {
+        if (currentHighlight) currentHighlight.classList.remove('jarvis-tour-highlight');
+        if (tooltip) tooltip.remove();
+        currentHighlight = null;
+        tooltip = null;
+    }
+
+    showStep(0);
+    plausibleTrack('Jarvis Tour Started');
+}
+
+/* ── Analytics event helpers ─────────────────────────────────── */
+function plausibleTrack(eventName, props) {
+    if (typeof window.plausible === 'function') {
+        window.plausible(eventName, props ? { props } : undefined);
+    }
+}
+
+function initAnalyticsEvents() {
+    // Track CTA clicks
+    document.querySelectorAll('.btn-primary, .btn-secondary, .btn-emerald').forEach(btn => {
+        btn.addEventListener('click', () => {
+            plausibleTrack('CTA Click', { label: btn.textContent.trim().slice(0, 40) });
+        });
+    });
+
+    // Track project link clicks
+    document.querySelectorAll('.project-link, .project-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            plausibleTrack('Project Link Click', { href: link.getAttribute('href') });
+        });
+    });
 }
