@@ -170,6 +170,41 @@ function initJarvisSplash() {
         }, 280);
     }
 
+    let ambientCtx = null;
+
+    // ── Low Ambient Diagnostic Arc Hum (Gentle Audio Presence) ──
+    function playAmbientBootHum() {
+        if (muted) return;
+        try {
+            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            if (!AudioCtx) return;
+            ambientCtx = new AudioCtx();
+            
+            const osc = ambientCtx.createOscillator();
+            const gain = ambientCtx.createGain();
+            const filter = ambientCtx.createBiquadFilter();
+
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(90, ambientCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(140, ambientCtx.currentTime + 1.8);
+
+            filter.type = 'lowpass';
+            filter.frequency.setValueAtTime(320, ambientCtx.currentTime);
+
+            gain.gain.setValueAtTime(0.001, ambientCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.045, ambientCtx.currentTime + 0.8);
+            gain.gain.exponentialRampToValueAtTime(0.015, ambientCtx.currentTime + 3.0);
+            gain.gain.exponentialRampToValueAtTime(0.0001, ambientCtx.currentTime + 4.5);
+
+            osc.connect(filter);
+            filter.connect(gain);
+            gain.connect(ambientCtx.destination);
+
+            osc.start();
+            osc.stop(ambientCtx.currentTime + 4.6);
+        } catch { }
+    }
+
     // ── Typewriter effect ──────────────────────────────────────
     function typewriterSpeak(text, el, onDone) {
         el.textContent = '';
@@ -182,18 +217,18 @@ function initJarvisSplash() {
         el.appendChild(cursor);
 
         let i = 0;
-        const speed = 28; // ms per character
+        const speed = 36; // ms per character (slightly more measured pacing)
         function tick() {
             if (dismissed) return;
             if (i < text.length) {
                 cursor.before(text[i]);
                 i++;
-                setTimeout(tick, speed + (Math.random() * 16 - 8));
+                setTimeout(tick, speed + (Math.random() * 14 - 7));
             } else {
-                setTimeout(() => { cursor.remove(); if (onDone) onDone(); }, 1000);
+                setTimeout(() => { cursor.remove(); if (onDone) onDone(); }, 1200);
             }
         }
-        setTimeout(tick, 60);
+        setTimeout(tick, 80);
     }
 
     // ── Play Pre-rendered Studio Audio ─────────────────────────
@@ -202,7 +237,14 @@ function initJarvisSplash() {
         try {
             if (!currentAudio) {
                 currentAudio = new Audio(audioSrc);
-                currentAudio.volume = 0.95;
+                // Lower comfortable volume + measured, slightly slower cadence
+                currentAudio.volume = 0.62;
+                currentAudio.playbackRate = 0.93;
+
+                // Never cut off: dismiss only AFTER sentence finishes cleanly + buffer
+                currentAudio.addEventListener('ended', () => {
+                    setTimeout(() => dismissSplash(), 1100);
+                });
             }
             const playPromise = currentAudio.play();
             if (playPromise !== undefined) {
@@ -238,6 +280,7 @@ function initJarvisSplash() {
     }
 
     // ── Sequence ───────────────────────────────────────────────
+    playAmbientBootHum();
     runBootLog();
     runDataStream();
 
@@ -248,13 +291,16 @@ function initJarvisSplash() {
         playQuipAudio(chosenQuip.audio);
     }, 2200);
 
-    // Auto-dismiss after 6.5s
-    const autoDismiss = setTimeout(() => dismissSplash(), 6500);
+    // Generous fallback auto-dismiss (e.g. if audio fails or muted)
+    const fallbackDismiss = setTimeout(() => dismissSplash(), 12000);
 
     function dismissSplash() {
         if (dismissed) return;
         dismissed = true;
-        clearTimeout(autoDismiss);
+        clearTimeout(fallbackDismiss);
+        if (ambientCtx) {
+            try { ambientCtx.close(); } catch { }
+        }
         if (currentAudio) {
             currentAudio.pause();
             currentAudio = null;
