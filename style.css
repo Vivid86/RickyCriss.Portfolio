@@ -257,6 +257,58 @@ main {
     z-index: 10;
 }
 
+/* Contextual Header above 3D Deck */
+.hero-deck-header {
+    text-align: center;
+    margin-bottom: 1.6rem;
+    max-width: 780px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    z-index: 20;
+}
+
+.deck-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: #00f0ff;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.6rem;
+    background: rgba(0, 240, 255, 0.08);
+    border: 1px solid rgba(0, 240, 255, 0.25);
+    padding: 0.3rem 0.95rem;
+    border-radius: 999px;
+    box-shadow: 0 0 16px rgba(0, 240, 255, 0.1);
+}
+
+.deck-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #00f0ff;
+    box-shadow: 0 0 8px #00f0ff;
+    animation: status-ping 1.8s infinite;
+}
+
+.deck-heading {
+    font-size: clamp(1.7rem, 3vw, 2.3rem);
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 0.45rem;
+    letter-spacing: -0.5px;
+}
+
+.deck-desc {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+    max-width: 660px;
+    margin: 0 auto;
+}
+
 .badge {
     display: inline-block;
     padding: 0.4rem 0.9rem;
@@ -591,7 +643,7 @@ main {
     perspective: 1600px;
     perspective-origin: 50% 45%;
     transform-style: preserve-3d;
-    height: 500px;
+    height: 550px;
     position: relative;
     display: flex;
     justify-content: center;
@@ -612,7 +664,7 @@ main {
     width: 580px;
     height: 580px;
     border-radius: 50%;
-    transform: rotateX(80deg) translateZ(-230px);
+    transform: rotateX(80deg) translateZ(-260px);
     pointer-events: none;
     display: flex;
     justify-content: center;
@@ -666,8 +718,8 @@ main {
 /* 3D Cylinder with cards */
 .carousel-cylinder {
     position: relative;
-    width: 310px;
-    height: 480px;
+    width: 365px;
+    height: 540px;
     transform-style: preserve-3d;
     transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -680,14 +732,18 @@ main {
     transition: none !important;
 }
 
-/* Cards inside 3D Cylinder */
+/* Bulbous Glass Cards inside 3D Cylinder */
 .jarvis-carousel-container:not(.mode-grid) .project-card {
     position: absolute;
-    width: 310px;
+    width: 365px;
     left: 0;
     top: 0;
-    height: 480px;
+    height: 540px;
     margin: 0;
+    border-radius: 28px;
+    background: linear-gradient(165deg, rgba(16, 22, 38, 0.92) 0%, rgba(8, 12, 22, 0.96) 100%);
+    border: 1px solid rgba(0, 240, 255, 0.24);
+    box-shadow: 0 16px 45px rgba(0, 0, 0, 0.75), inset 0 1px 1px rgba(255, 255, 255, 0.18), inset 0 -3px 12px rgba(0, 0, 0, 0.5);
     transform-style: preserve-3d;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
@@ -698,12 +754,26 @@ main {
     flex-direction: column;
 }
 
+/* Bulbous Top Lens Arc Highlight */
+.jarvis-carousel-container:not(.mode-grid) .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 12%;
+    right: 12%;
+    height: 3px;
+    background: radial-gradient(ellipse at center, rgba(0, 240, 255, 0.95), transparent 75%);
+    border-radius: 999px;
+    z-index: 5;
+    pointer-events: none;
+}
+
 /* Base 3D Carousel Card Orbit Positions */
-.jarvis-carousel-container:not(.mode-grid) .project-card:nth-child(1) { transform: rotateY(0deg) translateZ(340px); }
-.jarvis-carousel-container:not(.mode-grid) .project-card:nth-child(2) { transform: rotateY(72deg) translateZ(340px); }
-.jarvis-carousel-container:not(.mode-grid) .project-card:nth-child(3) { transform: rotateY(144deg) translateZ(340px); }
-.jarvis-carousel-container:not(.mode-grid) .project-card:nth-child(4) { transform: rotateY(216deg) translateZ(340px); }
-.jarvis-carousel-container:not(.mode-grid) .project-card:nth-child(5) { transform: rotateY(288deg) translateZ(340px); }
+.jarvis-carousel-container:not(.mode-grid) .project-card:nth-child(1) { transform: rotateY(0deg) translateZ(380px); }
+.jarvis-carousel-container:not(.mode-grid) .project-card:nth-child(2) { transform: rotateY(72deg) translateZ(380px); }
+.jarvis-carousel-container:not(.mode-grid) .project-card:nth-child(3) { transform: rotateY(144deg) translateZ(380px); }
+.jarvis-carousel-container:not(.mode-grid) .project-card:nth-child(4) { transform: rotateY(216deg) translateZ(380px); }
+.jarvis-carousel-container:not(.mode-grid) .project-card:nth-child(5) { transform: rotateY(288deg) translateZ(380px); }
 
 /* Prevent global .glass-panel:hover from flattening 3D transforms */
 .jarvis-carousel-container:not(.mode-grid) .project-card.glass-panel:hover {
@@ -711,36 +781,40 @@ main {
 }
 
 .jarvis-carousel-container:not(.mode-grid) .project-card .project-image {
-    height: 125px;
+    height: 140px;
     flex-shrink: 0;
+    border-top-left-radius: 27px;
+    border-top-right-radius: 27px;
+    overflow: hidden;
 }
 
 .jarvis-carousel-container:not(.mode-grid) .project-card .project-info {
-    padding: 0.95rem 1.15rem;
+    padding: 1.15rem 1.4rem;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
 }
 
 .jarvis-carousel-container:not(.mode-grid) .project-card .project-info h3 {
-    font-size: 1.1rem;
-    margin-bottom: 0.25rem;
+    font-size: 1.22rem;
+    margin-bottom: 0.35rem;
 }
 
 .jarvis-carousel-container:not(.mode-grid) .project-card .project-info p {
-    font-size: 0.8rem;
-    line-height: 1.4;
-    margin-bottom: 0.45rem;
+    font-size: 0.84rem;
+    line-height: 1.48;
+    margin-bottom: 0.5rem;
 }
 
 .jarvis-carousel-container:not(.mode-grid) .project-card .project-proof {
-    font-size: 0.74rem;
-    padding-top: 0.4rem;
+    font-size: 0.76rem;
+    padding-top: 0.45rem;
     margin-top: auto;
 }
 
 .jarvis-carousel-container:not(.mode-grid) .project-card .project-links {
-    margin-top: 0.5rem;
+    margin-top: 0.9rem;
+    padding-bottom: 0.4rem;
 }
 
 .card-telemetry-mini {
@@ -760,12 +834,12 @@ main {
     border-radius: 4px;
 }
 
-/* Active card in front */
+/* Active bulbous card in front */
 .jarvis-carousel-container:not(.mode-grid) .project-card.is-active-card {
     opacity: 1 !important;
     filter: none !important;
-    border-color: rgba(0, 240, 255, 0.6) !important;
-    box-shadow: 0 0 35px rgba(0, 240, 255, 0.25), 0 20px 40px rgba(0, 0, 0, 0.8) !important;
+    border-color: rgba(0, 240, 255, 0.65) !important;
+    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.85), 0 0 40px rgba(0, 240, 255, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.25) !important;
     z-index: 10;
     cursor: default;
     pointer-events: auto;

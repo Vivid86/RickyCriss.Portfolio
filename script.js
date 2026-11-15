@@ -688,7 +688,7 @@ function initJarvisCarousel() {
     const angleStep = 360 / totalCards;
     let currentIndex = 0;
     let currentAngle = 0;
-    let currentScale = 0.78;
+    let currentScale = 0.82;
     let isDragging = false;
     let pointerMoved = false;
     let startX = 0;
@@ -697,11 +697,11 @@ function initJarvisCarousel() {
     let lastTime = 0;
     let isPinching = false;
     let initialPinchDistance = null;
-    let initialScale = 0.78;
+    let initialScale = 0.82;
     let wheelTimeout = null;
 
     function getRadius() {
-        return window.innerWidth < 768 ? 220 : 340;
+        return window.innerWidth < 768 ? 260 : 380;
     }
 
     function setupCardPositions() {
@@ -819,7 +819,7 @@ function initJarvisCarousel() {
             container.classList.remove('mode-grid');
             if (btnModeCarousel) btnModeCarousel.classList.add('active');
             if (btnModeGrid) btnModeGrid.classList.remove('active');
-            currentScale = 0.78;
+            currentScale = 0.82;
             setupCardPositions();
             rotateToIndex(Math.round(-currentAngle / angleStep), false);
         }
