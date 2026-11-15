@@ -84,11 +84,11 @@ async function initPoeAgentStatus() {
 
 /* ── Jarvis splash screen ───────────────────────────────────── */
 function initJarvisSplash() {
-    const splash   = document.getElementById('jarvis-splash');
-    const msgEl    = document.getElementById('jarvis-splash-msg');
-    const skipBtn  = document.getElementById('jarvis-skip');
+    const splash = document.getElementById('jarvis-splash');
+    const msgEl = document.getElementById('jarvis-splash-msg');
+    const skipBtn = document.getElementById('jarvis-skip');
     const audioBtn = document.getElementById('jarvis-audio-btn');
-    const bootLog  = document.getElementById('jarvis-boot-log');
+    const bootLog = document.getElementById('jarvis-boot-log');
     const dataStream = document.getElementById('jarvis-data-stream');
     if (!splash) return;
 
@@ -170,8 +170,7 @@ function initJarvisSplash() {
         }, 280);
     }
 
-    // ── Sequence ───────────────────────────────────────────────
-    runBootLog();
+    // ── Typewriter effect ──────────────────────────────────────
     function typewriterSpeak(text, el, onDone) {
         el.textContent = '';
         el.classList.add('visible');
@@ -201,25 +200,39 @@ function initJarvisSplash() {
     function playQuipAudio(audioSrc) {
         if (muted) return;
         try {
-            currentAudio = new Audio(audioSrc);
-            currentAudio.volume = 0.95;
+            if (!currentAudio) {
+                currentAudio = new Audio(audioSrc);
+                currentAudio.volume = 0.95;
+            }
             const playPromise = currentAudio.play();
             if (playPromise !== undefined) {
                 playPromise.catch(() => {
-                    // Autoplay policy prevented playback until user interaction
+                    // Browsers require a user gesture before playing audio
+                    const unlockAudio = () => {
+                        if (!dismissed && currentAudio && !muted) {
+                            currentAudio.play().catch(() => {});
+                        }
+                        window.removeEventListener('pointerdown', unlockAudio);
+                        window.removeEventListener('keydown', unlockAudio);
+                    };
+                    window.addEventListener('pointerdown', unlockAudio, { once: true });
+                    window.addEventListener('keydown', unlockAudio, { once: true });
                 });
             }
-        } catch {}
+        } catch { }
     }
 
     // ── Mute toggle ────────────────────────────────────────────
     if (audioBtn) {
-        audioBtn.addEventListener('click', () => {
+        audioBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
             muted = !muted;
             audioBtn.textContent = muted ? '🔇' : '🔊';
             audioBtn.classList.toggle('muted', muted);
             if (muted && currentAudio) {
                 currentAudio.pause();
+            } else if (!muted && currentAudio) {
+                currentAudio.play().catch(() => {});
             }
         });
     }
@@ -249,35 +262,15 @@ function initJarvisSplash() {
         splash.classList.add('jarvis-hidden');
         document.body.style.overflow = '';
         sessionStorage.setItem('jarvis-seen', '1');
-        setTimeout(() => { if (splash.parentNode) splash.remove(); }, 1000);
+        setTimeout(() => { if (splash && splash.parentNode) splash.remove(); }, 1000);
         plausibleTrack('Jarvis Splash Seen');
     }
 
-    skipBtn.addEventListener('click', dismissSplash);
-    document.addEventListener('keydown', function onEsc(e) {
-        if (e.key === 'Escape') {
-            dismissSplash();
-            document.removeEventListener('keydown', onEsc);
-        }
+    skipBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dismissSplash();
     });
-}
-
-    // Auto-dismiss after 7s (longer — speech needs time)
-    const autoDismiss = setTimeout(() => dismissSplash(), 7000);
-
-    function dismissSplash() {
-        if (dismissed) return;
-        dismissed = true;
-        clearTimeout(autoDismiss);
-        if (window.speechSynthesis) window.speechSynthesis.cancel();
-        splash.classList.add('jarvis-hidden');
-        document.body.style.overflow = '';
-        sessionStorage.setItem('jarvis-seen', '1');
-        setTimeout(() => { if (splash.parentNode) splash.remove(); }, 1000);
-        plausibleTrack('Jarvis Splash Seen');
-    }
-
-    skipBtn.addEventListener('click', dismissSplash);
+    
     document.addEventListener('keydown', function onEsc(e) {
         if (e.key === 'Escape') {
             dismissSplash();
@@ -339,13 +332,13 @@ function jarvisRespond(input) {
 
 /* ── Jarvis chat widget ─────────────────────────────────────── */
 function initJarvisChat() {
-    const fab      = document.getElementById('jarvis-fab');
-    const chat     = document.getElementById('jarvis-chat');
+    const fab = document.getElementById('jarvis-fab');
+    const chat = document.getElementById('jarvis-chat');
     const closeBtn = document.getElementById('jarvis-close');
-    const input    = document.getElementById('jarvis-input');
-    const sendBtn  = document.getElementById('jarvis-send');
-    const tourBtn  = document.getElementById('jarvis-tour-btn');
-    const msgArea  = document.getElementById('jarvis-messages');
+    const input = document.getElementById('jarvis-input');
+    const sendBtn = document.getElementById('jarvis-send');
+    const tourBtn = document.getElementById('jarvis-tour-btn');
+    const msgArea = document.getElementById('jarvis-messages');
     if (!fab || !chat) return;
 
     let isOpen = false;
