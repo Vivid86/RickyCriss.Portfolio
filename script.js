@@ -103,39 +103,32 @@ function initJarvisSplash() {
     document.body.style.overflow = 'hidden';
     let muted = false;
     let dismissed = false;
+    let currentAudio = null;
 
-    // ── Quips ─────────────────────────────────────────────────
-    const quips = [
-        "All systems nominal. Detecting… impressive taste in developers.",
-        "I've scanned your intentions. Mostly harmless. Proceeding.",
-        "Loading portfolio… and yes, I read the whole thing. We'll talk.",
-        "Booting Ricky Criss OS. Warning: opinions about metal industry software may vary.",
-        "I'd say 'nice to meet you', but I already know everything. Carry on."
+    // ── Quips with Studio TTS Audio ───────────────────────────
+    const quipList = [
+        {
+            text: "All systems nominal. Detecting… impressive taste in developers.",
+            audio: "assets/audio/quip-1.wav"
+        },
+        {
+            text: "I've scanned your intentions. Mostly harmless. Proceeding.",
+            audio: "assets/audio/quip-2.wav"
+        },
+        {
+            text: "Loading portfolio… and yes, I read the whole thing. We'll talk.",
+            audio: "assets/audio/quip-3.wav"
+        },
+        {
+            text: "Booting Ricky Criss OS. Warning: opinions about metal industry software may vary.",
+            audio: "assets/audio/quip-4.wav"
+        },
+        {
+            text: "I'd say 'nice to meet you', but I already know everything. Carry on.",
+            audio: "assets/audio/quip-5.wav"
+        }
     ];
-    const quip = quips[Math.floor(Math.random() * quips.length)];
-
-    // ── Web Audio beep ─────────────────────────────────────────
-    function playBeep(freq = 880, dur = 0.08, vol = 0.12) {
-        if (muted) return;
-        try {
-            const ctx = new (window.AudioContext || window.webkitAudioContext)();
-            const osc = ctx.createOscillator();
-            const gain = ctx.createGain();
-            osc.connect(gain);
-            gain.connect(ctx.destination);
-            osc.type = 'sine';
-            osc.frequency.value = freq;
-            gain.gain.setValueAtTime(vol, ctx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + dur);
-            osc.start(ctx.currentTime);
-            osc.stop(ctx.currentTime + dur);
-        } catch {}
-    }
-
-    function playBootChime() {
-        if (muted) return;
-        [440, 554, 659, 880].forEach((f, i) => setTimeout(() => playBeep(f, 0.12, 0.08), i * 90));
-    }
+    const chosenQuip = quipList[Math.floor(Math.random() * quipList.length)];
 
     // ── Boot log lines ─────────────────────────────────────────
     const bootLines = [
@@ -156,8 +149,7 @@ function initJarvisSplash() {
                 span.textContent = line;
                 span.style.animationDelay = '0s';
                 bootLog.appendChild(span);
-                playBeep(600 + i * 40, 0.04, 0.05);
-            }, 300 + i * 320);
+            }, 300 + i * 280);
         });
     }
 
@@ -183,7 +175,6 @@ function initJarvisSplash() {
     function triggerGlitch() {
         if (!hexEl) return;
         hexEl.classList.add('glitch');
-        playBeep(220, 0.15, 0.1);
         setTimeout(() => hexEl.classList.remove('glitch'), 450);
     }
 
@@ -199,44 +190,33 @@ function initJarvisSplash() {
         el.appendChild(cursor);
 
         let i = 0;
-        const speed = 32; // ms per character
+        const speed = 28; // ms per character
         function tick() {
             if (dismissed) return;
             if (i < text.length) {
                 cursor.before(text[i]);
                 i++;
-                // Occasional key-click sound
-                if (i % 4 === 0) playBeep(1200 + Math.random() * 400, 0.025, 0.04);
-                setTimeout(tick, speed + (Math.random() * 20 - 10));
+                setTimeout(tick, speed + (Math.random() * 16 - 8));
             } else {
-                // Remove cursor after a beat
-                setTimeout(() => { cursor.remove(); if (onDone) onDone(); }, 1200);
+                setTimeout(() => { cursor.remove(); if (onDone) onDone(); }, 1000);
             }
         }
-        setTimeout(tick, 80);
+        setTimeout(tick, 60);
     }
 
-    // ── Web Speech API ─────────────────────────────────────────
-    function speak(text) {
-        if (muted || !window.speechSynthesis) return;
-        window.speechSynthesis.cancel();
-        const utter = new SpeechSynthesisUtterance(text);
-        utter.rate  = 0.92;
-        utter.pitch = 0.85;
-        utter.volume = 0.9;
-
-        // Prefer a British/neutral male voice; fall back gracefully
-        const voices = window.speechSynthesis.getVoices();
-        const preferred = voices.find(v =>
-            /google uk english male|daniel|microsoft george|microsoft ryan/i.test(v.name)
-        ) || voices.find(v =>
-            /english/i.test(v.lang) && /male/i.test(v.name)
-        ) || voices.find(v =>
-            v.lang.startsWith('en')
-        );
-        if (preferred) utter.voice = preferred;
-
-        window.speechSynthesis.speak(utter);
+    // ── Play Pre-rendered Studio Audio ─────────────────────────
+    function playQuipAudio(audioSrc) {
+        if (muted) return;
+        try {
+            currentAudio = new Audio(audioSrc);
+            currentAudio.volume = 0.95;
+            const playPromise = currentAudio.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {
+                    // Autoplay policy prevented playback until user interaction
+                });
+            }
+        } catch {}
     }
 
     // ── Mute toggle ────────────────────────────────────────────
@@ -245,41 +225,50 @@ function initJarvisSplash() {
             muted = !muted;
             audioBtn.textContent = muted ? '🔇' : '🔊';
             audioBtn.classList.toggle('muted', muted);
-            if (muted) window.speechSynthesis && window.speechSynthesis.cancel();
+            if (muted && currentAudio) {
+                currentAudio.pause();
+            }
         });
     }
 
     // ── Sequence ───────────────────────────────────────────────
-    // 0.0s: boot chime + glitch
-    playBootChime();
     setTimeout(triggerGlitch, 400);
-
-    // 0.3s: boot log
     runBootLog();
     runDataStream();
 
-    // 2.4s: show quip via typewriter + voice
+    // 2.2s: show quip via typewriter + studio voice track
     setTimeout(() => {
         if (dismissed) return;
-        const displayText = `"${quip}"`;
+        typewriterSpeak(`"${chosenQuip.text}"`, msgEl, null);
+        playQuipAudio(chosenQuip.audio);
+    }, 2200);
 
-        // Voices may not load instantly — wait for them
-        function startQuip() {
-            typewriterSpeak(displayText, msgEl, null);
-            speak(quip);
-        }
+    // Auto-dismiss after 6.5s
+    const autoDismiss = setTimeout(() => dismissSplash(), 6500);
 
-        const voices = window.speechSynthesis ? window.speechSynthesis.getVoices() : [];
-        if (voices.length > 0) {
-            startQuip();
-        } else if (window.speechSynthesis) {
-            window.speechSynthesis.onvoiceschanged = () => { startQuip(); window.speechSynthesis.onvoiceschanged = null; };
-            // Fallback if event never fires
-            setTimeout(startQuip, 300);
-        } else {
-            startQuip();
+    function dismissSplash() {
+        if (dismissed) return;
+        dismissed = true;
+        clearTimeout(autoDismiss);
+        if (currentAudio) {
+            currentAudio.pause();
+            currentAudio = null;
         }
-    }, 2400);
+        splash.classList.add('jarvis-hidden');
+        document.body.style.overflow = '';
+        sessionStorage.setItem('jarvis-seen', '1');
+        setTimeout(() => { if (splash.parentNode) splash.remove(); }, 1000);
+        plausibleTrack('Jarvis Splash Seen');
+    }
+
+    skipBtn.addEventListener('click', dismissSplash);
+    document.addEventListener('keydown', function onEsc(e) {
+        if (e.key === 'Escape') {
+            dismissSplash();
+            document.removeEventListener('keydown', onEsc);
+        }
+    });
+}
 
     // Auto-dismiss after 7s (longer — speech needs time)
     const autoDismiss = setTimeout(() => dismissSplash(), 7000);
