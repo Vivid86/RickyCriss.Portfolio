@@ -35,20 +35,50 @@ async function initPoeAgentStatus() {
     const statusText = document.getElementById('hero-agent-status-text');
     if (!statusPill || !statusText) return;
 
+    // ── State helpers ──────────────────────────────────────────
+    function setChecking() {
+        statusPill.classList.remove('status-offline');
+        statusPill.classList.add('status-checking');
+        statusText.textContent = 'Checking…';
+        statusPill.setAttribute('title', 'Probing local GPU server…');
+    }
+
+    function setOnline(label, tooltip) {
+        statusPill.classList.remove('status-checking', 'status-offline');
+        statusText.textContent = label;
+        statusPill.setAttribute('title', tooltip);
+    }
+
+    function setOffline() {
+        statusPill.classList.remove('status-checking');
+        statusPill.classList.add('status-offline');
+        statusText.textContent = 'Offline';
+        statusPill.setAttribute('title', 'Local GPU server (port 8088) is not reachable. The Poe bridge is likely idle.');
+    }
+
+    // ── Probe ──────────────────────────────────────────────────
+    setChecking();
+
     try {
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 1200);
-        await fetch('http://127.0.0.1:8088/v1/models', {
+        const timeoutId = setTimeout(() => controller.abort(), 1500);
+
+        // no-cors: resolves if the TCP connection succeeds, throws on refused/timeout
+        const res = await fetch('http://127.0.0.1:8088/v1/models', {
             method: 'GET',
             mode: 'no-cors',
             signal: controller.signal
         });
         clearTimeout(timeoutId);
-        statusText.textContent = 'Active (RTX 3070 Ti Online)';
-        statusPill.setAttribute('title', 'Local GPU model server (port 8088) is running and ready to serve');
-    } catch {
-        statusText.textContent = 'Active on Poe';
-        statusPill.setAttribute('title', 'Vivid86-DevAgent is deployed and active on Poe.com');
+
+        // Connection succeeded — local RTX node is up → bridge is live
+        setOnline(
+            'Active · RTX Node Online',
+            'Local GPU model server (port 8088) is running — Poe bridge is live.'
+        );
+    } catch (err) {
+        // AbortError = timeout, TypeError = connection refused — either way: offline
+        setOffline();
     }
 }
 

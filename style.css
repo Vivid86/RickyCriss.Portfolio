@@ -528,6 +528,34 @@ a:focus-visible { outline: 3px solid var(--accent-primary); outline-offset: 6px;
     75%, 100% { transform: scale(2.8); opacity: 0; }
 }
 
+/* Status: checking */
+.agent-status-pill.status-checking {
+    background: rgba(245, 158, 11, 0.08);
+    border-color: rgba(245, 158, 11, 0.3);
+    color: rgba(245, 158, 11, 0.7);
+}
+.agent-status-pill.status-checking .status-dot,
+.agent-status-pill.status-checking .status-ping {
+    background: rgba(245, 158, 11, 0.6);
+}
+.agent-status-pill.status-checking .status-ping {
+    animation: none;
+}
+
+/* Status: offline */
+.agent-status-pill.status-offline {
+    background: rgba(239, 68, 68, 0.07);
+    border-color: rgba(239, 68, 68, 0.3);
+    color: #f87171;
+}
+.agent-status-pill.status-offline .status-dot {
+    background: #ef4444;
+}
+.agent-status-pill.status-offline .status-ping {
+    animation: none;
+    background: transparent;
+}
+
 .hero-agent-title-row {
     display: flex;
     align-items: baseline;
