@@ -88,7 +88,6 @@ function initJarvisSplash() {
     const msgEl    = document.getElementById('jarvis-splash-msg');
     const skipBtn  = document.getElementById('jarvis-skip');
     const audioBtn = document.getElementById('jarvis-audio-btn');
-    const hexEl    = splash ? splash.querySelector('.jarvis-hex') : null;
     const bootLog  = document.getElementById('jarvis-boot-log');
     const dataStream = document.getElementById('jarvis-data-stream');
     if (!splash) return;
@@ -108,23 +107,23 @@ function initJarvisSplash() {
     // ── Quips with Studio TTS Audio ───────────────────────────
     const quipList = [
         {
-            text: "All systems nominal. Detecting… impressive taste in developers.",
+            text: "All systems nominal. Portfolio initialised. Good evening, sir.",
             audio: "assets/audio/quip-1.wav"
         },
         {
-            text: "I've scanned your intentions. Mostly harmless. Proceeding.",
+            text: "I've scanned your intentions. Mostly harmless. Proceeding to credentials.",
             audio: "assets/audio/quip-2.wav"
         },
         {
-            text: "Loading portfolio… and yes, I read the whole thing. We'll talk.",
+            text: "Sir, the portfolio is fully compiled. Shall I prepare the workshop?",
             audio: "assets/audio/quip-3.wav"
         },
         {
-            text: "Booting Ricky Criss OS. Warning: opinions about metal industry software may vary.",
+            text: "Rendering architectural telemetry. Do try not to break anything on your way in.",
             audio: "assets/audio/quip-4.wav"
         },
         {
-            text: "I'd say 'nice to meet you', but I already know everything. Carry on.",
+            text: "Diagnostics complete. Your choice in engineering talent appears statistically optimal.",
             audio: "assets/audio/quip-5.wav"
         }
     ];
@@ -171,14 +170,8 @@ function initJarvisSplash() {
         }, 280);
     }
 
-    // ── Glitch the hex logo ───────────────────────────────────
-    function triggerGlitch() {
-        if (!hexEl) return;
-        hexEl.classList.add('glitch');
-        setTimeout(() => hexEl.classList.remove('glitch'), 450);
-    }
-
-    // ── Typewriter effect ──────────────────────────────────────
+    // ── Sequence ───────────────────────────────────────────────
+    runBootLog();
     function typewriterSpeak(text, el, onDone) {
         el.textContent = '';
         el.classList.add('visible');
@@ -232,7 +225,6 @@ function initJarvisSplash() {
     }
 
     // ── Sequence ───────────────────────────────────────────────
-    setTimeout(triggerGlitch, 400);
     runBootLog();
     runDataStream();
 
