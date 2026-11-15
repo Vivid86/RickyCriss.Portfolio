@@ -515,7 +515,7 @@ const TOUR_STEPS = [
         text: "Twenty years of metal industry experience, now applied to software. Practical builder. Always learning. No buzzwords were harmed."
     },
     {
-        selector: '#contact',
+        selector: '#contact .contact-panel',
         title: 'Contact',
         text: "GitHub is the front door. If you've got a real project brief, that's where to start. And that's the tour — efficient, as promised."
     }
@@ -589,16 +589,36 @@ function startTour() {
                     <button class="tour-btn tour-btn-next">${i < TOUR_STEPS.length - 1 ? 'Next →' : 'Finish ✓'}</button>
                 </div>`;
 
-            // Position tooltip: prefer below, fall back to above
-            const top = rect.bottom + 16 < window.innerHeight - 100
-                ? rect.bottom + 16
-                : rect.top - 180;
-            const left = Math.min(Math.max(rect.left, 16), window.innerWidth - 300);
-            tooltip.style.cssText = `top:${top + window.scrollY}px; left:${left}px;`;
+            // Position tooltip relative to viewport (pure fixed coordinates)
+            const approxHeight = 210;
+            const approxWidth = Math.min(340, window.innerWidth - 32);
+            let top = rect.bottom + 16;
+            
+            // If placing below exceeds screen bottom, place above
+            if (top + approxHeight > window.innerHeight - 20) {
+                top = Math.max(20, rect.top - approxHeight - 16);
+            }
+            
+            // Center horizontally relative to target, clamped to screen
+            let left = rect.left + (rect.width / 2) - (approxWidth / 2);
+            left = Math.min(Math.max(left, 16), window.innerWidth - approxWidth - 16);
+
+            tooltip.style.top = `${Math.round(top)}px`;
+            tooltip.style.left = `${Math.round(left)}px`;
+            tooltip.style.width = `${approxWidth}px`;
             document.body.appendChild(tooltip);
 
-            tooltip.querySelector('.tour-btn-next').addEventListener('click', () => { step++; showStep(step); });
-            tooltip.querySelector('.tour-btn-skip').addEventListener('click', () => { cleanup(); addMessage('jarvis', "Tour cancelled. Sensible. I'll be here if you need anything."); plausibleTrack('Jarvis Tour Skipped'); });
+            tooltip.querySelector('.tour-btn-next').addEventListener('click', (e) => {
+                e.stopPropagation();
+                step++;
+                showStep(step);
+            });
+            tooltip.querySelector('.tour-btn-skip').addEventListener('click', (e) => {
+                e.stopPropagation();
+                cleanup();
+                addMessage('jarvis', "Tour cancelled. Sensible. I'll be here if you need anything.");
+                plausibleTrack('Jarvis Tour Skipped');
+            });
         }, 400);
     }
 
