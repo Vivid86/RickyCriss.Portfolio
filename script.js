@@ -84,9 +84,13 @@ async function initPoeAgentStatus() {
 
 /* ── Jarvis splash screen ───────────────────────────────────── */
 function initJarvisSplash() {
-    const splash  = document.getElementById('jarvis-splash');
-    const msgEl   = document.getElementById('jarvis-splash-msg');
-    const skipBtn = document.getElementById('jarvis-skip');
+    const splash   = document.getElementById('jarvis-splash');
+    const msgEl    = document.getElementById('jarvis-splash-msg');
+    const skipBtn  = document.getElementById('jarvis-skip');
+    const audioBtn = document.getElementById('jarvis-audio-btn');
+    const hexEl    = splash ? splash.querySelector('.jarvis-hex') : null;
+    const bootLog  = document.getElementById('jarvis-boot-log');
+    const dataStream = document.getElementById('jarvis-data-stream');
     if (!splash) return;
 
     // Only show once per session
@@ -97,7 +101,10 @@ function initJarvisSplash() {
 
     splash.focus();
     document.body.style.overflow = 'hidden';
+    let muted = false;
+    let dismissed = false;
 
+    // ── Quips ─────────────────────────────────────────────────
     const quips = [
         "All systems nominal. Detecting… impressive taste in developers.",
         "I've scanned your intentions. Mostly harmless. Proceeding.",
@@ -107,22 +114,185 @@ function initJarvisSplash() {
     ];
     const quip = quips[Math.floor(Math.random() * quips.length)];
 
-    // Show quip after 2.4s (progress bar is ~88% by then — nice timing)
+    // ── Web Audio beep ─────────────────────────────────────────
+    function playBeep(freq = 880, dur = 0.08, vol = 0.12) {
+        if (muted) return;
+        try {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.type = 'sine';
+            osc.frequency.value = freq;
+            gain.gain.setValueAtTime(vol, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + dur);
+            osc.start(ctx.currentTime);
+            osc.stop(ctx.currentTime + dur);
+        } catch {}
+    }
+
+    function playBootChime() {
+        if (muted) return;
+        [440, 554, 659, 880].forEach((f, i) => setTimeout(() => playBeep(f, 0.12, 0.08), i * 90));
+    }
+
+    // ── Boot log lines ─────────────────────────────────────────
+    const bootLines = [
+        '> kernel.jarvis loaded',
+        '> memory check …… OK',
+        '> persona module …… active',
+        '> sarcasm engine …… calibrated',
+        '> portfolio.db …… indexed',
+        '> awaiting visitor…'
+    ];
+
+    function runBootLog() {
+        if (!bootLog) return;
+        bootLines.forEach((line, i) => {
+            setTimeout(() => {
+                const span = document.createElement('span');
+                span.className = 'log-line';
+                span.textContent = line;
+                span.style.animationDelay = '0s';
+                bootLog.appendChild(span);
+                playBeep(600 + i * 40, 0.04, 0.05);
+            }, 300 + i * 320);
+        });
+    }
+
+    // ── Data stream ────────────────────────────────────────────
+    function runDataStream() {
+        if (!dataStream) return;
+        const hex = () => Math.floor(Math.random() * 0xFFFF).toString(16).toUpperCase().padStart(4, '0');
+        const labels = ['SYS', 'MEM', 'CPU', 'NET', 'RAG', 'GPU', 'TKN'];
+        let tick = 0;
+        const id = setInterval(() => {
+            if (dismissed) { clearInterval(id); return; }
+            const label = labels[tick % labels.length];
+            const val = `${hex()} ${hex()}`;
+            const line = document.createElement('div');
+            line.textContent = `${label} ░ ${val}`;
+            dataStream.appendChild(line);
+            if (dataStream.children.length > 10) dataStream.removeChild(dataStream.firstChild);
+            tick++;
+        }, 280);
+    }
+
+    // ── Glitch the hex logo ───────────────────────────────────
+    function triggerGlitch() {
+        if (!hexEl) return;
+        hexEl.classList.add('glitch');
+        playBeep(220, 0.15, 0.1);
+        setTimeout(() => hexEl.classList.remove('glitch'), 450);
+    }
+
+    // ── Typewriter effect ──────────────────────────────────────
+    function typewriterSpeak(text, el, onDone) {
+        el.textContent = '';
+        el.classList.add('visible');
+
+        // Blinking cursor
+        const cursor = document.createElement('span');
+        cursor.className = 'jarvis-cursor';
+        cursor.setAttribute('aria-hidden', 'true');
+        el.appendChild(cursor);
+
+        let i = 0;
+        const speed = 32; // ms per character
+        function tick() {
+            if (dismissed) return;
+            if (i < text.length) {
+                cursor.before(text[i]);
+                i++;
+                // Occasional key-click sound
+                if (i % 4 === 0) playBeep(1200 + Math.random() * 400, 0.025, 0.04);
+                setTimeout(tick, speed + (Math.random() * 20 - 10));
+            } else {
+                // Remove cursor after a beat
+                setTimeout(() => { cursor.remove(); if (onDone) onDone(); }, 1200);
+            }
+        }
+        setTimeout(tick, 80);
+    }
+
+    // ── Web Speech API ─────────────────────────────────────────
+    function speak(text) {
+        if (muted || !window.speechSynthesis) return;
+        window.speechSynthesis.cancel();
+        const utter = new SpeechSynthesisUtterance(text);
+        utter.rate  = 0.92;
+        utter.pitch = 0.85;
+        utter.volume = 0.9;
+
+        // Prefer a British/neutral male voice; fall back gracefully
+        const voices = window.speechSynthesis.getVoices();
+        const preferred = voices.find(v =>
+            /google uk english male|daniel|microsoft george|microsoft ryan/i.test(v.name)
+        ) || voices.find(v =>
+            /english/i.test(v.lang) && /male/i.test(v.name)
+        ) || voices.find(v =>
+            v.lang.startsWith('en')
+        );
+        if (preferred) utter.voice = preferred;
+
+        window.speechSynthesis.speak(utter);
+    }
+
+    // ── Mute toggle ────────────────────────────────────────────
+    if (audioBtn) {
+        audioBtn.addEventListener('click', () => {
+            muted = !muted;
+            audioBtn.textContent = muted ? '🔇' : '🔊';
+            audioBtn.classList.toggle('muted', muted);
+            if (muted) window.speechSynthesis && window.speechSynthesis.cancel();
+        });
+    }
+
+    // ── Sequence ───────────────────────────────────────────────
+    // 0.0s: boot chime + glitch
+    playBootChime();
+    setTimeout(triggerGlitch, 400);
+
+    // 0.3s: boot log
+    runBootLog();
+    runDataStream();
+
+    // 2.4s: show quip via typewriter + voice
     setTimeout(() => {
-        msgEl.textContent = `"${quip}"`;
-        msgEl.classList.add('visible');
+        if (dismissed) return;
+        const displayText = `"${quip}"`;
+
+        // Voices may not load instantly — wait for them
+        function startQuip() {
+            typewriterSpeak(displayText, msgEl, null);
+            speak(quip);
+        }
+
+        const voices = window.speechSynthesis ? window.speechSynthesis.getVoices() : [];
+        if (voices.length > 0) {
+            startQuip();
+        } else if (window.speechSynthesis) {
+            window.speechSynthesis.onvoiceschanged = () => { startQuip(); window.speechSynthesis.onvoiceschanged = null; };
+            // Fallback if event never fires
+            setTimeout(startQuip, 300);
+        } else {
+            startQuip();
+        }
     }, 2400);
 
-    // Auto-dismiss after 5.5s
-    const autoDismiss = setTimeout(() => dismissSplash(), 5500);
+    // Auto-dismiss after 7s (longer — speech needs time)
+    const autoDismiss = setTimeout(() => dismissSplash(), 7000);
 
     function dismissSplash() {
+        if (dismissed) return;
+        dismissed = true;
         clearTimeout(autoDismiss);
+        if (window.speechSynthesis) window.speechSynthesis.cancel();
         splash.classList.add('jarvis-hidden');
         document.body.style.overflow = '';
         sessionStorage.setItem('jarvis-seen', '1');
-        setTimeout(() => splash.remove(), 900);
-        // Track splash view
+        setTimeout(() => { if (splash.parentNode) splash.remove(); }, 1000);
         plausibleTrack('Jarvis Splash Seen');
     }
 

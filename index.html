@@ -16,6 +16,19 @@
     <div id="jarvis-splash" role="dialog" aria-modal="true" aria-label="Jarvis AI initialising" tabindex="-1">
         <div class="jarvis-grid-overlay"></div>
         <div class="jarvis-scan-line"></div>
+
+        <!-- HUD corner brackets -->
+        <div class="jarvis-hud-corner jarvis-hud-tl"></div>
+        <div class="jarvis-hud-corner jarvis-hud-tr"></div>
+        <div class="jarvis-hud-corner jarvis-hud-bl"></div>
+        <div class="jarvis-hud-corner jarvis-hud-br"></div>
+
+        <!-- Data stream ticker top-right -->
+        <div class="jarvis-data-stream" aria-hidden="true" id="jarvis-data-stream"></div>
+
+        <!-- Boot log top-left -->
+        <div class="jarvis-boot-log" aria-hidden="true" id="jarvis-boot-log"></div>
+
         <div class="jarvis-core">
             <div class="jarvis-ring jarvis-ring-outer"></div>
             <div class="jarvis-ring jarvis-ring-mid"></div>
@@ -28,11 +41,15 @@
                 </svg>
             </div>
         </div>
+
         <div class="jarvis-text-block">
             <p class="jarvis-init-label">JARVIS OS v2.6 — INITIALISING</p>
             <div class="jarvis-progress-bar"><div class="jarvis-progress-fill"></div></div>
             <p id="jarvis-splash-msg" class="jarvis-splash-msg" aria-live="polite"></p>
         </div>
+
+        <!-- Audio mute toggle -->
+        <button class="jarvis-audio-btn" id="jarvis-audio-btn" aria-label="Toggle Jarvis voice" title="Toggle voice">🔊</button>
         <button class="jarvis-skip-btn" id="jarvis-skip" aria-label="Skip intro">ESC to skip</button>
     </div>
 
