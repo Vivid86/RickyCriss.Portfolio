@@ -92,8 +92,9 @@ function initJarvisSplash() {
     const dataStream = document.getElementById('jarvis-data-stream');
     if (!splash) return;
 
-    // Only show once per session
-    if (sessionStorage.getItem('jarvis-seen')) {
+    // Allow user to bypass via ?skipintro, but keep active for testing
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('skipintro')) {
         splash.remove();
         return;
     }
@@ -237,11 +238,10 @@ function initJarvisSplash() {
         try {
             if (!currentAudio) {
                 currentAudio = new Audio(audioSrc);
-                // Lower comfortable volume + measured, slightly slower cadence
                 currentAudio.volume = 0.62;
                 currentAudio.playbackRate = 0.93;
 
-                // Never cut off: dismiss only AFTER sentence finishes cleanly + buffer
+                // Dismiss only AFTER sentence finishes cleanly + buffer
                 currentAudio.addEventListener('ended', () => {
                     setTimeout(() => dismissSplash(), 1100);
                 });
@@ -249,8 +249,18 @@ function initJarvisSplash() {
             const playPromise = currentAudio.play();
             if (playPromise !== undefined) {
                 playPromise.catch(() => {
-                    // Browsers require a user gesture before playing audio
+                    // Browser autoplay blocked audio until user interaction
+                    let hint = document.getElementById('jarvis-audio-hint');
+                    if (!hint && splash && !dismissed) {
+                        hint = document.createElement('div');
+                        hint.id = 'jarvis-audio-hint';
+                        hint.className = 'jarvis-audio-hint';
+                        hint.textContent = '🔊 CLICK TO UNMUTE J.A.R.V.I.S.';
+                        splash.appendChild(hint);
+                    }
+
                     const unlockAudio = () => {
+                        if (hint) hint.remove();
                         if (!dismissed && currentAudio && !muted) {
                             currentAudio.play().catch(() => {});
                         }
@@ -516,6 +526,25 @@ function startTour() {
     let currentHighlight = null;
     let tooltip = null;
 
+    function playTourChirp() {
+        try {
+            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            if (!AudioCtx) return;
+            const ctx = new AudioCtx();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(580, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.08);
+            gain.gain.setValueAtTime(0.04, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.12);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start();
+            osc.stop(ctx.currentTime + 0.13);
+        } catch {}
+    }
+
     function showStep(i) {
         cleanup();
         if (i >= TOUR_STEPS.length) {
@@ -527,6 +556,9 @@ function startTour() {
         const { selector, title, text } = TOUR_STEPS[i];
         const target = document.querySelector(selector);
         if (!target) { showStep(i + 1); return; }
+
+        // Play gentle HUD chirp on transition
+        playTourChirp();
 
         // Scroll into view
         target.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -541,11 +573,20 @@ function startTour() {
             tooltip = document.createElement('div');
             tooltip.id = 'jarvis-tour-tooltip';
             tooltip.innerHTML = `
-                <div class="tour-step-label">Step ${i + 1} of ${TOUR_STEPS.length} — ${title}</div>
-                <div>${text}</div>
+                <div class="tour-header-bar">
+                    <span class="tour-badge">
+                        <span class="tour-badge-dot"></span>
+                        J.A.R.V.I.S. TELEMETRY
+                    </span>
+                    <span class="tour-step-counter">${i + 1} / ${TOUR_STEPS.length}</span>
+                </div>
+                <div class="tour-body-text">
+                    <strong style="color:#00f0ff; display:block; margin-bottom:0.25rem;">${title}</strong>
+                    ${text}
+                </div>
                 <div class="tour-controls">
+                    <button class="tour-btn tour-btn-skip">Skip</button>
                     <button class="tour-btn tour-btn-next">${i < TOUR_STEPS.length - 1 ? 'Next →' : 'Finish ✓'}</button>
-                    <button class="tour-btn tour-btn-skip">Skip tour</button>
                 </div>`;
 
             // Position tooltip: prefer below, fall back to above
