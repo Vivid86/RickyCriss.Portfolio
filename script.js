@@ -4,13 +4,20 @@
              Jarvis chat widget · Guided tour · Analytics events
    ============================================================ */
 
-document.addEventListener('DOMContentLoaded', () => {
-    initMotion();
-    initPoeAgentStatus();
-    initJarvisSplash();
-    initJarvisChat();
-    initAnalyticsEvents();
-});
+function boot() {
+    try { initMotion(); } catch (e) { console.error('initMotion error:', e); }
+    try { initPoeAgentStatus(); } catch (e) { console.error('initPoeAgentStatus error:', e); }
+    try { initJarvisSplash(); } catch (e) { console.error('initJarvisSplash error:', e); }
+    try { initJarvisChat(); } catch (e) { console.error('initJarvisChat error:', e); }
+    try { initJarvisCarousel(); } catch (e) { console.error('initJarvisCarousel error:', e); }
+    try { initAnalyticsEvents(); } catch (e) { console.error('initAnalyticsEvents error:', e); }
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+} else {
+    boot();
+}
 
 /* ── Fade-in intersection observer ──────────────────────────── */
 function initMotion() {
@@ -92,10 +99,11 @@ function initJarvisSplash() {
     const dataStream = document.getElementById('jarvis-data-stream');
     if (!splash) return;
 
-    // Allow user to bypass via ?skipintro, but keep active for testing
+    // Allow user to bypass via ?skipintro or if already seen this session
     const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.has('skipintro')) {
+    if (urlParams.has('skipintro') || (sessionStorage.getItem('jarvis-splash-seen') && !urlParams.has('splash'))) {
         splash.remove();
+        document.body.style.overflow = '';
         return;
     }
 
@@ -301,8 +309,8 @@ function initJarvisSplash() {
         playQuipAudio(chosenQuip.audio);
     }, 2200);
 
-    // Generous fallback auto-dismiss (e.g. if audio fails or muted)
-    const fallbackDismiss = setTimeout(() => dismissSplash(), 12000);
+    // Fast auto-dismiss fallback (3.2s)
+    const fallbackDismiss = setTimeout(() => dismissSplash(), 3200);
 
     function dismissSplash() {
         if (dismissed) return;
@@ -316,11 +324,14 @@ function initJarvisSplash() {
             currentAudio = null;
         }
         splash.classList.add('jarvis-hidden');
+        splash.style.pointerEvents = 'none';
         document.body.style.overflow = '';
-        sessionStorage.setItem('jarvis-seen', '1');
-        setTimeout(() => { if (splash && splash.parentNode) splash.remove(); }, 1000);
+        sessionStorage.setItem('jarvis-splash-seen', '1');
+        setTimeout(() => { if (splash && splash.parentNode) splash.remove(); }, 600);
         plausibleTrack('Jarvis Splash Seen');
     }
+
+    splash.addEventListener('click', () => dismissSplash());
 
     skipBtn.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -495,9 +506,9 @@ const TOUR_STEPS = [
         text: "This is the hero — Ricky's elevator pitch, minus the elevator. Practical problems, purpose-built software."
     },
     {
-        selector: '.hero-agent-card-wide',
-        title: 'Live Poe Agent',
-        text: "Vivid-Architect — a real, running AI agent for Unreal Engine 5 C++ work. Active on Poe. You can chat with it right now."
+        selector: '#jarvis-carousel-container',
+        title: 'J.A.R.V.I.S. 3D Deck',
+        text: "The main presentation deck. Features live Poe agent Vivid-Architect, ProEval Studio, and more in an interactive 3D orbit."
     },
     {
         selector: '#services',
@@ -654,4 +665,331 @@ function initAnalyticsEvents() {
             plausibleTrack('Project Link Click', { href: link.getAttribute('href') });
         });
     });
+}
+
+/* ── Jarvis 3D Round-Robin Carousel ──────────────────────────── */
+function initJarvisCarousel() {
+    const container = document.getElementById('jarvis-carousel-container');
+    const viewport = document.getElementById('carousel-viewport');
+    const cylinder = document.getElementById('carousel-cylinder');
+    const prevBtn = document.getElementById('carousel-prev-btn');
+    const nextBtn = document.getElementById('carousel-next-btn');
+    const pipsContainer = document.getElementById('carousel-pips');
+    const targetTitleEl = document.getElementById('hud-target-title');
+    const btnModeCarousel = document.getElementById('btn-mode-carousel');
+    const btnModeGrid = document.getElementById('btn-mode-grid');
+
+    if (!container || !viewport || !cylinder) return;
+
+    const cards = Array.from(cylinder.querySelectorAll('.project-card'));
+    const totalCards = cards.length;
+    if (totalCards === 0) return;
+
+    const angleStep = 360 / totalCards;
+    let currentIndex = 0;
+    let currentAngle = 0;
+    let currentScale = 1.0;
+    let isDragging = false;
+    let pointerMoved = false;
+    let startX = 0;
+    let lastX = 0;
+    let velocity = 0;
+    let lastTime = 0;
+    let isPinching = false;
+    let initialPinchDistance = null;
+    let initialScale = 1.0;
+    let wheelTimeout = null;
+
+    function getRadius() {
+        return window.innerWidth < 768 ? 280 : 430;
+    }
+
+    function setupCardPositions() {
+        const radius = getRadius();
+        cards.forEach((card, idx) => {
+            const angle = idx * angleStep;
+            card.style.transform = `rotateY(${angle}deg) translateZ(${radius}px)`;
+            card.dataset.index = idx;
+        });
+    }
+
+    setupCardPositions();
+    window.addEventListener('resize', () => {
+        if (!container.classList.contains('mode-grid')) {
+            setupCardPositions();
+            applyTransform(false);
+        }
+    });
+
+    // Generate Pips
+    if (pipsContainer) {
+        pipsContainer.innerHTML = '';
+        cards.forEach((card, idx) => {
+            const pip = document.createElement('button');
+            pip.className = `carousel-pip ${idx === 0 ? 'active' : ''}`;
+            pip.setAttribute('aria-label', `Go to ${card.dataset.title || `Card ${idx + 1}`}`);
+            pip.setAttribute('role', 'tab');
+            pip.onclick = (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                rotateToIndex(idx, true);
+            };
+            pipsContainer.appendChild(pip);
+        });
+    }
+
+    function applyTransform(animate = true) {
+        if (animate) {
+            cylinder.classList.add('is-animating');
+        } else {
+            cylinder.classList.remove('is-animating');
+        }
+        cylinder.style.transform = `scale(${currentScale}) rotateY(${currentAngle}deg)`;
+        updateActiveStates();
+    }
+
+    function getNormalizedIndex() {
+        const normalizedAngle = ((-currentAngle % 360) + 360) % 360;
+        return Math.round(normalizedAngle / angleStep) % totalCards;
+    }
+
+    function updateActiveStates() {
+        const activeIdx = getNormalizedIndex();
+        cards.forEach((card, idx) => {
+            if (idx === activeIdx) {
+                card.classList.add('is-active-card');
+                card.classList.remove('is-inactive-card');
+                card.setAttribute('aria-hidden', 'false');
+            } else {
+                card.classList.remove('is-active-card');
+                card.classList.add('is-inactive-card');
+                card.setAttribute('aria-hidden', 'true');
+            }
+        });
+
+        const activeCard = cards[activeIdx];
+        if (activeCard && targetTitleEl) {
+            targetTitleEl.textContent = activeCard.dataset.title || activeCard.querySelector('h3')?.textContent || 'Target';
+        }
+
+        if (pipsContainer) {
+            const pips = pipsContainer.querySelectorAll('.carousel-pip');
+            pips.forEach((pip, idx) => {
+                if (idx === activeIdx) {
+                    pip.classList.add('active');
+                    pip.setAttribute('aria-selected', 'true');
+                } else {
+                    pip.classList.remove('active');
+                    pip.setAttribute('aria-selected', 'false');
+                }
+            });
+        }
+    }
+
+    function rotateToIndex(targetIndex, animate = true) {
+        currentIndex = targetIndex;
+        currentAngle = targetIndex * -angleStep;
+        applyTransform(animate);
+    }
+
+    // Prev / Next Buttons (Direct, Bulletproof Click Handlers)
+    if (prevBtn) {
+        prevBtn.onclick = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            rotateToIndex(Math.round(-currentAngle / angleStep) - 1, true);
+        };
+    }
+
+    if (nextBtn) {
+        nextBtn.onclick = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            rotateToIndex(Math.round(-currentAngle / angleStep) + 1, true);
+        };
+    }
+
+    // Mode Switcher (✦ 3D Deck vs ▦ Grid View)
+    function setMode(mode) {
+        if (mode === 'grid') {
+            container.classList.add('mode-grid');
+            if (btnModeGrid) btnModeGrid.classList.add('active');
+            if (btnModeCarousel) btnModeCarousel.classList.remove('active');
+        } else {
+            container.classList.remove('mode-grid');
+            if (btnModeCarousel) btnModeCarousel.classList.add('active');
+            if (btnModeGrid) btnModeGrid.classList.remove('active');
+            setupCardPositions();
+            rotateToIndex(Math.round(-currentAngle / angleStep), false);
+        }
+    }
+
+    if (btnModeCarousel) {
+        btnModeCarousel.onclick = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            setMode('carousel');
+        };
+    }
+
+    if (btnModeGrid) {
+        btnModeGrid.onclick = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            setMode('grid');
+        };
+    }
+
+    // Pointer Drag & Velocity Momentum
+    viewport.addEventListener('pointerdown', (e) => {
+        if (container.classList.contains('mode-grid')) return;
+        if (e.target.closest('button, a, input, select, .carousel-hud-bar, .carousel-pips')) return;
+
+        isDragging = true;
+        pointerMoved = false;
+        startX = e.clientX;
+        lastX = e.clientX;
+        lastTime = performance.now();
+        velocity = 0;
+
+        cylinder.classList.remove('is-animating');
+    });
+
+    window.addEventListener('pointermove', (e) => {
+        if (!isDragging || container.classList.contains('mode-grid')) return;
+
+        const deltaX = e.clientX - lastX;
+        if (Math.abs(e.clientX - startX) > 6) {
+            pointerMoved = true;
+            viewport.classList.add('is-dragging');
+            cylinder.classList.add('is-dragging');
+            try {
+                if (!viewport.hasPointerCapture(e.pointerId)) {
+                    viewport.setPointerCapture(e.pointerId);
+                }
+            } catch (_) {}
+        }
+
+        if (pointerMoved) {
+            const sensitivity = window.innerWidth < 768 ? 0.45 : 0.35;
+            currentAngle += deltaX * sensitivity;
+
+            const now = performance.now();
+            const dt = now - lastTime;
+            if (dt > 0) {
+                velocity = (deltaX / dt) * 16;
+            }
+
+            lastX = e.clientX;
+            lastTime = now;
+            applyTransform(false);
+        }
+    });
+
+    function endDrag(e) {
+        if (!isDragging) return;
+        isDragging = false;
+
+        viewport.classList.remove('is-dragging');
+        cylinder.classList.remove('is-dragging');
+
+        try {
+            if (e && e.pointerId && viewport.hasPointerCapture(e.pointerId)) {
+                viewport.releasePointerCapture(e.pointerId);
+            }
+        } catch (_) {}
+
+        if (pointerMoved) {
+            // Apply momentum flick
+            if (Math.abs(velocity) > 1.2) {
+                currentAngle += velocity * 4;
+            }
+            const nearestIndex = Math.round(-currentAngle / angleStep);
+            rotateToIndex(nearestIndex, true);
+        }
+    }
+
+    window.addEventListener('pointerup', endDrag);
+    window.addEventListener('pointercancel', endDrag);
+
+    // Touch Pinch-to-Zoom
+    viewport.addEventListener('touchstart', (e) => {
+        if (container.classList.contains('mode-grid')) return;
+        if (e.touches.length === 2) {
+            isPinching = true;
+            isDragging = false;
+            const dx = e.touches[0].clientX - e.touches[1].clientX;
+            const dy = e.touches[0].clientY - e.touches[1].clientY;
+            initialPinchDistance = Math.hypot(dx, dy);
+            initialScale = currentScale;
+        }
+    }, { passive: true });
+
+    viewport.addEventListener('touchmove', (e) => {
+        if (!isPinching || container.classList.contains('mode-grid') || e.touches.length !== 2) return;
+        const dx = e.touches[0].clientX - e.touches[1].clientX;
+        const dy = e.touches[0].clientY - e.touches[1].clientY;
+        const dist = Math.hypot(dx, dy);
+        if (initialPinchDistance) {
+            const factor = dist / initialPinchDistance;
+            currentScale = Math.min(1.28, Math.max(0.72, initialScale * factor));
+            applyTransform(false);
+        }
+    }, { passive: true });
+
+    viewport.addEventListener('touchend', (e) => {
+        if (e.touches.length < 2) {
+            isPinching = false;
+            initialPinchDistance = null;
+        }
+    }, { passive: true });
+
+    // Trackpad / Wheel Rotation
+    viewport.addEventListener('wheel', (e) => {
+        if (container.classList.contains('mode-grid')) return;
+        const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : (e.shiftKey ? e.deltaY : 0);
+        if (delta !== 0) {
+            e.preventDefault();
+            currentAngle -= delta * 0.22;
+            applyTransform(false);
+
+            clearTimeout(wheelTimeout);
+            wheelTimeout = setTimeout(() => {
+                const nearest = Math.round(-currentAngle / angleStep);
+                rotateToIndex(nearest, true);
+            }, 120);
+        }
+    }, { passive: false });
+
+    // Keyboard Arrow Keys
+    viewport.addEventListener('keydown', (e) => {
+        if (container.classList.contains('mode-grid')) return;
+        if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            rotateToIndex(Math.round(-currentAngle / angleStep) - 1, true);
+        } else if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            rotateToIndex(Math.round(-currentAngle / angleStep) + 1, true);
+        }
+    });
+
+    // Clicking Inactive Card Rotates Directly to Center
+    cards.forEach((card, idx) => {
+        card.addEventListener('click', (e) => {
+            if (container.classList.contains('mode-grid')) return;
+            if (pointerMoved) return; // don't trigger click if it was a drag
+            const activeIdx = getNormalizedIndex();
+            if (idx !== activeIdx) {
+                e.preventDefault();
+                e.stopPropagation();
+                let diff = (idx - activeIdx + totalCards) % totalCards;
+                if (diff > totalCards / 2) diff -= totalCards;
+                const currentNearest = Math.round(-currentAngle / angleStep);
+                rotateToIndex(currentNearest - diff, true);
+            }
+        });
+    });
+
+    // Initial focal rotation
+    rotateToIndex(0, false);
 }

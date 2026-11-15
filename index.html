@@ -6,8 +6,8 @@
     <title>Ricky Criss | Web, AI & Integration Services</title>
     <meta name="description" content="Ricky Criss — developer and AI software engineering student. Practical web applications, workflow integrations, and AI prototypes, informed by 20 years in the metal industry. Available for remote work.">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="jarvis.css">
+    <link rel="stylesheet" href="style.css?v=5">
+    <link rel="stylesheet" href="jarvis.css?v=5">
     <!-- Plausible Analytics - privacy-friendly, no cookies -->
     <script defer data-domain="vivid86.github.io" src="https://plausible.io/js/script.js"></script>
 </head>
@@ -98,16 +98,22 @@
 
     <nav class="glass-nav" aria-label="Main navigation">
         <div class="nav-content">
-            <div class="logo">
+            <a href="#home" class="logo">
                 <img src="assets/brand-logo.png" alt="Ricky Criss logo" class="nav-logo">
-                RICKY CRISS<span class="dot">.</span>
-            </div>
+                <span>RICKY CRISS<span class="dot">.</span></span>
+            </a>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#projects">Work</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+            <div class="nav-cta">
+                <a href="#contact" class="btn-nav-contact">
+                    <span class="nav-status-dot" aria-hidden="true"></span>
+                    <span>Let's Talk</span>
+                </a>
+            </div>
         </div>
     </nav>
 
@@ -127,77 +133,165 @@
                 <p class="availability"><span aria-hidden="true"></span> Open to remote developer opportunities &amp; scoped freelance projects</p>
             </div>
 
-            <!-- Featured Live Poe Agent Showcase (Stacked Wide Console) -->
-            <aside class="hero-agent-card hero-agent-card-wide glass-panel fade-in" aria-label="Featured Live Poe AI Agent">
-                <div class="hero-agent-wide-grid">
-                    <div class="hero-agent-col-info">
-                        <div class="hero-agent-header">
-                            <div class="hero-agent-type">
-                                <span class="agent-chip-icon" aria-hidden="true">🎮</span>
-                                <span>FEATURED POE AGENT</span>
-                            </div>
-                            <div class="agent-status-pill status-checking" id="hero-agent-status-pill" title="Checking agent status…">
-                                <span class="status-dot-wrapper">
-                                    <span class="status-ping"></span>
-                                    <span class="status-dot"></span>
-                                </span>
-                                <span class="status-text" id="hero-agent-status-text">Checking…</span>
-                            </div>
+            <!-- ░░ J.A.R.V.I.S. 3D ROUND-ROBIN HERO DECK ░░ -->
+            <div class="hero-carousel-wrap">
+                <div class="jarvis-carousel-container" id="jarvis-carousel-container">
+                    <!-- Top Holographic HUD Bar -->
+                    <div class="carousel-hud-bar" aria-live="polite">
+                        <div class="hud-target-indicator">
+                            <span class="hud-reticle-bracket">[</span>
+                            <span class="hud-scan-dot"></span>
+                            <span class="hud-label">TARGET ACQUIRED:</span>
+                            <span class="hud-target-title" id="hud-target-title">Vivid-Architect (vivid_ue5)</span>
+                            <span class="hud-reticle-bracket">]</span>
                         </div>
 
-                        <div class="hero-agent-title-row">
-                            <h3>Vivid-Architect</h3>
-                            <span class="hero-agent-version">vivid_ue5</span>
+                        <div class="hud-interaction-hint">
+                            <span class="hud-hint-icon">⟲</span>
+                            <span>Drag / Swipe · Pinch Zoom · Click Card to Focus</span>
                         </div>
-                        <p class="hero-agent-desc">Autonomous Unreal Engine 5 C++ agent. Trained to scaffold paired actors, validate Hungarian naming, and manage .Build.cs modules.</p>
-                        
-                        <div class="hero-agent-telemetry">
-                            <div class="telemetry-item">
-                                <span class="telem-label">MODEL</span>
-                                <span class="telem-val">Qwen2.5-1.5B (LoRA)</span>
-                            </div>
-                            <div class="telemetry-item">
-                                <span class="telem-label">CORPUS</span>
-                                <span class="telem-val">57MB Engine RAG</span>
-                            </div>
-                            <div class="telemetry-item">
-                                <span class="telem-label">COMPUTE</span>
-                                <span class="telem-val">RTX 3070 Ti (8GB)</span>
-                            </div>
-                            <div class="telemetry-item">
-                                <span class="telem-label">PROTOCOL</span>
-                                <span class="telem-val">FastAPI Poe Bridge</span>
-                            </div>
+
+                        <div class="carousel-nav-arrows">
+                            <button class="carousel-arrow-btn" id="carousel-prev-btn" type="button" aria-label="Previous project">◀ PREV</button>
+                            <div class="carousel-pips" id="carousel-pips" role="tablist" aria-label="Project card selector"></div>
+                            <button class="carousel-arrow-btn" id="carousel-next-btn" type="button" aria-label="Next project">NEXT ▶</button>
+                        </div>
+                        <div class="carousel-view-controls" role="group" aria-label="Deck display mode">
+                            <button class="view-mode-btn active" id="btn-mode-carousel" type="button">
+                                <span class="mode-icon">✦</span> 3D
+                            </button>
+                            <button class="view-mode-btn" id="btn-mode-grid" type="button">
+                                <span class="mode-icon">▦</span> Grid
+                            </button>
                         </div>
                     </div>
 
-                    <div class="hero-agent-col-action">
-                        <div class="hero-agent-terminal">
-                            <div class="terminal-bar">
-                                <span class="term-circle red"></span>
-                                <span class="term-circle yellow"></span>
-                                <span class="term-circle green"></span>
-                                <span class="terminal-title">vivid_ue5_agent.py — REPL</span>
-                            </div>
-                            <pre class="terminal-code"><code><span class="term-p">&gt;</span> <span class="term-cmd">/scaffold AProceduralDungeon AActor</span>
-<span class="term-ok">✓</span> CoreMinimal.h &amp; Hungarian prefix 'A' verified
-<span class="term-info">ℹ</span> Injected ProceduralMeshComponent in .Build.cs
-<span class="term-active">● Active Poe Bridge: @Vivid86-DevAgent</span></code></pre>
+                    <!-- 3D Viewport Stage -->
+                    <div class="carousel-viewport" id="carousel-viewport" tabindex="0" role="region" aria-label="3D Project Carousel (Use left and right arrow keys to rotate)">
+                        <!-- Holographic Arc-Reactor Floor Grid -->
+                        <div class="carousel-holo-floor" aria-hidden="true">
+                            <div class="holo-ring-outer"></div>
+                            <div class="holo-ring-ticks"></div>
+                            <div class="holo-ring-inner"></div>
+                            <div class="holo-core-glow"></div>
                         </div>
 
-                        <div class="hero-agent-actions">
-                            <a href="https://poe.com/Vivid86-DevAgent" target="_blank" rel="noopener noreferrer" class="btn btn-emerald btn-sm">
-                                <span>Chat on Poe</span>
-                                <span aria-hidden="true">↗</span>
-                            </a>
-                            <a href="projects/vivid-ue5/index.html" class="btn btn-secondary btn-sm">
-                                <span>Architecture</span>
-                                <span aria-hidden="true">→</span>
-                            </a>
+                        <!-- 3D Spinning Cylinder -->
+                        <div class="carousel-cylinder" id="carousel-cylinder">
+                            <!-- Vivid-Architect UE5 Poe Agent -->
+                            <div class="project-card glass-panel highlight-card is-active-card" id="vivid-ue5" data-index="0" data-title="Vivid-Architect (vivid_ue5)">
+                                <div class="project-image">
+                                    <img loading="lazy" src="projects/vivid-ue5/assets/preview.svg" alt="Vivid-Architect Autonomous Unreal Engine 5 Developer Agent on Poe" class="project-img">
+                                </div>
+                                <div class="project-info">
+                                    <div class="project-tags">
+                                        <div class="agent-status-pill status-checking" id="hero-agent-status-pill" title="Checking agent status…">
+                                            <span class="status-dot-wrapper">
+                                                <span class="status-ping"></span>
+                                                <span class="status-dot"></span>
+                                            </span>
+                                            <span class="status-text" id="hero-agent-status-text">Active Poe Agent</span>
+                                        </div>
+                                        <span class="tag">UE5 C++</span>
+                                        <span class="tag">LoRA SFT</span>
+                                        <span class="tag">57MB RAG</span>
+                                    </div>
+                                    <h3>Vivid-Architect (vivid_ue5)</h3>
+                                    <p>Autonomous Unreal Engine 5 C++ developer agent powered by fine-tuned Qwen2.5-Coder-1.5B with indexed 57MB engine corpus. Scaffolds paired headers/sources, validates Hungarian notation, and injects Build.cs modules—deployed via FastAPI Poe bridge.</p>
+                                    <p class="project-proof"><strong>Key Architecture:</strong> LoRA Rank-16 on RTX 3070 Ti, 1,619 engine headers RAG index, AST C++ validator, Poe server bot.</p>
+                                    <div class="project-links">
+                                        <a href="https://poe.com/Vivid86-DevAgent" class="project-link" target="_blank" rel="noopener noreferrer" style="color: #34d399; font-weight: 700;">Chat on Poe ↗</a>
+                                        <a href="projects/vivid-ue5/index.html" class="project-link" style="color: var(--accent-primary); font-weight: 700;">Read Architecture ↗</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- ProEval Studio (Flagship Case Study) -->
+                            <div class="project-card glass-panel highlight-card is-inactive-card" id="proeval-studio" data-index="1" data-title="ProEval Studio">
+                                <div class="project-image">
+                                    <img loading="lazy" src="projects/proeval-studio/assets/preview.svg" alt="ProEval Studio AI Code and RLHF Evaluation Simulator" class="project-img">
+                                </div>
+                                <div class="project-info">
+                                    <div class="project-tags">
+                                        <span class="tag" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border-color: rgba(245, 158, 11, 0.4);">Featured Case Study</span>
+                                        <span class="tag">AI &amp; RLHF</span>
+                                        <span class="tag">React 19</span>
+                                        <span class="tag">Gemini API</span>
+                                        <span class="tag">Pyodide WASM</span>
+                                    </div>
+                                    <h3>ProEval Studio</h3>
+                                    <p>Interactive AI code-evaluation and RLHF sparring workbench. Prepares engineers for Outlier AI and Code4Ai screenings with timed bug-hunt sprints, in-browser Python WASM execution, A/B model auditing, and Gemini-powered adversarial QA reviews.</p>
+                                    <p class="project-proof"><strong>Key Architecture:</strong> Gemini Structured Outputs (responseSchema), Pyodide sandbox, Firebase Auth &amp; anti-tamper Firestore security.</p>
+                                    <div class="project-links">
+                                        <a href="projects/proeval-studio/index.html" class="project-link" style="color: var(--accent-primary); font-weight: 700;">Read Full Case Study ↗</a>
+                                        <a href="https://github.com/RickyCriss/proeval-studio" class="project-link" target="_blank" rel="noopener noreferrer">View GitHub Repo ↗</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Mortal Tactical Map -->
+                            <div class="project-card glass-panel is-inactive-card" id="mortal-map" data-index="2" data-title="The MO:2 AI Assistant">
+                                <div class="project-image">
+                                    <img loading="lazy" src="projects/mortal-map/assets/mountain.jpg" alt="Mortal Online 2 Vista" class="project-img">
+                                </div>
+                                <div class="project-info">
+                                    <div class="project-tags">
+                                        <span class="tag">Leaflet</span>
+                                        <span class="tag">Firestore</span>
+                                        <span class="tag">AI Assistant</span>
+                                    </div>
+                                    <h3>The MO:2 AI Assistant</h3>
+                                    <p>An interactive mapping project for Mortal Online 2, bringing location information into a navigable map interface. Built around Leaflet and Firestore to explore interactive interfaces and shared data.</p>
+                                    <p class="project-proof"><strong>Skills explored:</strong> Mapping UI, application state, and data integration.</p>
+                                    <div class="project-links">
+                                        <a href="projects/mortal-map/index.html" class="project-link" target="_blank" rel="noopener noreferrer">Explore mapping demo ↗</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- AI Studio App -->
+                            <div class="project-card glass-panel is-inactive-card" id="corner14" data-index="3" data-title="Corner14 AI Studio App">
+                                <div class="project-image">
+                                    <img loading="lazy" src="projects/ai-studio-app/assets/preview.png" alt="Corner14" class="project-img">
+                                </div>
+                                <div class="project-info">
+                                    <div class="project-tags">
+                                        <span class="tag">React</span>
+                                        <span class="tag">AI</span>
+                                        <span class="tag">Vite</span>
+                                    </div>
+                                    <h3>Corner14</h3>
+                                    <p>A React and Vite application developed with Google AI Studio. A learning project exploring how to structure an AI-facing application and manage interactive interface state.</p>
+                                    <p class="project-proof"><strong>Skills explored:</strong> React components, state management, and AI application interfaces.</p>
+                                    <div class="project-links">
+                                        <a href="projects/ai-studio-app/dist/index.html" class="project-link" target="_blank" rel="noopener noreferrer">Open learning project ↗</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Custom Tool-Calling Agent -->
+                            <div class="project-card glass-panel highlight-card is-inactive-card" id="react-agent" data-index="4" data-title="Tool-calling AI agent">
+                                <div class="project-image">
+                                    <img loading="lazy" src="projects/react-agent/assets/preview.png" alt="Custom ReAct Agent" class="project-img">
+                                </div>
+                                <div class="project-info">
+                                    <div class="project-tags">
+                                        <span class="tag" style="background: rgba(139, 92, 246, 0.2); color: #c4b5fd;">Personal project</span>
+                                        <span class="tag">AI Implementation</span>
+                                    </div>
+                                    <h3>Tool-calling AI agent</h3>
+                                    <p>A Python ReAct agent example using the Gemini SDK to explore tool calling and multi-step tasks. A starting point for understanding how an assistant can choose tools, act, and respond.</p>
+                                    <p class="project-proof"><strong>Skills explored:</strong> Python, Gemini SDK, tool calling, and agent control flow.</p>
+                                    <div class="project-links">
+                                        <a href="#contact" class="project-link">Discuss an AI prototype ↗</a>
+                                        <a href="https://github.com/Vivid86/Antigravity" class="project-link" target="_blank" rel="noopener noreferrer">View Core Repo ↗</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </aside>
+            </div>
         </section>
 
         <section id="services" class="services-section" aria-labelledby="services-title">
@@ -228,36 +322,18 @@
             <div class="about-copy fade-in"><p>My background is in the metal industry, where I spent 20 years working with real materials, constraints, and problems. That experience shapes how I approach software: understand the job, break it into manageable parts, and build something useful.</p><p>I’m currently studying AI software engineering and developing projects across web applications, AI integrations, and backend systems. I also build and configure computers, from workstations to gaming systems.</p><p>I’m looking for remote opportunities where I can contribute, learn from others, and take responsibility for a defined piece of work.</p><a href="https://github.com/Vivid86" class="project-link" target="_blank" rel="noopener noreferrer">Explore my GitHub <span aria-hidden="true">↗</span></a></div>
         </section>
 
-        <section id="projects" class="projects-section">
-            <p class="eyebrow fade-in">SELECTED WORK</p><h2 class="section-title fade-in">Built to learn. Shared to demonstrate.</h2><p class="section-intro fade-in">Personal projects and implementation examples. These demonstrate areas I’m developing; they are not presented as paid client engagements or measured business results.</p>
-            <div class="projects-grid">
-                <!-- Vivid-Architect UE5 Poe Agent -->
-                <div class="project-card glass-panel fade-in highlight-card" id="vivid-ue5">
-                    <div class="project-image">
-                        <img loading="lazy" src="projects/vivid-ue5/assets/preview.svg" alt="Vivid-Architect Autonomous Unreal Engine 5 Developer Agent on Poe" class="project-img">
-                    </div>
-                    <div class="project-info">
-                        <div class="project-tags">
-                            <span class="tag" style="background: rgba(16, 185, 129, 0.15); color: #34d399; border-color: rgba(16, 185, 129, 0.4);">
-                                <span class="status-dot" style="display:inline-block; width:6px; height:6px; margin-right:5px; background:#10b981; border-radius:50%;"></span>Active Poe Agent
-                            </span>
-                            <span class="tag">Unreal Engine 5</span>
-                            <span class="tag">LoRA SFT</span>
-                            <span class="tag">57MB RAG</span>
-                            <span class="tag">Local RTX Node</span>
-                        </div>
-                        <h3>Vivid-Architect (vivid_ue5)</h3>
-                        <p>An autonomous Unreal Engine 5 C++ developer agent powered by fine-tuned Qwen2.5-Coder-1.5B with an indexed 57MB Epic Games engine corpus. Scaffolds paired headers/sources, validates Hungarian notation, and injects Build.cs modules—deployed via FastAPI Poe bridge and local OpenAI API.</p>
-                        <p class="project-proof"><strong>Key Architecture:</strong> LoRA Rank-16 on RTX 3070 Ti (8GB VRAM), 1,619 engine headers RAG index, AST C++ validator, Poe.com server bot bridge.</p>
-                        <div class="project-links">
-                            <a href="https://poe.com/Vivid86-DevAgent" class="project-link" target="_blank" rel="noopener noreferrer" style="color: #34d399; font-weight: 700;">Chat on Poe ↗</a>
-                            <a href="projects/vivid-ue5/index.html" class="project-link" style="color: var(--accent-primary); font-weight: 700;">Read Architecture ↗</a>
-                        </div>
-                    </div>
+        <section id="projects" class="projects-section" aria-labelledby="projects-title">
+            <div class="projects-header-row fade-in">
+                <div>
+                    <p class="eyebrow">PORTFOLIO REPOSITORY</p>
+                    <h2 id="projects-title" class="section-title">Built to learn. Shared to demonstrate.</h2>
+                    <p class="section-intro">Full project index with architecture deep-dives, live prototypes, and repository links.</p>
                 </div>
+            </div>
 
+            <div class="projects-grid">
                 <!-- ProEval Studio (Flagship Case Study) -->
-                <div class="project-card glass-panel fade-in highlight-card">
+                <article class="project-card glass-panel highlight-card fade-in">
                     <div class="project-image">
                         <img loading="lazy" src="projects/proeval-studio/assets/preview.svg" alt="ProEval Studio AI Code and RLHF Evaluation Simulator" class="project-img">
                     </div>
@@ -277,10 +353,34 @@
                             <a href="https://github.com/RickyCriss/proeval-studio" class="project-link" target="_blank" rel="noopener noreferrer">View GitHub Repo ↗</a>
                         </div>
                     </div>
-                </div>
+                </article>
+
+                <!-- Vivid-Architect UE5 Poe Agent -->
+                <article class="project-card glass-panel highlight-card fade-in">
+                    <div class="project-image">
+                        <img loading="lazy" src="projects/vivid-ue5/assets/preview.svg" alt="Vivid-Architect Autonomous Unreal Engine 5 Developer Agent on Poe" class="project-img">
+                    </div>
+                    <div class="project-info">
+                        <div class="project-tags">
+                            <span class="tag" style="background: rgba(16, 185, 129, 0.15); color: #34d399; border-color: rgba(16, 185, 129, 0.4);">
+                                <span class="status-dot" style="display:inline-block; width:6px; height:6px; margin-right:5px; background:#10b981; border-radius:50%;"></span>Active Poe Agent
+                            </span>
+                            <span class="tag">Unreal Engine 5</span>
+                            <span class="tag">LoRA SFT</span>
+                            <span class="tag">57MB RAG</span>
+                        </div>
+                        <h3>Vivid-Architect (vivid_ue5)</h3>
+                        <p>An autonomous Unreal Engine 5 C++ developer agent powered by fine-tuned Qwen2.5-Coder-1.5B with an indexed 57MB Epic Games engine corpus. Scaffolds paired headers/sources, validates Hungarian notation, and injects Build.cs modules—deployed via FastAPI Poe bridge.</p>
+                        <p class="project-proof"><strong>Key Architecture:</strong> LoRA Rank-16 on RTX 3070 Ti, 1,619 engine headers RAG index, AST C++ validator, Poe server bot.</p>
+                        <div class="project-links">
+                            <a href="https://poe.com/Vivid86-DevAgent" class="project-link" target="_blank" rel="noopener noreferrer" style="color: #34d399; font-weight: 700;">Chat on Poe ↗</a>
+                            <a href="projects/vivid-ue5/index.html" class="project-link" style="color: var(--accent-primary); font-weight: 700;">Read Architecture ↗</a>
+                        </div>
+                    </div>
+                </article>
 
                 <!-- Mortal Tactical Map -->
-                <div class="project-card glass-panel fade-in">
+                <article class="project-card glass-panel fade-in">
                     <div class="project-image">
                         <img loading="lazy" src="projects/mortal-map/assets/mountain.jpg" alt="Mortal Online 2 Vista" class="project-img">
                     </div>
@@ -297,10 +397,10 @@
                             <a href="projects/mortal-map/index.html" class="project-link" target="_blank" rel="noopener noreferrer">Explore mapping demo ↗</a>
                         </div>
                     </div>
-                </div>
+                </article>
 
                 <!-- AI Studio App -->
-                <div class="project-card glass-panel fade-in">
+                <article class="project-card glass-panel fade-in">
                     <div class="project-image">
                         <img loading="lazy" src="projects/ai-studio-app/assets/preview.png" alt="Corner14" class="project-img">
                     </div>
@@ -317,10 +417,10 @@
                             <a href="projects/ai-studio-app/dist/index.html" class="project-link" target="_blank" rel="noopener noreferrer">Open learning project ↗</a>
                         </div>
                     </div>
-                </div>
+                </article>
 
                 <!-- Custom Tool-Calling Agent -->
-                <div class="project-card glass-panel fade-in highlight-card">
+                <article class="project-card glass-panel highlight-card fade-in">
                     <div class="project-image">
                         <img loading="lazy" src="projects/react-agent/assets/preview.png" alt="Custom ReAct Agent" class="project-img">
                     </div>
@@ -337,7 +437,7 @@
                             <a href="https://github.com/Vivid86/Antigravity" class="project-link" target="_blank" rel="noopener noreferrer">View Core Repo ↗</a>
                         </div>
                     </div>
-                </div>
+                </article>
             </div>
         </section>
 
@@ -359,7 +459,7 @@
         <p>&copy; 2026 Ricky Criss. Practical experience. Purposeful software.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=5"></script>
 
     <!-- ░░ JARVIS CHAT WIDGET ░░ -->
     <div id="jarvis-fab" aria-label="Open Jarvis AI assistant" role="button" tabindex="0" title="Ask Jarvis">
