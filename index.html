@@ -341,9 +341,10 @@
                             </div>
                         </div>
 
-                        <!-- Holographic HUD Control Bar (Positioned under Carousel) -->
-                        <div class="carousel-hud-bar" aria-live="polite">
-                            <div class="hud-target-indicator">
+                        <!-- Holographic HUD Control Station (Positioned under Carousel) -->
+                        <div class="carousel-hud-station">
+                            <!-- Target Telemetry Readout (Centered & Uncrammed) -->
+                            <div class="hud-target-indicator" aria-live="polite">
                                 <span class="hud-reticle-bracket">[</span>
                                 <span class="hud-scan-dot"></span>
                                 <span class="hud-label">TARGET ACQUIRED:</span>
@@ -351,20 +352,19 @@
                                 <span class="hud-reticle-bracket">]</span>
                             </div>
 
-                            <div class="carousel-nav-arrows">
-                                <button class="carousel-arrow-btn" id="carousel-prev-btn" type="button"
-                                    aria-label="Previous project">◀ PREV</button>
-                                <div class="carousel-pips" id="carousel-pips" role="tablist"
-                                    aria-label="Project card selector"></div>
-                                <button class="carousel-arrow-btn" id="carousel-next-btn" type="button"
-                                    aria-label="Next project">NEXT ▶</button>
-                            </div>
-
-                            <div class="hud-right-group">
-                                <div class="hud-interaction-hint">
-                                    <span class="hud-hint-icon">⟲</span>
-                                    <span>Drag · Pinch · Click Card</span>
+                            <!-- Centered Floating Controls Console -->
+                            <div class="carousel-hud-bar" role="region" aria-label="Deck navigation and view mode">
+                                <div class="carousel-nav-arrows">
+                                    <button class="carousel-arrow-btn" id="carousel-prev-btn" type="button"
+                                        aria-label="Previous project">◀ PREV</button>
+                                    <div class="carousel-pips" id="carousel-pips" role="tablist"
+                                        aria-label="Project card selector"></div>
+                                    <button class="carousel-arrow-btn" id="carousel-next-btn" type="button"
+                                        aria-label="Next project">NEXT ▶</button>
                                 </div>
+
+                                <div class="hud-divider" aria-hidden="true"></div>
+
                                 <div class="carousel-view-controls" role="group" aria-label="Deck display mode">
                                     <button class="view-mode-btn active" id="btn-mode-carousel" type="button">
                                         <span class="mode-icon">✦</span> 3D
