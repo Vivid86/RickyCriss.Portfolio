@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ricky Criss | Web, AI & Integration Services</title>
-    <meta name="description" content="Ricky Criss — developer and AI software engineering student. Practical web applications, workflow integrations, and AI prototypes, informed by 20 years in the metal industry. Available for remote work.">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="description"
+        content="Ricky Criss — developer and AI software engineering student. Practical web applications, workflow integrations, and AI prototypes, informed by 20 years in the metal industry. Available for remote work.">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css?v=11">
     <link rel="stylesheet" href="jarvis.css?v=11">
 </head>
+
 <body>
     <!-- ░░ JARVIS SPLASH SCREEN ░░ -->
     <div id="jarvis-splash" role="dialog" aria-modal="true" aria-label="Jarvis AI initialising" tabindex="-1">
@@ -53,35 +58,40 @@
 
                 <!-- Segmented Rotating Outer Arc Ring -->
                 <circle cx="160" cy="160" r="132" class="hud-arc-segmented-1" />
-                
+
                 <!-- Counter-Rotating Data Track Ring -->
                 <circle cx="160" cy="160" r="114" class="hud-arc-segmented-2" />
-                
+
                 <!-- Middle Gauge & Degree Markers -->
                 <circle cx="160" cy="160" r="96" class="hud-ring-gauge" />
                 <circle cx="160" cy="160" r="82" class="hud-arc-dashed" />
 
                 <!-- Crosshair & Target Reticle Accents -->
-                <path d="M 160 18 L 160 38 M 160 282 L 160 302 M 18 160 L 38 160 M 282 160 L 302 160" class="hud-reticle-line" />
-                
+                <path d="M 160 18 L 160 38 M 160 282 L 160 302 M 18 160 L 38 160 M 282 160 L 302 160"
+                    class="hud-reticle-line" />
+
                 <!-- Inner Acoustic Wave / Arc Reactor Core -->
                 <circle cx="160" cy="160" r="66" class="hud-core-pulse-outer" />
                 <circle cx="160" cy="160" r="50" class="hud-core-pulse-mid" />
                 <circle cx="160" cy="160" r="34" class="hud-reactor-center" />
 
                 <!-- Center Stark J.A.R.V.I.S. Monogram -->
-                <text x="160" y="165" class="hud-core-text" text-anchor="middle" dominant-baseline="middle">J.A.R.V.I.S.</text>
+                <text x="160" y="165" class="hud-core-text" text-anchor="middle"
+                    dominant-baseline="middle">J.A.R.V.I.S.</text>
             </svg>
         </div>
 
         <div class="jarvis-text-block">
             <p class="jarvis-init-label">J.A.R.V.I.S. · JUST A RATHER VERY INTELLIGENT SYSTEM · MARK VII</p>
-            <div class="jarvis-progress-bar"><div class="jarvis-progress-fill"></div></div>
+            <div class="jarvis-progress-bar">
+                <div class="jarvis-progress-fill"></div>
+            </div>
             <p id="jarvis-splash-msg" class="jarvis-splash-msg" aria-live="polite"></p>
         </div>
 
         <!-- Audio mute toggle -->
-        <button class="jarvis-audio-btn" id="jarvis-audio-btn" aria-label="Toggle Jarvis voice" title="Toggle voice">🔊</button>
+        <button class="jarvis-audio-btn" id="jarvis-audio-btn" aria-label="Toggle Jarvis voice"
+            title="Toggle voice">🔊</button>
         <button class="jarvis-skip-btn" id="jarvis-skip" aria-label="Skip intro">ESC to skip</button>
     </div>
 
@@ -89,7 +99,7 @@
     <div class="background-grid"></div>
     <div class="glow-orb orb-1"></div>
     <div class="glow-orb orb-2"></div>
-    
+
     <div class="hero-brand-bg">
         <img src="assets/brand-logo.png" alt="" class="hero-logo-large">
     </div>
@@ -123,12 +133,15 @@
                     <span class="title-line-1">Practical problems.</span>
                     <span class="highlight title-offset">Purpose-built software.</span>
                 </h1>
-                <p class="subtitle">I’m Ricky Criss, a developer studying AI software engineering. I bring 20 years of hands-on experience in the metal industry to building websites, workflow integrations, and custom applications.</p>
+                <p class="subtitle">I’m Ricky Criss, a developer studying AI software engineering. I bring 20 years of
+                    hands-on experience in the metal industry to building websites, workflow integrations, and custom
+                    applications.</p>
                 <div class="cta-group">
                     <a href="#projects" class="btn btn-primary">View My Work</a>
                     <a href="#contact" class="btn btn-secondary">Discuss a Project</a>
                 </div>
-                <p class="availability"><span aria-hidden="true"></span> Open to remote developer opportunities &amp; scoped freelance projects</p>
+                <p class="availability"><span aria-hidden="true"></span> Open to remote developer opportunities &amp;
+                    scoped freelance projects</p>
             </div>
 
             <!-- ░░ J.A.R.V.I.S. 3D ROUND-ROBIN HERO DECK ░░ -->
@@ -143,38 +156,9 @@
                 </div>
 
                 <div class="jarvis-carousel-container" id="jarvis-carousel-container">
-                    <!-- Top Holographic HUD Bar -->
-                    <div class="carousel-hud-bar" aria-live="polite">
-                        <div class="hud-target-indicator">
-                            <span class="hud-reticle-bracket">[</span>
-                            <span class="hud-scan-dot"></span>
-                            <span class="hud-label">TARGET ACQUIRED:</span>
-                            <span class="hud-target-title" id="hud-target-title">Vivid-Architect (vivid_ue5)</span>
-                            <span class="hud-reticle-bracket">]</span>
-                        </div>
-
-                        <div class="hud-interaction-hint">
-                            <span class="hud-hint-icon">⟲</span>
-                            <span>Drag / Swipe · Pinch Zoom · Click Card to Focus</span>
-                        </div>
-
-                        <div class="carousel-nav-arrows">
-                            <button class="carousel-arrow-btn" id="carousel-prev-btn" type="button" aria-label="Previous project">◀ PREV</button>
-                            <div class="carousel-pips" id="carousel-pips" role="tablist" aria-label="Project card selector"></div>
-                            <button class="carousel-arrow-btn" id="carousel-next-btn" type="button" aria-label="Next project">NEXT ▶</button>
-                        </div>
-                        <div class="carousel-view-controls" role="group" aria-label="Deck display mode">
-                            <button class="view-mode-btn active" id="btn-mode-carousel" type="button">
-                                <span class="mode-icon">✦</span> 3D
-                            </button>
-                            <button class="view-mode-btn" id="btn-mode-grid" type="button">
-                                <span class="mode-icon">▦</span> Grid
-                            </button>
-                        </div>
-                    </div>
-
                     <!-- 3D Viewport Stage -->
-                    <div class="carousel-viewport" id="carousel-viewport" tabindex="0" role="region" aria-label="3D Project Carousel (Use left and right arrow keys to rotate)">
+                    <div class="carousel-viewport" id="carousel-viewport" tabindex="0" role="region"
+                        aria-label="3D Project Carousel (Use left and right arrow keys to rotate)">
                         <!-- Holographic Arc-Reactor Floor Grid -->
                         <div class="carousel-holo-floor" aria-hidden="true">
                             <div class="holo-ring-outer"></div>
@@ -185,148 +169,277 @@
 
                         <!-- 3D Spinning Cylinder -->
                         <div class="carousel-cylinder" id="carousel-cylinder">
-                            <!-- Vivid-Architect UE5 Poe Agent -->
-                            <div class="project-card glass-panel highlight-card is-active-card" id="vivid-ue5" data-index="0" data-title="Vivid-Architect (vivid_ue5)">
-                                <div class="project-image">
-                                    <img loading="lazy" src="projects/vivid-ue5/assets/preview.svg" alt="Vivid-Architect Autonomous Unreal Engine 5 Developer Agent on Poe" class="project-img">
-                                </div>
-                                <div class="project-info">
-                                    <div class="project-tags">
-                                        <div class="agent-status-pill status-checking" id="hero-agent-status-pill" title="Checking agent status…">
-                                            <span class="status-dot-wrapper">
-                                                <span class="status-ping"></span>
-                                                <span class="status-dot"></span>
-                                            </span>
-                                            <span class="status-text" id="hero-agent-status-text">Active Poe Agent</span>
+                                <!-- Vivid-Architect UE5 Poe Agent -->
+                                <div class="project-card glass-panel highlight-card is-active-card" id="vivid-ue5"
+                                    data-index="0" data-title="Vivid-Architect (vivid_ue5)">
+                                    <div class="project-image">
+                                        <img loading="lazy" src="projects/vivid-ue5/assets/preview.svg"
+                                            alt="Vivid-Architect Autonomous Unreal Engine 5 Developer Agent on Poe"
+                                            class="project-img">
+                                    </div>
+                                    <div class="project-info">
+                                        <div class="project-tags">
+                                            <div class="agent-status-pill status-checking" id="hero-agent-status-pill"
+                                                title="Checking agent status…">
+                                                <span class="status-dot-wrapper">
+                                                    <span class="status-ping"></span>
+                                                    <span class="status-dot"></span>
+                                                </span>
+                                                <span class="status-text" id="hero-agent-status-text">Active Poe
+                                                    Agent</span>
+                                            </div>
+                                            <span class="tag">UE5 C++</span>
+                                            <span class="tag">LoRA SFT</span>
+                                            <span class="tag">57MB RAG</span>
                                         </div>
-                                        <span class="tag">UE5 C++</span>
-                                        <span class="tag">LoRA SFT</span>
-                                        <span class="tag">57MB RAG</span>
-                                    </div>
-                                    <h3>Vivid-Architect (vivid_ue5)</h3>
-                                    <p>Autonomous Unreal Engine 5 C++ developer agent powered by fine-tuned Qwen2.5-Coder-1.5B with indexed 57MB engine corpus. Scaffolds paired headers/sources, validates Hungarian notation, and injects Build.cs modules—deployed via FastAPI Poe bridge.</p>
-                                    <p class="project-proof"><strong>Key Architecture:</strong> LoRA Rank-16 on RTX 3070 Ti, 1,619 engine headers RAG index, AST C++ validator, Poe server bot.</p>
-                                    <div class="project-links">
-                                        <a href="https://poe.com/Vivid86-DevAgent" class="project-link" target="_blank" rel="noopener noreferrer" style="color: #34d399; font-weight: 700;">Chat on Poe ↗</a>
-                                        <a href="projects/vivid-ue5/index.html" class="project-link" style="color: var(--accent-primary); font-weight: 700;">Read Architecture ↗</a>
+                                        <h3>Vivid-Architect (vivid_ue5)</h3>
+                                        <p>Autonomous Unreal Engine 5 C++ developer agent powered by fine-tuned
+                                            Qwen2.5-Coder-1.5B with indexed 57MB engine corpus. Scaffolds paired
+                                            headers/sources, validates Hungarian notation, and injects Build.cs
+                                            modules—deployed via FastAPI Poe bridge.</p>
+                                        <p class="project-proof"><strong>Key Architecture:</strong> LoRA Rank-16 on RTX
+                                            3070
+                                            Ti, 1,619 engine headers RAG index, AST C++ validator, Poe server bot.</p>
+                                        <div class="project-links">
+                                            <a href="https://poe.com/Vivid86-DevAgent" class="project-link"
+                                                target="_blank" rel="noopener noreferrer"
+                                                style="color: #34d399; font-weight: 700;">Chat on
+                                                Poe ↗</a>
+                                            <a href="projects/vivid-ue5/index.html" class="project-link"
+                                                style="color: var(--accent-primary); font-weight: 700;">Read
+                                                Architecture
+                                                ↗</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <!-- ProEval Studio (Flagship Case Study) -->
-                            <div class="project-card glass-panel highlight-card is-inactive-card" id="proeval-studio" data-index="1" data-title="ProEval Studio">
-                                <div class="project-image">
-                                    <img loading="lazy" src="projects/proeval-studio/assets/preview.svg" alt="ProEval Studio AI Code and RLHF Evaluation Simulator" class="project-img">
-                                </div>
-                                <div class="project-info">
-                                    <div class="project-tags">
-                                        <span class="tag" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border-color: rgba(245, 158, 11, 0.4);">Featured Case Study</span>
-                                        <span class="tag">AI &amp; RLHF</span>
-                                        <span class="tag">React 19</span>
-                                        <span class="tag">Gemini API</span>
-                                        <span class="tag">Pyodide WASM</span>
+                                <!-- ProEval Studio (Flagship Case Study) -->
+                                <div class="project-card glass-panel highlight-card is-inactive-card"
+                                    id="proeval-studio" data-index="1" data-title="ProEval Studio">
+                                    <div class="project-image">
+                                        <img loading="lazy" src="projects/proeval-studio/assets/preview.svg"
+                                            alt="ProEval Studio AI Code and RLHF Evaluation Simulator"
+                                            class="project-img">
                                     </div>
-                                    <h3>ProEval Studio</h3>
-                                    <p>Interactive AI code-evaluation and RLHF sparring workbench. Prepares engineers for Outlier AI and Code4Ai screenings with timed bug-hunt sprints, in-browser Python WASM execution, A/B model auditing, and Gemini-powered adversarial QA reviews.</p>
-                                    <p class="project-proof"><strong>Key Architecture:</strong> Gemini Structured Outputs (responseSchema), Pyodide sandbox, Firebase Auth &amp; anti-tamper Firestore security.</p>
-                                    <div class="project-links">
-                                        <a href="projects/proeval-studio/index.html" class="project-link" style="color: var(--accent-primary); font-weight: 700;">Read Full Case Study ↗</a>
-                                        <a href="https://github.com/RickyCriss/proeval-studio" class="project-link" target="_blank" rel="noopener noreferrer">View GitHub Repo ↗</a>
+                                    <div class="project-info">
+                                        <div class="project-tags">
+                                            <span class="tag"
+                                                style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border-color: rgba(245, 158, 11, 0.4);">Featured
+                                                Case Study</span>
+                                            <span class="tag">AI &amp; RLHF</span>
+                                            <span class="tag">React 19</span>
+                                            <span class="tag">Gemini API</span>
+                                            <span class="tag">Pyodide WASM</span>
+                                        </div>
+                                        <h3>ProEval Studio</h3>
+                                        <p>Interactive AI code-evaluation and RLHF sparring workbench. Prepares
+                                            engineers
+                                            for Outlier AI and Code4Ai screenings with timed bug-hunt sprints,
+                                            in-browser
+                                            Python WASM execution, A/B model auditing, and Gemini-powered adversarial QA
+                                            reviews.</p>
+                                        <p class="project-proof"><strong>Key Architecture:</strong> Gemini Structured
+                                            Outputs (responseSchema), Pyodide sandbox, Firebase Auth &amp; anti-tamper
+                                            Firestore security.</p>
+                                        <div class="project-links">
+                                            <a href="projects/proeval-studio/index.html" class="project-link"
+                                                style="color: var(--accent-primary); font-weight: 700;">Read Full Case
+                                                Study
+                                                ↗</a>
+                                            <a href="https://github.com/RickyCriss/proeval-studio" class="project-link"
+                                                target="_blank" rel="noopener noreferrer">View GitHub Repo ↗</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <!-- Mortal Tactical Map -->
-                            <div class="project-card glass-panel is-inactive-card" id="mortal-map" data-index="2" data-title="The MO:2 AI Assistant">
-                                <div class="project-image">
-                                    <img loading="lazy" src="projects/mortal-map/assets/mountain.jpg" alt="Mortal Online 2 Vista" class="project-img">
-                                </div>
-                                <div class="project-info">
-                                    <div class="project-tags">
-                                        <span class="tag">Leaflet</span>
-                                        <span class="tag">Firestore</span>
-                                        <span class="tag">AI Assistant</span>
+                                <!-- Mortal Tactical Map -->
+                                <div class="project-card glass-panel is-inactive-card" id="mortal-map" data-index="2"
+                                    data-title="The MO:2 AI Assistant">
+                                    <div class="project-image">
+                                        <img loading="lazy" src="projects/mortal-map/assets/mountain.jpg"
+                                            alt="Mortal Online 2 Vista" class="project-img">
                                     </div>
-                                    <h3>The MO:2 AI Assistant</h3>
-                                    <p>An interactive mapping project for Mortal Online 2, bringing location information into a navigable map interface. Built around Leaflet and Firestore to explore interactive interfaces and shared data.</p>
-                                    <p class="project-proof"><strong>Skills explored:</strong> Mapping UI, application state, and data integration.</p>
-                                    <div class="project-links">
-                                        <a href="projects/mortal-map/index.html" class="project-link" target="_blank" rel="noopener noreferrer">Explore mapping demo ↗</a>
+                                    <div class="project-info">
+                                        <div class="project-tags">
+                                            <span class="tag">Leaflet</span>
+                                            <span class="tag">Firestore</span>
+                                            <span class="tag">AI Assistant</span>
+                                        </div>
+                                        <h3>The MO:2 AI Assistant</h3>
+                                        <p>An interactive mapping project for Mortal Online 2, bringing location
+                                            information
+                                            into a navigable map interface. Built around Leaflet and Firestore to
+                                            explore
+                                            interactive interfaces and shared data.</p>
+                                        <p class="project-proof"><strong>Skills explored:</strong> Mapping UI,
+                                            application
+                                            state, and data integration.</p>
+                                        <div class="project-links">
+                                            <a href="projects/mortal-map/index.html" class="project-link"
+                                                target="_blank" rel="noopener noreferrer">Explore mapping demo ↗</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <!-- AI Studio App -->
-                            <div class="project-card glass-panel is-inactive-card" id="corner14" data-index="3" data-title="Corner14 AI Studio App">
-                                <div class="project-image">
-                                    <img loading="lazy" src="projects/ai-studio-app/assets/preview.png" alt="Corner14" class="project-img">
-                                </div>
-                                <div class="project-info">
-                                    <div class="project-tags">
-                                        <span class="tag">React</span>
-                                        <span class="tag">AI</span>
-                                        <span class="tag">Vite</span>
+                                <!-- AI Studio App -->
+                                <div class="project-card glass-panel is-inactive-card" id="corner14" data-index="3"
+                                    data-title="Corner14 AI Studio App">
+                                    <div class="project-image">
+                                        <img loading="lazy" src="projects/ai-studio-app/assets/preview.png"
+                                            alt="Corner14" class="project-img">
                                     </div>
-                                    <h3>Corner14</h3>
-                                    <p>A React and Vite application developed with Google AI Studio. A learning project exploring how to structure an AI-facing application and manage interactive interface state.</p>
-                                    <p class="project-proof"><strong>Skills explored:</strong> React components, state management, and AI application interfaces.</p>
-                                    <div class="project-links">
-                                        <a href="projects/ai-studio-app/dist/index.html" class="project-link" target="_blank" rel="noopener noreferrer">Open learning project ↗</a>
+                                    <div class="project-info">
+                                        <div class="project-tags">
+                                            <span class="tag">React</span>
+                                            <span class="tag">AI</span>
+                                            <span class="tag">Vite</span>
+                                        </div>
+                                        <h3>Corner14</h3>
+                                        <p>A React and Vite application developed with Google AI Studio. A learning
+                                            project
+                                            exploring how to structure an AI-facing application and manage interactive
+                                            interface state.</p>
+                                        <p class="project-proof"><strong>Skills explored:</strong> React components,
+                                            state
+                                            management, and AI application interfaces.</p>
+                                        <div class="project-links">
+                                            <a href="projects/ai-studio-app/dist/index.html" class="project-link"
+                                                target="_blank" rel="noopener noreferrer">Open learning project ↗</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <!-- Custom Tool-Calling Agent -->
-                            <div class="project-card glass-panel highlight-card is-inactive-card" id="react-agent" data-index="4" data-title="Tool-calling AI agent">
-                                <div class="project-image">
-                                    <img loading="lazy" src="projects/react-agent/assets/preview.png" alt="Custom ReAct Agent" class="project-img">
-                                </div>
-                                <div class="project-info">
-                                    <div class="project-tags">
-                                        <span class="tag" style="background: rgba(139, 92, 246, 0.2); color: #c4b5fd;">Personal project</span>
-                                        <span class="tag">AI Implementation</span>
+                                <!-- Custom Tool-Calling Agent -->
+                                <div class="project-card glass-panel highlight-card is-inactive-card" id="react-agent"
+                                    data-index="4" data-title="Tool-calling AI agent">
+                                    <div class="project-image">
+                                        <img loading="lazy" src="projects/react-agent/assets/preview.png"
+                                            alt="Custom ReAct Agent" class="project-img">
                                     </div>
-                                    <h3>Tool-calling AI agent</h3>
-                                    <p>A Python ReAct agent example using the Gemini SDK to explore tool calling and multi-step tasks. A starting point for understanding how an assistant can choose tools, act, and respond.</p>
-                                    <p class="project-proof"><strong>Skills explored:</strong> Python, Gemini SDK, tool calling, and agent control flow.</p>
-                                    <div class="project-links">
-                                        <a href="#contact" class="project-link">Discuss an AI prototype ↗</a>
-                                        <a href="https://github.com/Vivid86/Antigravity" class="project-link" target="_blank" rel="noopener noreferrer">View Core Repo ↗</a>
+                                    <div class="project-info">
+                                        <div class="project-tags">
+                                            <span class="tag"
+                                                style="background: rgba(139, 92, 246, 0.2); color: #c4b5fd;">Personal
+                                                project</span>
+                                            <span class="tag">AI Implementation</span>
+                                        </div>
+                                        <h3>Tool-calling AI agent</h3>
+                                        <p>A Python ReAct agent example using the Gemini SDK to explore tool calling and
+                                            multi-step tasks. A starting point for understanding how an assistant can
+                                            choose
+                                            tools, act, and respond.</p>
+                                        <p class="project-proof"><strong>Skills explored:</strong> Python, Gemini SDK,
+                                            tool
+                                            calling, and agent control flow.</p>
+                                        <div class="project-links">
+                                            <a href="#contact" class="project-link">Discuss an AI prototype ↗</a>
+                                            <a href="https://github.com/Vivid86/Antigravity" class="project-link"
+                                                target="_blank" rel="noopener noreferrer">View Core Repo ↗</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+
+                        <!-- Holographic HUD Control Bar (Positioned under Carousel) -->
+                        <div class="carousel-hud-bar" aria-live="polite">
+                            <div class="hud-target-indicator">
+                                <span class="hud-reticle-bracket">[</span>
+                                <span class="hud-scan-dot"></span>
+                                <span class="hud-label">TARGET ACQUIRED:</span>
+                                <span class="hud-target-title" id="hud-target-title">Vivid-Architect (vivid_ue5)</span>
+                                <span class="hud-reticle-bracket">]</span>
+                            </div>
+
+                            <div class="carousel-nav-arrows">
+                                <button class="carousel-arrow-btn" id="carousel-prev-btn" type="button"
+                                    aria-label="Previous project">◀ PREV</button>
+                                <div class="carousel-pips" id="carousel-pips" role="tablist"
+                                    aria-label="Project card selector"></div>
+                                <button class="carousel-arrow-btn" id="carousel-next-btn" type="button"
+                                    aria-label="Next project">NEXT ▶</button>
+                            </div>
+
+                            <div class="hud-right-group">
+                                <div class="hud-interaction-hint">
+                                    <span class="hud-hint-icon">⟲</span>
+                                    <span>Drag · Pinch · Click Card</span>
+                                </div>
+                                <div class="carousel-view-controls" role="group" aria-label="Deck display mode">
+                                    <button class="view-mode-btn active" id="btn-mode-carousel" type="button">
+                                        <span class="mode-icon">✦</span> 3D
+                                    </button>
+                                    <button class="view-mode-btn" id="btn-mode-grid" type="button">
+                                        <span class="mode-icon">▦</span> Grid
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                 </div>
             </div>
         </section>
 
         <section id="services" class="services-section" aria-labelledby="services-title">
-            <div class="section-heading fade-in"><p class="eyebrow">WORK WITH ME</p><h2 id="services-title" class="section-title">A clear problem. A useful solution.</h2><p class="section-intro">Start with a focused scope and an outcome we can test together. These are proposed service packages; scope, timing, and price are agreed after discovery.</p></div>
+            <div class="section-heading fade-in">
+                <p class="eyebrow">WORK WITH ME</p>
+                <h2 id="services-title" class="section-title">A clear problem. A useful solution.</h2>
+                <p class="section-intro">Start with a focused scope and an outcome we can test together. These are
+                    proposed service packages; scope, timing, and price are agreed after discovery.</p>
+            </div>
             <div class="services-grid">
                 <article class="service-card glass-panel fade-in">
                     <div class="service-icon" aria-hidden="true">01 / WEB</div>
                     <h3>Website launch &amp; care</h3>
-                    <p>For a small business that needs a clear, professional place to explain its work and help customers take the next step.</p>
-                    <ul class="offer-details"><li>Responsive service pages and clear calls to action</li><li>Contact flow, accessibility basics, and launch checks</li><li>Source handoff and a simple update guide</li></ul>
-                    <p class="offer-scope"><strong>Package:</strong> A scoped launch, with optional ongoing updates and care.</p>
+                    <p>For a small business that needs a clear, professional place to explain its work and help
+                        customers take the next step.</p>
+                    <ul class="offer-details">
+                        <li>Responsive service pages and clear calls to action</li>
+                        <li>Contact flow, accessibility basics, and launch checks</li>
+                        <li>Source handoff and a simple update guide</li>
+                    </ul>
+                    <p class="offer-scope"><strong>Package:</strong> A scoped launch, with optional ongoing updates and
+                        care.</p>
                     <a href="#contact" class="project-link">Discuss a website <span aria-hidden="true">↗</span></a>
                 </article>
                 <article class="service-card glass-panel fade-in">
                     <div class="service-icon" aria-hidden="true">02 / WORKFLOWS</div>
                     <h3>Connect tools. Reduce busywork.</h3>
                     <p>For a team copying the same information between forms, spreadsheets, or business tools.</p>
-                    <ul class="offer-details"><li>Map one workflow and its source of truth</li><li>Connect agreed systems through supported APIs</li><li>Test duplicate records, failures, and recovery</li></ul>
-                    <p class="offer-scope"><strong>Package:</strong> Discovery followed by a bounded implementation; optional maintenance.</p>
+                    <ul class="offer-details">
+                        <li>Map one workflow and its source of truth</li>
+                        <li>Connect agreed systems through supported APIs</li>
+                        <li>Test duplicate records, failures, and recovery</li>
+                    </ul>
+                    <p class="offer-scope"><strong>Package:</strong> Discovery followed by a bounded implementation;
+                        optional maintenance.</p>
                     <a href="#contact" class="project-link">Discuss a workflow <span aria-hidden="true">↗</span></a>
                 </article>
             </div>
-            <div class="capability-note fade-in"><h3>Have a different technical challenge?</h3><p>I also explore AI assistants, custom applications, backend systems, and remote hardware support. We’ll establish feasibility and a realistic scope before making commitments.</p></div>
+            <div class="capability-note fade-in">
+                <h3>Have a different technical challenge?</h3>
+                <p>I also explore AI assistants, custom applications, backend systems, and remote hardware support.
+                    We’ll establish feasibility and a realistic scope before making commitments.</p>
+            </div>
         </section>
 
         <section id="about" class="about-section" aria-labelledby="about-title">
-            <div class="about-heading fade-in"><p class="eyebrow">THE PERSON BEHIND THE BUILD</p><h2 id="about-title" class="section-title">A practical builder,<br>always learning.</h2><span class="about-signature">Ricky Criss / Criss Tech Solutions</span></div>
-            <div class="about-copy fade-in"><p>My background is in the metal industry, where I spent 20 years working with real materials, constraints, and problems. That experience shapes how I approach software: understand the job, break it into manageable parts, and build something useful.</p><p>I’m currently studying AI software engineering and developing projects across web applications, AI integrations, and backend systems. I also build and configure computers, from workstations to gaming systems.</p><p>I’m looking for remote opportunities where I can contribute, learn from others, and take responsibility for a defined piece of work.</p><a href="https://github.com/Vivid86" class="project-link" target="_blank" rel="noopener noreferrer">Explore my GitHub <span aria-hidden="true">↗</span></a></div>
+            <div class="about-heading fade-in">
+                <p class="eyebrow">THE PERSON BEHIND THE BUILD</p>
+                <h2 id="about-title" class="section-title">A practical builder,<br>always learning.</h2><span
+                    class="about-signature">Ricky Criss / Criss Tech Solutions</span>
+            </div>
+            <div class="about-copy fade-in">
+                <p>My background is in the metal industry, where I spent 20 years working with real materials,
+                    constraints, and problems. That experience shapes how I approach software: understand the job, break
+                    it into manageable parts, and build something useful.</p>
+                <p>I’m currently studying AI software engineering and developing projects across web applications, AI
+                    integrations, and backend systems. I also build and configure computers, from workstations to gaming
+                    systems.</p>
+                <p>I’m looking for remote opportunities where I can contribute, learn from others, and take
+                    responsibility for a defined piece of work.</p><a href="https://github.com/Vivid86"
+                    class="project-link" target="_blank" rel="noopener noreferrer">Explore my GitHub <span
+                        aria-hidden="true">↗</span></a>
+            </div>
         </section>
 
         <section id="projects" class="projects-section" aria-labelledby="projects-title">
@@ -334,7 +447,8 @@
                 <div>
                     <p class="eyebrow">PORTFOLIO REPOSITORY</p>
                     <h2 id="projects-title" class="section-title">Built to learn. Shared to demonstrate.</h2>
-                    <p class="section-intro">Full project index with architecture deep-dives, live prototypes, and repository links.</p>
+                    <p class="section-intro">Full project index with architecture deep-dives, live prototypes, and
+                        repository links.</p>
                 </div>
             </div>
 
@@ -342,22 +456,30 @@
                 <!-- ProEval Studio (Flagship Case Study) -->
                 <article class="project-card glass-panel highlight-card fade-in">
                     <div class="project-image">
-                        <img loading="lazy" src="projects/proeval-studio/assets/preview.svg" alt="ProEval Studio AI Code and RLHF Evaluation Simulator" class="project-img">
+                        <img loading="lazy" src="projects/proeval-studio/assets/preview.svg"
+                            alt="ProEval Studio AI Code and RLHF Evaluation Simulator" class="project-img">
                     </div>
                     <div class="project-info">
                         <div class="project-tags">
-                            <span class="tag" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border-color: rgba(245, 158, 11, 0.4);">Featured Case Study</span>
+                            <span class="tag"
+                                style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border-color: rgba(245, 158, 11, 0.4);">Featured
+                                Case Study</span>
                             <span class="tag">AI &amp; RLHF</span>
                             <span class="tag">React 19</span>
                             <span class="tag">Gemini API</span>
                             <span class="tag">Pyodide WASM</span>
                         </div>
                         <h3>ProEval Studio</h3>
-                        <p>An interactive AI code-evaluation and RLHF sparring workbench. Prepares engineers for Outlier AI and Code4Ai screenings with timed bug-hunt sprints, in-browser Python WASM execution, A/B model auditing, and Gemini-powered adversarial QA reviews.</p>
-                        <p class="project-proof"><strong>Key Architecture:</strong> Gemini Structured Outputs (responseSchema), Pyodide sandbox, Firebase Auth &amp; anti-tamper Firestore security.</p>
+                        <p>An interactive AI code-evaluation and RLHF sparring workbench. Prepares engineers for Outlier
+                            AI and Code4Ai screenings with timed bug-hunt sprints, in-browser Python WASM execution, A/B
+                            model auditing, and Gemini-powered adversarial QA reviews.</p>
+                        <p class="project-proof"><strong>Key Architecture:</strong> Gemini Structured Outputs
+                            (responseSchema), Pyodide sandbox, Firebase Auth &amp; anti-tamper Firestore security.</p>
                         <div class="project-links">
-                            <a href="projects/proeval-studio/index.html" class="project-link" style="color: var(--accent-primary); font-weight: 700;">Read Full Case Study ↗</a>
-                            <a href="https://github.com/RickyCriss/proeval-studio" class="project-link" target="_blank" rel="noopener noreferrer">View GitHub Repo ↗</a>
+                            <a href="projects/proeval-studio/index.html" class="project-link"
+                                style="color: var(--accent-primary); font-weight: 700;">Read Full Case Study ↗</a>
+                            <a href="https://github.com/RickyCriss/proeval-studio" class="project-link" target="_blank"
+                                rel="noopener noreferrer">View GitHub Repo ↗</a>
                         </div>
                     </div>
                 </article>
@@ -365,23 +487,32 @@
                 <!-- Vivid-Architect UE5 Poe Agent -->
                 <article class="project-card glass-panel highlight-card fade-in">
                     <div class="project-image">
-                        <img loading="lazy" src="projects/vivid-ue5/assets/preview.svg" alt="Vivid-Architect Autonomous Unreal Engine 5 Developer Agent on Poe" class="project-img">
+                        <img loading="lazy" src="projects/vivid-ue5/assets/preview.svg"
+                            alt="Vivid-Architect Autonomous Unreal Engine 5 Developer Agent on Poe" class="project-img">
                     </div>
                     <div class="project-info">
                         <div class="project-tags">
-                            <span class="tag" style="background: rgba(16, 185, 129, 0.15); color: #34d399; border-color: rgba(16, 185, 129, 0.4);">
-                                <span class="status-dot" style="display:inline-block; width:6px; height:6px; margin-right:5px; background:#10b981; border-radius:50%;"></span>Active Poe Agent
+                            <span class="tag"
+                                style="background: rgba(16, 185, 129, 0.15); color: #34d399; border-color: rgba(16, 185, 129, 0.4);">
+                                <span class="status-dot"
+                                    style="display:inline-block; width:6px; height:6px; margin-right:5px; background:#10b981; border-radius:50%;"></span>Active
+                                Poe Agent
                             </span>
                             <span class="tag">Unreal Engine 5</span>
                             <span class="tag">LoRA SFT</span>
                             <span class="tag">57MB RAG</span>
                         </div>
                         <h3>Vivid-Architect (vivid_ue5)</h3>
-                        <p>An autonomous Unreal Engine 5 C++ developer agent powered by fine-tuned Qwen2.5-Coder-1.5B with an indexed 57MB Epic Games engine corpus. Scaffolds paired headers/sources, validates Hungarian notation, and injects Build.cs modules—deployed via FastAPI Poe bridge.</p>
-                        <p class="project-proof"><strong>Key Architecture:</strong> LoRA Rank-16 on RTX 3070 Ti, 1,619 engine headers RAG index, AST C++ validator, Poe server bot.</p>
+                        <p>An autonomous Unreal Engine 5 C++ developer agent powered by fine-tuned Qwen2.5-Coder-1.5B
+                            with an indexed 57MB Epic Games engine corpus. Scaffolds paired headers/sources, validates
+                            Hungarian notation, and injects Build.cs modules—deployed via FastAPI Poe bridge.</p>
+                        <p class="project-proof"><strong>Key Architecture:</strong> LoRA Rank-16 on RTX 3070 Ti, 1,619
+                            engine headers RAG index, AST C++ validator, Poe server bot.</p>
                         <div class="project-links">
-                            <a href="https://poe.com/Vivid86-DevAgent" class="project-link" target="_blank" rel="noopener noreferrer" style="color: #34d399; font-weight: 700;">Chat on Poe ↗</a>
-                            <a href="projects/vivid-ue5/index.html" class="project-link" style="color: var(--accent-primary); font-weight: 700;">Read Architecture ↗</a>
+                            <a href="https://poe.com/Vivid86-DevAgent" class="project-link" target="_blank"
+                                rel="noopener noreferrer" style="color: #34d399; font-weight: 700;">Chat on Poe ↗</a>
+                            <a href="projects/vivid-ue5/index.html" class="project-link"
+                                style="color: var(--accent-primary); font-weight: 700;">Read Architecture ↗</a>
                         </div>
                     </div>
                 </article>
@@ -389,7 +520,8 @@
                 <!-- Mortal Tactical Map -->
                 <article class="project-card glass-panel fade-in">
                     <div class="project-image">
-                        <img loading="lazy" src="projects/mortal-map/assets/mountain.jpg" alt="Mortal Online 2 Vista" class="project-img">
+                        <img loading="lazy" src="projects/mortal-map/assets/mountain.jpg" alt="Mortal Online 2 Vista"
+                            class="project-img">
                     </div>
                     <div class="project-info">
                         <div class="project-tags">
@@ -398,10 +530,14 @@
                             <span class="tag">AI Assistant</span>
                         </div>
                         <h3>The MO:2 AI Assistant</h3>
-                        <p>An interactive mapping project for Mortal Online 2, bringing location information into a navigable map interface. Built around Leaflet and Firestore to explore interactive interfaces and shared data.</p>
-                        <p class="project-proof"><strong>Skills explored:</strong> Mapping UI, application state, and data integration.</p>
+                        <p>An interactive mapping project for Mortal Online 2, bringing location information into a
+                            navigable map interface. Built around Leaflet and Firestore to explore interactive
+                            interfaces and shared data.</p>
+                        <p class="project-proof"><strong>Skills explored:</strong> Mapping UI, application state, and
+                            data integration.</p>
                         <div class="project-links">
-                            <a href="projects/mortal-map/index.html" class="project-link" target="_blank" rel="noopener noreferrer">Explore mapping demo ↗</a>
+                            <a href="projects/mortal-map/index.html" class="project-link" target="_blank"
+                                rel="noopener noreferrer">Explore mapping demo ↗</a>
                         </div>
                     </div>
                 </article>
@@ -409,7 +545,8 @@
                 <!-- AI Studio App -->
                 <article class="project-card glass-panel fade-in">
                     <div class="project-image">
-                        <img loading="lazy" src="projects/ai-studio-app/assets/preview.png" alt="Corner14" class="project-img">
+                        <img loading="lazy" src="projects/ai-studio-app/assets/preview.png" alt="Corner14"
+                            class="project-img">
                     </div>
                     <div class="project-info">
                         <div class="project-tags">
@@ -418,10 +555,13 @@
                             <span class="tag">Vite</span>
                         </div>
                         <h3>Corner14</h3>
-                        <p>A React and Vite application developed with Google AI Studio. A learning project exploring how to structure an AI-facing application and manage interactive interface state.</p>
-                        <p class="project-proof"><strong>Skills explored:</strong> React components, state management, and AI application interfaces.</p>
+                        <p>A React and Vite application developed with Google AI Studio. A learning project exploring
+                            how to structure an AI-facing application and manage interactive interface state.</p>
+                        <p class="project-proof"><strong>Skills explored:</strong> React components, state management,
+                            and AI application interfaces.</p>
                         <div class="project-links">
-                            <a href="projects/ai-studio-app/dist/index.html" class="project-link" target="_blank" rel="noopener noreferrer">Open learning project ↗</a>
+                            <a href="projects/ai-studio-app/dist/index.html" class="project-link" target="_blank"
+                                rel="noopener noreferrer">Open learning project ↗</a>
                         </div>
                     </div>
                 </article>
@@ -429,34 +569,65 @@
                 <!-- Custom Tool-Calling Agent -->
                 <article class="project-card glass-panel highlight-card fade-in">
                     <div class="project-image">
-                        <img loading="lazy" src="projects/react-agent/assets/preview.png" alt="Custom ReAct Agent" class="project-img">
+                        <img loading="lazy" src="projects/react-agent/assets/preview.png" alt="Custom ReAct Agent"
+                            class="project-img">
                     </div>
                     <div class="project-info">
                         <div class="project-tags">
-                            <span class="tag" style="background: rgba(139, 92, 246, 0.2); color: #c4b5fd;">Personal project</span>
+                            <span class="tag" style="background: rgba(139, 92, 246, 0.2); color: #c4b5fd;">Personal
+                                project</span>
                             <span class="tag">AI Implementation</span>
                         </div>
                         <h3>Tool-calling AI agent</h3>
-                        <p>A Python ReAct agent example using the Gemini SDK to explore tool calling and multi-step tasks. A starting point for understanding how an assistant can choose tools, act, and respond.</p>
-                        <p class="project-proof"><strong>Skills explored:</strong> Python, Gemini SDK, tool calling, and agent control flow.</p>
+                        <p>A Python ReAct agent example using the Gemini SDK to explore tool calling and multi-step
+                            tasks. A starting point for understanding how an assistant can choose tools, act, and
+                            respond.</p>
+                        <p class="project-proof"><strong>Skills explored:</strong> Python, Gemini SDK, tool calling, and
+                            agent control flow.</p>
                         <div class="project-links">
                             <a href="#contact" class="project-link">Discuss an AI prototype ↗</a>
-                            <a href="https://github.com/Vivid86/Antigravity" class="project-link" target="_blank" rel="noopener noreferrer">View Core Repo ↗</a>
+                            <a href="https://github.com/Vivid86/Antigravity" class="project-link" target="_blank"
+                                rel="noopener noreferrer">View Core Repo ↗</a>
                         </div>
                     </div>
                 </article>
             </div>
         </section>
 
-        <section class="process-section" aria-labelledby="process-title"><p class="eyebrow fade-in">HOW WE’D WORK TOGETHER</p><h2 id="process-title" class="section-title fade-in">Know what happens next.</h2><ol class="process-grid"><li class="fade-in"><span>01</span><h3>Understand</h3><p>Define the problem, users, tools, and what a useful result looks like.</p></li><li class="fade-in"><span>02</span><h3>Agree</h3><p>Set deliverables, exclusions, milestones, access, and price before implementation.</p></li><li class="fade-in"><span>03</span><h3>Build &amp; test</h3><p>Work in small steps, share progress, and check the agreed workflow.</p></li><li class="fade-in"><span>04</span><h3>Hand over</h3><p>Document the result and discuss any support or improvements you need.</p></li></ol></section>
+        <section class="process-section" aria-labelledby="process-title">
+            <p class="eyebrow fade-in">HOW WE’D WORK TOGETHER</p>
+            <h2 id="process-title" class="section-title fade-in">Know what happens next.</h2>
+            <ol class="process-grid">
+                <li class="fade-in"><span>01</span>
+                    <h3>Understand</h3>
+                    <p>Define the problem, users, tools, and what a useful result looks like.</p>
+                </li>
+                <li class="fade-in"><span>02</span>
+                    <h3>Agree</h3>
+                    <p>Set deliverables, exclusions, milestones, access, and price before implementation.</p>
+                </li>
+                <li class="fade-in"><span>03</span>
+                    <h3>Build &amp; test</h3>
+                    <p>Work in small steps, share progress, and check the agreed workflow.</p>
+                </li>
+                <li class="fade-in"><span>04</span>
+                    <h3>Hand over</h3>
+                    <p>Document the result and discuss any support or improvements you need.</p>
+                </li>
+            </ol>
+        </section>
 
         <section id="contact" class="contact-section fade-in">
             <div class="glass-panel contact-panel">
                 <h2>Have a project—or a place on your team?</h2>
-                <p>I’m open to remote developer opportunities and focused freelance projects. Share the problem you’re solving, the tools involved, and what you need next.</p>
+                <p>I’m open to remote developer opportunities and focused freelance projects. Share the problem you’re
+                    solving, the tools involved, and what you need next.</p>
                 <div class="contact-methods" style="margin-top: 2rem;">
-                    <a href="https://github.com/Vivid86" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Connect on GitHub</a>
-                    <p class="contact-subtext" style="margin-top: 1rem; color: #a1a1aa; font-size: 0.9rem;">GitHub is my public contact route for now. If we’re already connected on another platform, send the project link there. Please keep credentials and confidential material out of public issues.</p>
+                    <a href="https://github.com/Vivid86" target="_blank" rel="noopener noreferrer"
+                        class="btn btn-primary">Connect on GitHub</a>
+                    <p class="contact-subtext" style="margin-top: 1rem; color: #a1a1aa; font-size: 0.9rem;">GitHub is my
+                        public contact route for now. If we’re already connected on another platform, send the project
+                        link there. Please keep credentials and confidential material out of public issues.</p>
                 </div>
             </div>
         </section>
@@ -489,10 +660,12 @@
         </div>
         <div id="jarvis-messages" class="jarvis-messages" aria-live="polite" aria-atomic="false"></div>
         <div class="jarvis-input-row">
-            <input id="jarvis-input" type="text" placeholder="Ask me anything…" autocomplete="off" aria-label="Message Jarvis">
+            <input id="jarvis-input" type="text" placeholder="Ask me anything…" autocomplete="off"
+                aria-label="Message Jarvis">
             <button id="jarvis-send" aria-label="Send message">↑</button>
         </div>
     </div>
 
 </body>
+
 </html>
