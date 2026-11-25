@@ -10,6 +10,7 @@ function boot() {
     try { initJarvisSplash(); } catch (e) { console.error('initJarvisSplash error:', e); }
     try { initJarvisChat(); } catch (e) { console.error('initJarvisChat error:', e); }
     try { initJarvisCarousel(); } catch (e) { console.error('initJarvisCarousel error:', e); }
+    try { initProjectsFilter(); } catch (e) { console.error('initProjectsFilter error:', e); }
     try { initAnalyticsEvents(); } catch (e) { console.error('initAnalyticsEvents error:', e); }
 }
 
@@ -387,6 +388,10 @@ const JARVIS_KB = [
     {
         keys: ['corner14', 'react', 'vite', 'ai studio'],
         response: "Corner14 is a React + Vite learning project built with Google AI Studio. It explores structured AI application interfaces and state management. Early work — honest, documented, and functional."
+    },
+    {
+        keys: ['concept', 'templates', 'client', 'aurelia', 'realtor', 'restaurant', 'lumen', 'medspa', 'aura'],
+        response: "Ricky has engineered three production-grade web application concepts for high-ticket service niches: Aurelia (Luxury Real Estate with Mapbox and CMA valuation), Lumen & Oak (Woodfire Fine Dining with interactive dietary menu and banquet estimator), and Aura Aesthetics (Medical Spa with split-slider results vault and financing calculator). All built on Next.js 16 and deployed live on Vercel."
     }
 ];
 
@@ -667,6 +672,41 @@ function initAnalyticsEvents() {
     });
 }
 
+/* ── Projects Category Filter Tabs ────────────────────────────── */
+function initProjectsFilter() {
+    const filterBar = document.querySelector('.projects-filter-bar');
+    const filterBtns = document.querySelectorAll('.filter-tab-btn');
+    const gridCards = document.querySelectorAll('.projects-grid .project-card');
+
+    if (!filterBar || filterBtns.length === 0 || gridCards.length === 0) return;
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const filter = btn.dataset.filter;
+
+            filterBtns.forEach(b => {
+                b.classList.remove('active');
+                b.setAttribute('aria-selected', 'false');
+            });
+            btn.classList.add('active');
+            btn.setAttribute('aria-selected', 'true');
+
+            gridCards.forEach(card => {
+                const category = card.dataset.category;
+                if (filter === 'all' || category === filter) {
+                    card.classList.remove('is-filtered-out');
+                } else {
+                    card.classList.add('is-filtered-out');
+                }
+            });
+
+            if (typeof plausibleTrack === 'function') {
+                plausibleTrack('Filter Projects', { category: filter });
+            }
+        });
+    });
+}
+
 /* ── Jarvis 3D Round-Robin Carousel ──────────────────────────── */
 function initJarvisCarousel() {
     const container = document.getElementById('jarvis-carousel-container');
@@ -701,6 +741,9 @@ function initJarvisCarousel() {
     let wheelTimeout = null;
 
     function getRadius() {
+        if (cards.length > 5) {
+            return window.innerWidth < 768 ? 320 : 480;
+        }
         return window.innerWidth < 768 ? 260 : 380;
     }
 

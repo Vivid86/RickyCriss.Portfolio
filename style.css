@@ -201,30 +201,64 @@ main {
     width: 100%;
 }
 
-.hero-brand-bg {
+/* Holographic CAD / Arc-Reactor Schematic Background */
+.hero-schematic-bg {
     position: fixed;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     z-index: -1;
-    opacity: 0.15;
+    width: min(85vw, 840px);
+    height: min(85vw, 840px);
     pointer-events: none;
-    animation: pulse-glow 4s infinite ease-in-out;
     display: flex;
     justify-content: center;
     align-items: center;
+    animation: schematic-breathe 8s infinite ease-in-out;
+    filter: drop-shadow(0 0 50px rgba(0, 240, 255, 0.22));
 }
 
-.hero-logo-large {
-    width: 80vw;
-    max-width: 800px;
-    height: auto;
-    filter: drop-shadow(0 0 50px var(--accent-glow));
+.hero-schematic-svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
 }
 
-@keyframes pulse-glow {
-    0%, 100% { opacity: 0.04; transform: translate(-50%, -50%) scale(1); }
-    50% { opacity: 0.08; transform: translate(-50%, -50%) scale(1.03); }
+/* Counter-rotating technical rings */
+.schematic-spin-clockwise {
+    transform-origin: 400px 400px;
+    animation: spin-clockwise 140s linear infinite;
+}
+
+.schematic-spin-counter {
+    transform-origin: 400px 400px;
+    animation: spin-counter 90s linear infinite;
+}
+
+.schematic-spin-fast {
+    transform-origin: 400px 400px;
+    animation: spin-clockwise 55s linear infinite;
+}
+
+@keyframes spin-clockwise {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes spin-counter {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
+}
+
+@keyframes schematic-breathe {
+    0%, 100% {
+        opacity: 0.12;
+        transform: translate(-50%, -50%) scale(0.98);
+    }
+    50% {
+        opacity: 0.22;
+        transform: translate(-50%, -50%) scale(1.02);
+    }
 }
 
 .hero-content {
@@ -609,7 +643,9 @@ main {
 
 /* Fixed-width pips container absorbs active pill expansion without shifting buttons */
 .carousel-pips {
-    width: 96px;
+    min-width: 140px;
+    width: auto;
+    padding: 0 0.5rem;
     height: 34px;
     display: inline-flex;
     gap: 0.45rem;
@@ -700,8 +736,8 @@ main {
 /* Holographic Reactor Base (Floor) */
 .carousel-holo-floor {
     position: absolute;
-    width: 580px;
-    height: 580px;
+    width: 720px;
+    height: 720px;
     border-radius: 50%;
     transform: rotateX(80deg) translateZ(-260px);
     pointer-events: none;
@@ -807,12 +843,15 @@ main {
     pointer-events: none;
 }
 
-/* Base 3D Carousel Card Orbit Positions */
-.jarvis-carousel-container:not(.mode-grid) .project-card:nth-child(1) { transform: rotateY(0deg) translateZ(380px); }
-.jarvis-carousel-container:not(.mode-grid) .project-card:nth-child(2) { transform: rotateY(72deg) translateZ(380px); }
-.jarvis-carousel-container:not(.mode-grid) .project-card:nth-child(3) { transform: rotateY(144deg) translateZ(380px); }
-.jarvis-carousel-container:not(.mode-grid) .project-card:nth-child(4) { transform: rotateY(216deg) translateZ(380px); }
-.jarvis-carousel-container:not(.mode-grid) .project-card:nth-child(5) { transform: rotateY(288deg) translateZ(380px); }
+/* Base 3D Carousel Card Orbit Positions (8 cards at 45deg intervals) */
+.jarvis-carousel-container:not(.mode-grid) .project-card:nth-child(1) { transform: rotateY(0deg) translateZ(480px); }
+.jarvis-carousel-container:not(.mode-grid) .project-card:nth-child(2) { transform: rotateY(45deg) translateZ(480px); }
+.jarvis-carousel-container:not(.mode-grid) .project-card:nth-child(3) { transform: rotateY(90deg) translateZ(480px); }
+.jarvis-carousel-container:not(.mode-grid) .project-card:nth-child(4) { transform: rotateY(135deg) translateZ(480px); }
+.jarvis-carousel-container:not(.mode-grid) .project-card:nth-child(5) { transform: rotateY(180deg) translateZ(480px); }
+.jarvis-carousel-container:not(.mode-grid) .project-card:nth-child(6) { transform: rotateY(225deg) translateZ(480px); }
+.jarvis-carousel-container:not(.mode-grid) .project-card:nth-child(7) { transform: rotateY(270deg) translateZ(480px); }
+.jarvis-carousel-container:not(.mode-grid) .project-card:nth-child(8) { transform: rotateY(315deg) translateZ(480px); }
 
 /* Prevent global .glass-panel:hover from flattening 3D transforms */
 .jarvis-carousel-container:not(.mode-grid) .project-card.glass-panel:hover {
@@ -976,10 +1015,96 @@ main {
     }
 }
 
+/* ── HUD Projects Category Filter Bar ────────────────────────────── */
+.projects-filter-bar {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.65rem;
+    margin-bottom: 2.2rem;
+    padding: 0.4rem 0.65rem;
+    background: rgba(10, 15, 26, 0.75);
+    border: 1px solid var(--glass-border);
+    border-radius: 999px;
+    backdrop-filter: blur(12px);
+}
+
+.filter-tab-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.45rem 1.05rem;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    user-select: none;
+}
+
+.filter-tab-btn .tab-prefix {
+    color: rgba(0, 240, 255, 0.45);
+    font-size: 0.75rem;
+}
+
+.filter-tab-btn .tab-count {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    opacity: 0.75;
+}
+
+.filter-tab-btn:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.filter-tab-btn.active {
+    background: rgba(0, 240, 255, 0.14);
+    color: #00f0ff;
+    border-color: rgba(0, 240, 255, 0.4);
+    box-shadow: 0 0 14px rgba(0, 240, 255, 0.2);
+}
+
+.filter-tab-btn.active .tab-prefix {
+    color: #00f0ff;
+}
+
+.filter-tab-btn.active .tab-count {
+    color: #00f0ff;
+    opacity: 1;
+}
+
+@media (max-width: 600px) {
+    .projects-filter-bar {
+        border-radius: 16px;
+        width: 100%;
+        justify-content: flex-start;
+        padding: 0.35rem;
+        gap: 0.4rem;
+    }
+    .filter-tab-btn {
+        font-size: 0.72rem;
+        padding: 0.35rem 0.75rem;
+    }
+}
+
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 2rem;
+}
+
+.projects-grid .project-card {
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.projects-grid .project-card.is-filtered-out {
+    display: none !important;
 }
 
 .glass-panel {

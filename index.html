@@ -10,8 +10,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=11">
-    <link rel="stylesheet" href="jarvis.css?v=11">
+    <link rel="stylesheet" href="style.css?v=12">
+    <link rel="stylesheet" href="jarvis.css?v=12">
 </head>
 
 <body>
@@ -100,10 +100,133 @@
     <div class="glow-orb orb-1"></div>
     <div class="glow-orb orb-2"></div>
 
-    <!-- Background Brand Watermark (Temporarily removed to test clean look) -->
-    <!-- <div class="hero-brand-bg">
-        <img src="assets/brand-logo.png" alt="" class="hero-logo-large">
-    </div> -->
+    <!-- Holographic CAD / Arc-Reactor Schematic Watermark -->
+    <div class="hero-schematic-bg" aria-hidden="true">
+        <svg viewBox="0 0 800 800" class="hero-schematic-svg" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <radialGradient id="holo-schematic-glow" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.28" />
+                    <stop offset="40%" stop-color="#00f0ff" stop-opacity="0.08" />
+                    <stop offset="100%" stop-color="#00f0ff" stop-opacity="0" />
+                </radialGradient>
+                <radialGradient id="holo-amber-glow" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.25" />
+                    <stop offset="100%" stop-color="#f59e0b" stop-opacity="0" />
+                </radialGradient>
+            </defs>
+
+            <!-- Ambient Core Glow -->
+            <circle cx="400" cy="400" r="280" fill="url(#holo-schematic-glow)" />
+
+            <!-- Corner HUD L-Brackets -->
+            <g stroke="rgba(0, 240, 255, 0.25)" stroke-width="1" fill="none">
+                <path d="M 60 90 L 60 60 L 90 60" />
+                <path d="M 740 90 L 740 60 L 710 60" />
+                <path d="M 60 710 L 60 740 L 90 740" />
+                <path d="M 740 710 L 740 740 L 710 740" />
+            </g>
+
+            <!-- Technical Telemetry Labels -->
+            <text x="62" y="52" fill="rgba(0, 240, 255, 0.35)" font-family="'JetBrains Mono', monospace" font-size="9" letter-spacing="0.18em">SYS.ARCH // MK-VII</text>
+            <text x="738" y="52" text-anchor="end" fill="rgba(245, 158, 11, 0.35)" font-family="'JetBrains Mono', monospace" font-size="9" letter-spacing="0.18em">ORBIT.CALIB // 360°</text>
+            <text x="62" y="756" fill="rgba(148, 163, 184, 0.3)" font-family="'JetBrains Mono', monospace" font-size="9" letter-spacing="0.18em">COORD.RADIAL // 400.400</text>
+            <text x="738" y="756" text-anchor="end" fill="rgba(0, 240, 255, 0.35)" font-family="'JetBrains Mono', monospace" font-size="9" letter-spacing="0.18em">STATUS // ONLINE</text>
+
+            <!-- Precision Crosshair Axes -->
+            <g stroke="rgba(0, 240, 255, 0.14)" stroke-width="0.75">
+                <line x1="400" y1="50" x2="400" y2="330" />
+                <line x1="400" y1="470" x2="400" y2="750" />
+                <line x1="50" y1="400" x2="330" y2="400" />
+                <line x1="470" y1="400" x2="750" y2="400" />
+                
+                <!-- Diagonal 45° Guidelines -->
+                <line x1="160" y1="160" x2="310" y2="310" stroke-dasharray="3 6" opacity="0.6" />
+                <line x1="640" y1="160" x2="490" y2="310" stroke-dasharray="3 6" opacity="0.6" />
+                <line x1="160" y1="640" x2="310" y2="490" stroke-dasharray="3 6" opacity="0.6" />
+                <line x1="640" y1="640" x2="490" y2="490" stroke-dasharray="3 6" opacity="0.6" />
+            </g>
+
+            <!-- Cardinal Degree Markings -->
+            <g fill="rgba(0, 240, 255, 0.3)" font-family="'JetBrains Mono', monospace" font-size="8" letter-spacing="0.12em" text-anchor="middle">
+                <text x="400" y="42">000°</text>
+                <text x="765" y="403">090°</text>
+                <text x="400" y="768">180°</text>
+                <text x="35" y="403">270°</text>
+            </g>
+
+            <!-- LAYER 1: Clockwise Rotating Outer Rings & Segmented Tracks -->
+            <g class="schematic-spin-clockwise">
+                <circle cx="400" cy="400" r="370" fill="none" stroke="rgba(0, 240, 255, 0.16)" stroke-width="1" />
+                <circle cx="400" cy="400" r="364" fill="none" stroke="rgba(0, 240, 255, 0.08)" stroke-width="0.5" />
+                
+                <!-- Outer Tick Graduation Ring (Dashed) -->
+                <circle cx="400" cy="400" r="352" fill="none" stroke="rgba(0, 240, 255, 0.22)" stroke-width="2" stroke-dasharray="2 10" />
+                
+                <!-- Segmented Heavy Arcs -->
+                <circle cx="400" cy="400" r="334" fill="none" stroke="rgba(0, 240, 255, 0.3)" stroke-width="2" stroke-dasharray="80 40 160 40" />
+
+                <!-- 4 Outer Data Nodes -->
+                <circle cx="400" cy="30" r="3" fill="#00f0ff" opacity="0.8" />
+                <circle cx="770" cy="400" r="3" fill="#00f0ff" opacity="0.8" />
+                <circle cx="400" cy="770" r="3" fill="#00f0ff" opacity="0.8" />
+                <circle cx="30" cy="400" r="3" fill="#00f0ff" opacity="0.8" />
+
+                <!-- Range Ring 240 -->
+                <circle cx="400" cy="400" r="240" fill="none" stroke="rgba(0, 240, 255, 0.12)" stroke-width="1" stroke-dasharray="12 16" />
+            </g>
+
+            <!-- LAYER 2: Counter-Clockwise Rotating Mid Telemetry & Amber Track -->
+            <g class="schematic-spin-counter">
+                <!-- Amber Pitch Track -->
+                <circle cx="400" cy="400" r="290" fill="none" stroke="rgba(245, 158, 11, 0.25)" stroke-width="1.5" stroke-dasharray="6 14 30 14" />
+                
+                <!-- Segmented Target Ring -->
+                <circle cx="400" cy="400" r="210" fill="none" stroke="rgba(0, 240, 255, 0.2)" stroke-width="1.5" stroke-dasharray="50 25" />
+
+                <!-- Diamond Target Points -->
+                <polygon points="400,195 405,200 400,205 395,200" fill="rgba(245, 158, 11, 0.5)" />
+                <polygon points="600,395 605,400 600,405 595,400" fill="rgba(245, 158, 11, 0.5)" />
+                <polygon points="400,595 405,600 400,605 395,600" fill="rgba(245, 158, 11, 0.5)" />
+                <polygon points="200,395 205,400 200,405 195,400" fill="rgba(245, 158, 11, 0.5)" />
+
+                <!-- Inner Metric Ring -->
+                <circle cx="400" cy="400" r="150" fill="none" stroke="rgba(0, 240, 255, 0.18)" stroke-width="1" stroke-dasharray="4 8" />
+            </g>
+
+            <!-- LAYER 3: Fast Inner Arc-Reactor Core Spoke Ring -->
+            <g class="schematic-spin-fast">
+                <circle cx="400" cy="400" r="105" fill="none" stroke="rgba(0, 240, 255, 0.28)" stroke-width="1.5" stroke-dasharray="18 10" />
+                <circle cx="400" cy="400" r="85" fill="none" stroke="rgba(245, 158, 11, 0.2)" stroke-width="1" stroke-dasharray="4 6" />
+                
+                <!-- 8 Subtle Radial Spokes -->
+                <g stroke="rgba(0, 240, 255, 0.2)" stroke-width="1">
+                    <line x1="400" y1="330" x2="400" y2="350" />
+                    <line x1="400" y1="450" x2="400" y2="470" />
+                    <line x1="330" y1="400" x2="350" y2="400" />
+                    <line x1="450" y1="400" x2="470" y2="400" />
+                    <line x1="350" y1="350" x2="365" y2="365" />
+                    <line x1="450" y1="450" x2="435" y2="435" />
+                    <line x1="350" y1="450" x2="365" y2="435" />
+                    <line x1="450" y1="350" x2="435" y2="365" />
+                </g>
+            </g>
+
+            <!-- Static Inner Reactor Center Core -->
+            <g>
+                <circle cx="400" cy="400" r="60" fill="url(#holo-amber-glow)" />
+                <circle cx="400" cy="400" r="55" fill="none" stroke="rgba(0, 240, 255, 0.3)" stroke-width="1" />
+                <circle cx="400" cy="400" r="38" fill="none" stroke="rgba(245, 158, 11, 0.35)" stroke-width="1" stroke-dasharray="8 6" />
+                <circle cx="400" cy="400" r="20" fill="none" stroke="rgba(0, 240, 255, 0.4)" stroke-width="1.5" />
+                <circle cx="400" cy="400" r="6" fill="#00f0ff" opacity="0.6" />
+                
+                <!-- Center Target Reticle Brackets -->
+                <path d="M 388 384 L 384 384 L 384 388" fill="none" stroke="#00f0ff" stroke-width="1.2" />
+                <path d="M 412 384 L 416 384 L 416 388" fill="none" stroke="#00f0ff" stroke-width="1.2" />
+                <path d="M 388 416 L 384 416 L 384 412" fill="none" stroke="#00f0ff" stroke-width="1.2" />
+                <path d="M 412 416 L 416 416 L 416 412" fill="none" stroke="#00f0ff" stroke-width="1.2" />
+            </g>
+        </svg>
+    </div>
 
     <nav class="glass-nav" aria-label="Main navigation">
         <div class="nav-content">
@@ -214,9 +337,41 @@
                                     </div>
                                 </div>
 
+                                <!-- Aurelia Luxury Real Estate (High-Ticket Concept) -->
+                                <div class="project-card glass-panel highlight-card is-inactive-card"
+                                    id="aurelia-realestate" data-index="1" data-title="Aurelia Luxury Real Estate">
+                                    <div class="project-image">
+                                        <img loading="lazy" src="assets/concepts/realtor-thumbnail.jpg"
+                                            alt="Aurelia Luxury Real Estate Web Application Preview"
+                                            class="project-img">
+                                    </div>
+                                    <div class="project-info">
+                                        <div class="project-tags">
+                                            <span class="tag"
+                                                style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border-color: rgba(245, 158, 11, 0.4);">
+                                                <span class="status-dot"
+                                                    style="display:inline-block; width:6px; height:6px; margin-right:5px; background:#fbbf24; border-radius:50%;"></span>Client Concept
+                                            </span>
+                                            <span class="tag">Next.js 16</span>
+                                            <span class="tag">React 19</span>
+                                            <span class="tag">Mapbox GL</span>
+                                        </div>
+                                        <h3>Aurelia Luxury Real Estate</h3>
+                                        <p>High-converting residential real estate platform with dual-pane Mapbox property explorer, 3-step automated CMA seller valuation engine, saved listings drawer, and luxury enclave guides.</p>
+                                        <p class="project-proof"><strong>Key Architecture:</strong> Next.js 16 App Router, Mapbox GL custom animated DOM pills, dynamic showcase routes, and iPad open-house kiosk.</p>
+                                        <div class="project-links">
+                                            <a href="https://realtor-template-zeta.vercel.app" class="project-link"
+                                                target="_blank" rel="noopener noreferrer"
+                                                style="color: var(--accent-primary); font-weight: 700;">View Live Demo ↗</a>
+                                            <a href="https://github.com/RickyCriss/Templates.Concepts" class="project-link"
+                                                target="_blank" rel="noopener noreferrer">Concept Specs ↗</a>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <!-- ProEval Studio (Flagship Case Study) -->
                                 <div class="project-card glass-panel highlight-card is-inactive-card"
-                                    id="proeval-studio" data-index="1" data-title="ProEval Studio">
+                                    id="proeval-studio" data-index="2" data-title="ProEval Studio">
                                     <div class="project-image">
                                         <img loading="lazy" src="projects/proeval-studio/assets/preview.svg"
                                             alt="ProEval Studio AI Code and RLHF Evaluation Simulator"
@@ -253,8 +408,72 @@
                                     </div>
                                 </div>
 
+                                <!-- Lumen & Oak Fine Dining (High-Ticket Concept) -->
+                                <div class="project-card glass-panel highlight-card is-inactive-card"
+                                    id="lumen-oak" data-index="3" data-title="Lumen & Oak Woodfire Kitchen">
+                                    <div class="project-image">
+                                        <img loading="lazy" src="assets/concepts/restaurant-thumbnail.jpg"
+                                            alt="Lumen and Oak Woodfire Kitchen Preview"
+                                            class="project-img">
+                                    </div>
+                                    <div class="project-info">
+                                        <div class="project-tags">
+                                            <span class="tag"
+                                                style="background: rgba(239, 68, 68, 0.2); color: #f87171; border-color: rgba(239, 68, 68, 0.4);">
+                                                <span class="status-dot"
+                                                    style="display:inline-block; width:6px; height:6px; margin-right:5px; background:#f87171; border-radius:50%;"></span>Client Concept
+                                            </span>
+                                            <span class="tag">Next.js 16</span>
+                                            <span class="tag">Interactive Menu</span>
+                                            <span class="tag">Reservation Drawer</span>
+                                        </div>
+                                        <h3>Lumen & Oak Woodfire Kitchen</h3>
+                                        <p>Fine dining woodfire kitchen & rooftop lounge suite with real-time status telemetry, an interactive dietary menu with instant allergen filtering, tableside reservation drawer modal, and event estimator.</p>
+                                        <p class="project-proof"><strong>Key Architecture:</strong> Next.js 16 Turbopack, client-side dietary filtering, tableside QR menu web app, and PIN-protected host stand 86-board.</p>
+                                        <div class="project-links">
+                                            <a href="https://restaurant-template-two-wheat.vercel.app" class="project-link"
+                                                target="_blank" rel="noopener noreferrer"
+                                                style="color: var(--accent-primary); font-weight: 700;">View Live Demo ↗</a>
+                                            <a href="https://github.com/RickyCriss/Templates.Concepts" class="project-link"
+                                                target="_blank" rel="noopener noreferrer">Concept Specs ↗</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Aura Aesthetics & Wellness (High-Ticket Concept) -->
+                                <div class="project-card glass-panel highlight-card is-inactive-card"
+                                    id="aura-medspa" data-index="4" data-title="Aura Aesthetics & Wellness">
+                                    <div class="project-image">
+                                        <img loading="lazy" src="assets/concepts/medspa-thumbnail.jpg"
+                                            alt="Aura Aesthetics and Wellness Clinic Preview"
+                                            class="project-img">
+                                    </div>
+                                    <div class="project-info">
+                                        <div class="project-tags">
+                                            <span class="tag"
+                                                style="background: rgba(168, 85, 247, 0.2); color: #c084fc; border-color: rgba(168, 85, 247, 0.4);">
+                                                <span class="status-dot"
+                                                    style="display:inline-block; width:6px; height:6px; margin-right:5px; background:#c084fc; border-radius:50%;"></span>Client Concept
+                                            </span>
+                                            <span class="tag">Next.js 16</span>
+                                            <span class="tag">MedSpa & Longevity</span>
+                                            <span class="tag">Split-Slider Vault</span>
+                                        </div>
+                                        <h3>Aura Aesthetics & Wellness</h3>
+                                        <p>Physician-directed medical aesthetics and longevity clinic platform engineered with draggable polarized before/after split sliders, 60-second skin concern diagnostic quiz, and 0% APR financing calculator.</p>
+                                        <p class="project-proof"><strong>Key Architecture:</strong> Polarized split-image comparison canvas, 4-step diagnostic intake quiz, CareCredit/Cherry financing estimator, and interactive recovery companion.</p>
+                                        <div class="project-links">
+                                            <a href="https://medspa-template-rouge.vercel.app" class="project-link"
+                                                target="_blank" rel="noopener noreferrer"
+                                                style="color: var(--accent-primary); font-weight: 700;">View Live Demo ↗</a>
+                                            <a href="https://github.com/RickyCriss/Templates.Concepts" class="project-link"
+                                                target="_blank" rel="noopener noreferrer">Concept Specs ↗</a>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <!-- Mortal Tactical Map -->
-                                <div class="project-card glass-panel is-inactive-card" id="mortal-map" data-index="2"
+                                <div class="project-card glass-panel is-inactive-card" id="mortal-map" data-index="5"
                                     data-title="The MO:2 AI Assistant">
                                     <div class="project-image">
                                         <img loading="lazy" src="projects/mortal-map/assets/mountain.jpg"
@@ -283,7 +502,7 @@
                                 </div>
 
                                 <!-- AI Studio App -->
-                                <div class="project-card glass-panel is-inactive-card" id="corner14" data-index="3"
+                                <div class="project-card glass-panel is-inactive-card" id="corner14" data-index="6"
                                     data-title="Corner14 AI Studio App">
                                     <div class="project-image">
                                         <img loading="lazy" src="projects/ai-studio-app/assets/preview.png"
@@ -298,11 +517,11 @@
                                         <h3>Corner14</h3>
                                         <p>A React and Vite application developed with Google AI Studio. A learning
                                             project
-                                            exploring how to structure an AI-facing application and manage interactive
-                                            interface state.</p>
+                                             exploring how to structure an AI-facing application and manage interactive
+                                             interface state.</p>
                                         <p class="project-proof"><strong>Skills explored:</strong> React components,
-                                            state
-                                            management, and AI application interfaces.</p>
+                                             state
+                                             management, and AI application interfaces.</p>
                                         <div class="project-links">
                                             <a href="projects/ai-studio-app/dist/index.html" class="project-link"
                                                 target="_blank" rel="noopener noreferrer">Open learning project ↗</a>
@@ -312,7 +531,7 @@
 
                                 <!-- Custom Tool-Calling Agent -->
                                 <div class="project-card glass-panel highlight-card is-inactive-card" id="react-agent"
-                                    data-index="4" data-title="Tool-calling AI agent">
+                                    data-index="7" data-title="Tool-calling AI agent">
                                     <div class="project-image">
                                         <img loading="lazy" src="projects/react-agent/assets/preview.png"
                                             alt="Custom ReAct Agent" class="project-img">
@@ -453,9 +672,114 @@
                 </div>
             </div>
 
+            <div class="projects-filter-bar fade-in" role="tablist" aria-label="Filter portfolio projects">
+                <button class="filter-tab-btn active" data-filter="all" role="tab" aria-selected="true">
+                    <span class="tab-prefix">//</span> All Systems <span class="tab-count">(8)</span>
+                </button>
+                <button class="filter-tab-btn" data-filter="client-apps" role="tab" aria-selected="false">
+                    <span class="tab-prefix">//</span> Client Concepts <span class="tab-count">(3)</span>
+                </button>
+                <button class="filter-tab-btn" data-filter="ai-systems" role="tab" aria-selected="false">
+                    <span class="tab-prefix">//</span> AI &amp; Autonomous <span class="tab-count">(3)</span>
+                </button>
+                <button class="filter-tab-btn" data-filter="interactive-lab" role="tab" aria-selected="false">
+                    <span class="tab-prefix">//</span> Interactive Lab <span class="tab-count">(2)</span>
+                </button>
+            </div>
+
             <div class="projects-grid">
+                <!-- Aurelia Luxury Real Estate (High-Ticket Concept) -->
+                <article class="project-card glass-panel highlight-card fade-in" data-category="client-apps">
+                    <div class="project-image">
+                        <img loading="lazy" src="assets/concepts/realtor-thumbnail.jpg"
+                            alt="Aurelia Luxury Real Estate Web Application Preview" class="project-img">
+                    </div>
+                    <div class="project-info">
+                        <div class="project-tags">
+                            <span class="tag"
+                                style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border-color: rgba(245, 158, 11, 0.4);">
+                                <span class="status-dot"
+                                    style="display:inline-block; width:6px; height:6px; margin-right:5px; background:#fbbf24; border-radius:50%;"></span>Client Concept
+                            </span>
+                            <span class="tag">Next.js 16</span>
+                            <span class="tag">React 19</span>
+                            <span class="tag">Mapbox GL</span>
+                            <span class="tag">Tailwind v4</span>
+                        </div>
+                        <h3>Aurelia Luxury Real Estate</h3>
+                        <p>A high-converting residential real estate and boutique brokerage platform. Features an interactive dual-pane Mapbox property explorer with custom animated price markers, 3-step automated CMA valuation funnel, saved listings drawer, and luxury enclave guides.</p>
+                        <p class="project-proof"><strong>Key Architecture:</strong> Next.js 16 App Router, Mapbox GL custom animated DOM pills, dynamic showcase routes, paperless iPad open-house kiosk, and 3-step seller valuation engine.</p>
+                        <div class="project-links">
+                            <a href="https://realtor-template-zeta.vercel.app" class="project-link" target="_blank"
+                                rel="noopener noreferrer" style="color: var(--accent-primary); font-weight: 700;">View Live Demo ↗</a>
+                            <a href="https://github.com/RickyCriss/Templates.Concepts" class="project-link" target="_blank"
+                                rel="noopener noreferrer">Concept Specs ↗</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Lumen & Oak Fine Dining (High-Ticket Concept) -->
+                <article class="project-card glass-panel highlight-card fade-in" data-category="client-apps">
+                    <div class="project-image">
+                        <img loading="lazy" src="assets/concepts/restaurant-thumbnail.jpg"
+                            alt="Lumen and Oak Woodfire Kitchen Preview" class="project-img">
+                    </div>
+                    <div class="project-info">
+                        <div class="project-tags">
+                            <span class="tag"
+                                style="background: rgba(239, 68, 68, 0.2); color: #f87171; border-color: rgba(239, 68, 68, 0.4);">
+                                <span class="status-dot"
+                                    style="display:inline-block; width:6px; height:6px; margin-right:5px; background:#f87171; border-radius:50%;"></span>Client Concept
+                            </span>
+                            <span class="tag">Next.js 16</span>
+                            <span class="tag">Interactive Menu</span>
+                            <span class="tag">Reservation Drawer</span>
+                            <span class="tag">Tailwind v4</span>
+                        </div>
+                        <h3>Lumen & Oak Woodfire Kitchen</h3>
+                        <p>A culinary showcase and hospitality platform for fine dining woodfire kitchens and lounges. Features real-time operating telemetry, an interactive dietary menu with instant allergen filtering, tableside reservation drawer modal, and event banquet estimator.</p>
+                        <p class="project-proof"><strong>Key Architecture:</strong> Next.js 16 Turbopack, client-side dietary filtering, tableside QR menu web app, printable PDF RFP banquet quote engine, and passcode-protected host stand 86-board.</p>
+                        <div class="project-links">
+                            <a href="https://restaurant-template-two-wheat.vercel.app" class="project-link" target="_blank"
+                                rel="noopener noreferrer" style="color: var(--accent-primary); font-weight: 700;">View Live Demo ↗</a>
+                            <a href="https://github.com/RickyCriss/Templates.Concepts" class="project-link" target="_blank"
+                                rel="noopener noreferrer">Concept Specs ↗</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Aura Aesthetics & Wellness (High-Ticket Concept) -->
+                <article class="project-card glass-panel highlight-card fade-in" data-category="client-apps">
+                    <div class="project-image">
+                        <img loading="lazy" src="assets/concepts/medspa-thumbnail.jpg"
+                            alt="Aura Aesthetics and Wellness Clinic Preview" class="project-img">
+                    </div>
+                    <div class="project-info">
+                        <div class="project-tags">
+                            <span class="tag"
+                                style="background: rgba(168, 85, 247, 0.2); color: #c084fc; border-color: rgba(168, 85, 247, 0.4);">
+                                <span class="status-dot"
+                                    style="display:inline-block; width:6px; height:6px; margin-right:5px; background:#c084fc; border-radius:50%;"></span>Client Concept
+                            </span>
+                            <span class="tag">Next.js 16</span>
+                            <span class="tag">MedSpa &amp; Longevity</span>
+                            <span class="tag">Split-Slider Vault</span>
+                            <span class="tag">Diagnostic Quiz</span>
+                        </div>
+                        <h3>Aura Aesthetics & Wellness</h3>
+                        <p>A physician-directed medical aesthetics and longevity clinic platform. Engineered with an interactive before/after split-slider results vault, 60-second diagnostic skin intake quiz, VIP membership tiering, and real-time treatment financing calculator.</p>
+                        <p class="project-proof"><strong>Key Architecture:</strong> Draggable polarized before/after split sliders, 4-step diagnostic intake funnel, CareCredit &amp; Cherry 0% APR financing calculator, and day-by-day interactive post-care recovery companion.</p>
+                        <div class="project-links">
+                            <a href="https://medspa-template-rouge.vercel.app" class="project-link" target="_blank"
+                                rel="noopener noreferrer" style="color: var(--accent-primary); font-weight: 700;">View Live Demo ↗</a>
+                            <a href="https://github.com/RickyCriss/Templates.Concepts" class="project-link" target="_blank"
+                                rel="noopener noreferrer">Concept Specs ↗</a>
+                        </div>
+                    </div>
+                </article>
+
                 <!-- ProEval Studio (Flagship Case Study) -->
-                <article class="project-card glass-panel highlight-card fade-in">
+                <article class="project-card glass-panel highlight-card fade-in" data-category="ai-systems">
                     <div class="project-image">
                         <img loading="lazy" src="projects/proeval-studio/assets/preview.svg"
                             alt="ProEval Studio AI Code and RLHF Evaluation Simulator" class="project-img">
@@ -486,7 +810,7 @@
                 </article>
 
                 <!-- Vivid-Architect UE5 Poe Agent -->
-                <article class="project-card glass-panel highlight-card fade-in">
+                <article class="project-card glass-panel highlight-card fade-in" data-category="ai-systems">
                     <div class="project-image">
                         <img loading="lazy" src="projects/vivid-ue5/assets/preview.svg"
                             alt="Vivid-Architect Autonomous Unreal Engine 5 Developer Agent on Poe" class="project-img">
@@ -518,8 +842,34 @@
                     </div>
                 </article>
 
+                <!-- Custom Tool-Calling Agent -->
+                <article class="project-card glass-panel highlight-card fade-in" data-category="ai-systems">
+                    <div class="project-image">
+                        <img loading="lazy" src="projects/react-agent/assets/preview.png" alt="Custom ReAct Agent"
+                            class="project-img">
+                    </div>
+                    <div class="project-info">
+                        <div class="project-tags">
+                            <span class="tag" style="background: rgba(139, 92, 246, 0.2); color: #c4b5fd;">Personal
+                                project</span>
+                            <span class="tag">AI Implementation</span>
+                        </div>
+                        <h3>Tool-calling AI agent</h3>
+                        <p>A Python ReAct agent example using the Gemini SDK to explore tool calling and multi-step
+                            tasks. A starting point for understanding how an assistant can choose tools, act, and
+                            respond.</p>
+                        <p class="project-proof"><strong>Skills explored:</strong> Python, Gemini SDK, tool calling, and
+                            agent control flow.</p>
+                        <div class="project-links">
+                            <a href="#contact" class="project-link">Discuss an AI prototype ↗</a>
+                            <a href="https://github.com/Vivid86/Antigravity" class="project-link" target="_blank"
+                                rel="noopener noreferrer">View Core Repo ↗</a>
+                        </div>
+                    </div>
+                </article>
+
                 <!-- Mortal Tactical Map -->
-                <article class="project-card glass-panel fade-in">
+                <article class="project-card glass-panel fade-in" data-category="interactive-lab">
                     <div class="project-image">
                         <img loading="lazy" src="projects/mortal-map/assets/mountain.jpg" alt="Mortal Online 2 Vista"
                             class="project-img">
@@ -544,7 +894,7 @@
                 </article>
 
                 <!-- AI Studio App -->
-                <article class="project-card glass-panel fade-in">
+                <article class="project-card glass-panel fade-in" data-category="interactive-lab">
                     <div class="project-image">
                         <img loading="lazy" src="projects/ai-studio-app/assets/preview.png" alt="Corner14"
                             class="project-img">
@@ -563,32 +913,6 @@
                         <div class="project-links">
                             <a href="projects/ai-studio-app/dist/index.html" class="project-link" target="_blank"
                                 rel="noopener noreferrer">Open learning project ↗</a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Custom Tool-Calling Agent -->
-                <article class="project-card glass-panel highlight-card fade-in">
-                    <div class="project-image">
-                        <img loading="lazy" src="projects/react-agent/assets/preview.png" alt="Custom ReAct Agent"
-                            class="project-img">
-                    </div>
-                    <div class="project-info">
-                        <div class="project-tags">
-                            <span class="tag" style="background: rgba(139, 92, 246, 0.2); color: #c4b5fd;">Personal
-                                project</span>
-                            <span class="tag">AI Implementation</span>
-                        </div>
-                        <h3>Tool-calling AI agent</h3>
-                        <p>A Python ReAct agent example using the Gemini SDK to explore tool calling and multi-step
-                            tasks. A starting point for understanding how an assistant can choose tools, act, and
-                            respond.</p>
-                        <p class="project-proof"><strong>Skills explored:</strong> Python, Gemini SDK, tool calling, and
-                            agent control flow.</p>
-                        <div class="project-links">
-                            <a href="#contact" class="project-link">Discuss an AI prototype ↗</a>
-                            <a href="https://github.com/Vivid86/Antigravity" class="project-link" target="_blank"
-                                rel="noopener noreferrer">View Core Repo ↗</a>
                         </div>
                     </div>
                 </article>
@@ -638,7 +962,7 @@
         <p>&copy; 2026 Ricky Criss. Practical experience. Purposeful software.</p>
     </footer>
 
-    <script src="script.js?v=11"></script>
+    <script src="script.js?v=12"></script>
 
     <!-- ░░ JARVIS CHAT WIDGET ░░ -->
     <div id="jarvis-fab" aria-label="Open Jarvis AI assistant" role="button" tabindex="0" title="Ask Jarvis">
