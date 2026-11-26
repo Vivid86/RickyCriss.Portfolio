@@ -14,7 +14,7 @@ This document tracks all active deployments and release history for the Vivid ec
 | **ProEval Studio** | [Case Study](projects/proeval-studio/index.html) | `RickyCriss/proeval-studio` | `Published` |
 | **Mortal Online 2 Assistant** | [https://vivid86.github.io/Vivid86-s-Ultimate-Mortal-Online-2-Assistant/](https://vivid86.github.io/Vivid86-s-Ultimate-Mortal-Online-2-Assistant/) | `Vivid86/Vivid86-s-Ultimate-Mortal-Online-2-Assistant` | `f06c60b` |
 | **Vivid Nexus Deck** | [https://vivid86.github.io/Vivid-Nexus-Deck/](https://vivid86.github.io/Vivid-Nexus-Deck/) | `Vivid86/Vivid-Nexus-Deck` | `36c4693` |
-| **Portfolio Hub** | [https://vivid86.github.io/RickyCriss.github.io/](https://vivid86.github.io/RickyCriss.github.io/) | `Vivid86/RickyCriss.github.io` | `eadfe61` |
+| **Portfolio Hub** | [https://rickycriss-portfolio.pages.dev/](https://rickycriss-portfolio.pages.dev/) | `Vivid86/RickyCriss.Portfolio` | `Active` |
 | **Antigravity** | [https://vivid86.github.io/Antigravity/](https://vivid86.github.io/Antigravity/) | `Vivid86/Antigravity` | `4b0473e` |
 
 ---
